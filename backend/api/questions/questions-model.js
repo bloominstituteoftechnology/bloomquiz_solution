@@ -5,9 +5,8 @@ async function getAll() {
   let options = await db('options')
 
   options = options.map(o => ({
-    ...o, option_is_distractor: o.option_is_distractor
-      ? true
-      : false
+    ...o,
+    option_is_distractor: !!o.option_is_distractor
   }))
 
   questions.forEach(q => {
@@ -18,6 +17,12 @@ async function getAll() {
   return questions
 }
 
+async function post(question) {
+  const { options } = question
+
+}
+
 module.exports = {
   getAll,
+  post,
 }

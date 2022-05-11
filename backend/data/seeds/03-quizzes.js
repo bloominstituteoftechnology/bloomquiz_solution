@@ -10,19 +10,19 @@ exports.seed = async function (knex) {
     {
       option_text: 'Hand',
       option_remark: 'Nope...',
-      option_is_distractor: true,
+      is_distractor: true,
       question_id: 1,
     },
     {
       option_text: 'Nothing',
       option_remark: 'Nice try...',
-      option_is_distractor: true,
+      is_distractor: true,
       question_id: 1,
     },
     {
       option_text: 'The One Ring',
       option_remark: 'There ya go!',
-      option_is_distractor: false,
+      is_distractor: false,
       question_id: 1,
     },
   ])

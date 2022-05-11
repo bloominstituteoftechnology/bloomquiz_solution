@@ -6,7 +6,7 @@ async function getAll() {
 
   options = options.map(o => ({
     ...o,
-    option_is_distractor: !!o.option_is_distractor
+    is_distractor: !!o.is_distractor
   }))
 
   questions.forEach(q => {
@@ -17,12 +17,12 @@ async function getAll() {
   return questions
 }
 
-async function post(question) {
+async function create(question) {
   const result = await db('questions').insert(question)
   return result
 }
 
 module.exports = {
   getAll,
-  post,
+  create,
 }

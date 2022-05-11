@@ -13,13 +13,13 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { question_title, question_text, question_hint } = req.body
-    const validated = {}
+    const validatedQuestion = { options: [] }
     if (
       question_title !== undefined &&
       typeof question_title === 'string' &&
       question_title.trim().length > 2
     ) {
-      validated.question_title = question_title.trim()
+      validatedQuestion.question_title = question_title.trim()
     } else {
       return res.status(422).json({
         message: 'question_title of at least 3 chars is required',
@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
       typeof question_text === 'string' &&
       question_text.trim().length > 0
     ) {
-      validated.question_text = question_text.trim()
+      validatedQuestion.question_text = question_text.trim()
     } else {
       return res.status(422).json({
         message: 'question_text of at least 1 char is required',
@@ -41,9 +41,53 @@ router.post('/', async (req, res, next) => {
       typeof question_hint === 'string' &&
       question_hint.trim().length > 0
     ) {
-      validated.question_hint = question_hint.trim()
+      validatedQuestion.question_hint = question_hint.trim()
     }
-    const question = await Question.post(validated)
+
+    const { options } = req.body
+    for (let option of options) {
+      const { option_text, is_distractor, option_remark } = option
+      const validatedOption = {}
+      if (
+        option_text !== undefined &&
+        typeof option_text === 'string' &&
+        option_text.trim().length > 0
+      ) {
+        validatedOption.option_text = option_text.trim()
+      } else {
+        return res.status(422).json({
+          message: 'option_text of at least 1 char is required',
+        })
+      }
+      if (
+        is_distractor !== undefined &&
+        typeof is_distractor === 'boolean'
+      ) {
+        validatedOption.is_distractor = is_distractor
+      } else {
+        return res.status(422).json({
+          message: 'is_distractor (true or false) for each option is required',
+        })
+      }
+      if (
+        option_remark !== undefined &&
+        typeof option_remark === 'string' &&
+        option_remark.trim().length > 0
+      ) {
+        validatedOption.option_remark = option_remark.trim()
+      }
+      validatedQuestion.options.push(validatedOption)
+    }
+
+    const areAllDistractors = validatedQuestion.options.every(o => o.is_distractor)
+
+    if (areAllDistractors) {
+      return res.status(422).json({
+        message: 'options cannot all be distractors',
+      })
+    }
+
+    const question = await Question.create(validatedQuestion)
     res.status(201).json(question)
   } catch (err) {
     next(err)

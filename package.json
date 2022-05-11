@@ -7,7 +7,7 @@
     "webpack": "cross-env NODE_ENV=production webpack",
     "heroku-postbuild": "npm run webpack",
     "frontend": "webpack serve --open",
-    "backend": "node index.js",
+    "backend": "nodemon index.js",
     "start": "npm run backend",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",

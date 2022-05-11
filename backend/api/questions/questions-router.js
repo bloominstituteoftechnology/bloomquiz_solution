@@ -22,7 +22,7 @@ router.post('/', async (req, res, next) => {
       validated.question_title = question_title.trim()
     } else {
       return res.status(422).json({
-        message: 'question_title of at least 3 chars is required'
+        message: 'question_title of at least 3 chars is required',
       })
     }
     if (
@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
       validated.question_text = question_text.trim()
     } else {
       return res.status(422).json({
-        message: 'question_text of at least 1 char is required'
+        message: 'question_text of at least 1 char is required',
       })
     }
     if (

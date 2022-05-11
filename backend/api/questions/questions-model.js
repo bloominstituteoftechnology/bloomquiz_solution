@@ -18,8 +18,8 @@ async function getAll() {
 }
 
 async function post(question) {
-  const { options } = question
-
+  const result = await db('questions').insert(question)
+  return result
 }
 
 module.exports = {

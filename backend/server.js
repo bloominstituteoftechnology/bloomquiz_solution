@@ -3,6 +3,7 @@ const cors = require('cors')
 const path = require('path')
 
 const questionsRouter = require('./api/questions/questions-router')
+const authRouter = require('./api/auth/auth-router')
 
 const server = express()
 server.use(express.json())
@@ -10,6 +11,7 @@ server.use(express.static(path.join(__dirname, '../dist')))
 server.use(cors())
 
 server.use('/api/questions', questionsRouter)
+server.use('/api/auth', authRouter)
 
 // SPA
 server.get('*', (req, res) => {

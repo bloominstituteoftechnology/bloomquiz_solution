@@ -1,22 +1,31 @@
-const sharedConfig = {
+const pg = require('pg')
+
+if (process.env.NODE_ENV === 'production') {
+  pg.defaults.ssl = { rejectUnauthorized: false }
+}
+
+const sqliteConfig = {
   client: 'sqlite3',
   useNullAsDefault: true,
   migrations: { directory: './backend/data/migrations' },
   pool: { afterCreate: (conn, done) => conn.run('PRAGMA foreign_keys = ON', done) },
 }
 
+const postgresConfig = {
+  client: 'pg',
+  connection: process.env.DATABASE_URL,
+  migrations: { directory: './backend/data/migrations' },
+  pool: { min: 2, max: 10 },
+}
+
 module.exports = {
   development: {
-    ...sharedConfig,
+    ...sqliteConfig,
     connection: { filename: './backend/data/dev.db3' },
     seeds: { directory: './backend/data/seeds' },
   },
   testing: {
-    ...sharedConfig,
-    connection: { filename: './backend/data/test.db3' },
+    ...sqliteConfig,
   },
-  production: {
-    ...sharedConfig,
-    connection: { filename: './backend/data/test.db3' },
-  },
+  production: postgresConfig,
 }

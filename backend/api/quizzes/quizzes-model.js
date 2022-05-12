@@ -8,8 +8,12 @@ async function next({ user_id }) {
     .sum('is_correct')
     .select('question_id')
   // TODO: spaced repetition
+  if (!answers.length) {
+    const [random] = await db.raw('SELECT * FROM questions ORDER BY RANDOM() LIMIT 1')
+    return random
+  }
   const { question_id } = answers[Math.floor(Math.random() * answers.length - 1)]
-  const question = await db('questions').where('question_id', question_id)
+  const question = await db('questions').where('question_id', question_id).first()
   return question
 }
 

@@ -94,6 +94,15 @@ router.post('/', async (req, res, next) => {
       })
     }
 
+    if (
+      validatedQuestion.options[0].option_text.trim() ===
+      validatedQuestion.options[0].option_text.trim()
+    ) {
+      return res.status(422).json({
+        message: 'the option_texts cannot all be the same',
+      })
+    }
+
     const question = await Question.create(validatedQuestion)
     res.status(201).json(question)
   } catch (err) {

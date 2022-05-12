@@ -15,14 +15,14 @@ async function getAll() {
 }
 
 async function getById(question_id) {
-  const questions = await db('questions').where('question_id', question_id)
+  const question = await db('questions').where('question_id', question_id).first()
   let options = await db('options').where('question_id', question_id)
   options = options.map(o => ({
     ...o,
     is_distractor: !!o.is_distractor
   }))
-  questions.options = options
-  return questions
+  question.options = options
+  return question
 }
 
 async function create(question) {

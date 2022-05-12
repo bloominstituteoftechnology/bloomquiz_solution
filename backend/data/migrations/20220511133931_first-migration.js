@@ -1,10 +1,22 @@
 exports.up = async function (knex) {
   await knex.schema
+    .createTable('roles', (users) => {
+      users.increments('role_id')
+      users.timestamps(false, true)
+      users.string('role_name', 200).notNullable().unique()
+    })
     .createTable('users', (users) => {
       users.increments('user_id')
       users.timestamps(false, true)
       users.string('username', 200).notNullable().unique()
       users.string('password', 100).notNullable().unique()
+      users.integer('role_id')
+        .unsigned()
+        .notNullable()
+        .references('role_id')
+        .inTable('roles')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
     })
     .createTable('questions', (questions) => {
       questions.increments('question_id')
@@ -54,4 +66,5 @@ exports.down = async function (knex) {
     .dropTableIfExists('options')
     .dropTableIfExists('questions')
     .dropTableIfExists('users')
+    .dropTableIfExists('roles')
 }

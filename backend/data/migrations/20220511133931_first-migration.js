@@ -28,6 +28,25 @@ exports.up = async function (knex) {
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
     })
+    .createTable('answers', (answers) => {
+      answers.increments('answer_id')
+      answers.timestamps(false, true)
+      answers.integer('user_id')
+      answers.boolean('is_correct')
+        .unsigned()
+        .notNullable()
+        .references('user_id')
+        .inTable('users')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
+      answers.integer('question_id')
+        .unsigned()
+        .notNullable()
+        .references('question_id')
+        .inTable('questions')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
+    })
 }
 
 exports.down = async function (knex) {

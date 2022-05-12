@@ -46,7 +46,7 @@ router.post('/', async (req, res, next) => {
 
     const { options } = req.body
     for (let option of options) {
-      const { option_text, is_distractor, option_remark } = option
+      const { option_text, is_distractor, remark } = option
       const validatedOption = {}
       if (
         option_text !== undefined &&
@@ -70,11 +70,11 @@ router.post('/', async (req, res, next) => {
         })
       }
       if (
-        option_remark !== undefined &&
-        typeof option_remark === 'string' &&
-        option_remark.trim().length > 0
+        remark !== undefined &&
+        typeof remark === 'string' &&
+        remark.trim().length > 0
       ) {
-        validatedOption.option_remark = option_remark.trim()
+        validatedOption.remark = remark.trim()
       }
       validatedQuestion.options.push(validatedOption)
     }

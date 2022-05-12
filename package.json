@@ -12,7 +12,10 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
-    "resetdb": "npm run rollback && npm run migrate && npm run seed"
+    "resetdb": "npm run rollback && npm run migrate && npm run seed",
+    "migrate:prod": "heroku run knex migrate:latest -a codealong-web",
+    "rollback:prod": "heroku run knex migrate:rollback -a codealong-web",
+    "seed:prod": "heroku run knex seed:run -a codealong-web"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",

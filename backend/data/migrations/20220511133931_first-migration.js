@@ -51,6 +51,7 @@ exports.up = async function (knex) {
 
 exports.down = async function (knex) {
   await knex.schema
+    .dropTableIfExists('answers')
     .dropTableIfExists('options')
     .dropTableIfExists('questions')
     .dropTableIfExists('users')

@@ -8,12 +8,6 @@ exports.seed = async function (knex) {
   ])
   await knex('options').insert([
     {
-      option_text: 'Hand',
-      option_remark: 'Nope...',
-      is_distractor: true,
-      question_id: 1,
-    },
-    {
       option_text: 'Nothing',
       option_remark: 'Nice try...',
       is_distractor: true,

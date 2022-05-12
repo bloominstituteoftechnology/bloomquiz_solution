@@ -79,11 +79,18 @@ router.post('/', async (req, res, next) => {
       validatedQuestion.options.push(validatedOption)
     }
 
-    const areAllDistractors = validatedQuestion.options.every(o => o.is_distractor)
-
-    if (areAllDistractors) {
+    if (validatedQuestion.options.length !== 2) {
       return res.status(422).json({
-        message: 'options cannot all be distractors',
+        message: 'provide one correct option and one distractor',
+      })
+    }
+
+    const areAllDistractors = validatedQuestion.options.every(o => o.is_distractor)
+    const areAllTrue = validatedQuestion.options.every(o => !o.is_distractor)
+
+    if (areAllDistractors || areAllTrue) {
+      return res.status(422).json({
+        message: 'provide one correct option and one distractor',
       })
     }
 

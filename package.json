@@ -5,7 +5,6 @@
     "dev": "fkill :9000 :3000 -s && concurrently \"npm:backend\" \"npm:frontend\"",
     "test": "cross-env NODE_ENV=testing jest --watch",
     "webpack": "cross-env NODE_ENV=production webpack",
-    "heroku-postbuild": "npm run webpack",
     "frontend": "webpack serve --open",
     "backend": "nodemon index.js",
     "start": "node index.js",

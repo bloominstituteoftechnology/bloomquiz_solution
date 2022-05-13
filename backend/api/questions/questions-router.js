@@ -87,15 +87,17 @@ router.post('/', async (req, res, next) => {
       validatedQuestion.options.push(validatedOption)
     }
 
+    const validatedOptions = validatedQuestion.options
+
     // VALIDATING that at least 2 options are provided
-    if (validatedQuestion.options.length < 2) {
+    if (validatedOptions.length < 2) {
       return res.status(422).json({
         message: 'provide one correct option and at least one distractor',
       })
     }
 
     // VALIDATING exactly one option is a non-distractor
-    const nonDistractorCount = validatedQuestion.options.filter(o => !o.is_distractor).length
+    const nonDistractorCount = validatedOptions.filter(o => !o.is_distractor).length
     if (nonDistractorCount !== 1) {
       return res.status(422).json({
         message: 'provide one correct option and at least one distractor',
@@ -103,12 +105,11 @@ router.post('/', async (req, res, next) => {
     }
 
     // VALIDATING no two options have the same option_text
-    if (
-      validatedQuestion.options[0].option_text.trim() ===
-      validatedQuestion.options[0].option_text.trim()
-    ) {
+    const optionTextsArr = validatedOptions.map(o => o.option_text.trim())
+    const optionTextsSet = new Set(optionTextsArr)
+    if (optionTextsSet.size !== optionTextsArr.length) {
       return res.status(422).json({
-        message: 'the option_texts cannot all be the same',
+        message: 'option texts must be different',
       })
     }
 

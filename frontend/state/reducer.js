@@ -50,7 +50,7 @@ const initialQuiz = { question: null, option_id: null }
 function quiz(state = initialQuiz, action) {
   switch (action.type) {
     case types.SET_QUIZ:
-      return { ...state, question: action.payload }
+      return { option_id: null, question: action.payload }
     case types.SET_SELECTED_OPTION:
       return { ...state, option_id: action.payload }
     default:

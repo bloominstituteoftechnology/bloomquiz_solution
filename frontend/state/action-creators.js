@@ -26,6 +26,7 @@ export function login({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/login', { username, password })
       .then(res => {
+        localStorage.setItem('token', res.data.token)
         dispatch(setMessage(res.data.message))
       })
       .catch(err => {

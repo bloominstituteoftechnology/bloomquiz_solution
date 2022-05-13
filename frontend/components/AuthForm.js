@@ -54,9 +54,9 @@ export function AuthForm(props) {
       <button disabled={isDisabled()} id="submitCredentials">
         Submit credentials
       </button>
-      <button onClick={toggleMode}>
-        {isNewUser ? "Login instead" : "Register instead"}
-      </button>
+      <a onClick={toggleMode}>
+        {isNewUser ? "Already have an account? Login instead" : "New to the site? Register instead"}
+      </a>
     </form>
   )
 }

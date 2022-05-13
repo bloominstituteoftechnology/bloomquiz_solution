@@ -1,9 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../state/action-creators'
 
-export default function Quiz(props) {
+export function Quiz(props) {
+  const { quiz } = props
   return (
     <div>
-      Here is your quiz...
+      Here is your quiz... {JSON.stringify(quiz)}
     </div>
   )
 }
+
+export default connect(st => st, actions)(Quiz)

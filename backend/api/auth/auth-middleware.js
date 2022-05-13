@@ -4,7 +4,7 @@ const secret = process.env.SECRET || 'the secret'
 
 function generateToken(user) {
   const payload = {
-    subject: user.id,
+    subject: user.user_id,
     username: user.username,
   }
   const options = {
@@ -54,9 +54,20 @@ function restrict(req, res, next) {
   })
 }
 
+function processToken(req, res, next) {
+  const token = req.headers.authorization
+  if (!token) return next()
+
+  jwt.verify(token, secret, (err, decoded) => {
+    if (!err) req.token = decoded
+    next()
+  })
+}
+
 module.exports = {
   restrict,
   uniqueUsername,
   usernameExists,
   generateToken,
+  processToken,
 }

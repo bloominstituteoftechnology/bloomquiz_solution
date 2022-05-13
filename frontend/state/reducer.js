@@ -33,8 +33,14 @@ function questionForm(state = initialQuestionForm, action) {
   return state
 }
 
+const initialQuiz = { question: null, option_id: null }
+function quiz(state = initialQuiz, action) {
+  return state
+}
+
 export default combineReducers({
   count,
   authForm,
   questionForm,
+  quiz,
 })

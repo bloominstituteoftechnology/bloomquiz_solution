@@ -33,9 +33,10 @@ async function nextQuiz({ user_id }) {
 }
 
 async function answerQuiz({ question_id, option_id, user_id }) {
-  // TODO: build middleware to check that option_id belongs to question_id
   const option = await db('options').where('option_id', option_id).first()
-  await db('answers').insert({ user_id, question_id, is_correct: !option.is_distractor })
+  if (user_id) {
+    await db('answers').insert({ user_id, question_id, is_correct: !option.is_distractor })
+  }
   return {
     remark: option.remark,
     verdict: `You ${option.is_distractor ? "screwed up!" : "did great!"}`,

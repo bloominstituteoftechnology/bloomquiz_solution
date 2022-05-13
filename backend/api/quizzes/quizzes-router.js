@@ -3,7 +3,8 @@ const Quiz = require('./quizzes-model')
 
 router.get('/next', async (req, res, next) => {
   try {
-    const nextQuiz = await Quiz.nextQuiz({ user_id: req?.user?.user_id || 2 }) // TODO
+    const user_id = req?.token?.user_id
+    const nextQuiz = await Quiz.nextQuiz({ user_id })
     res.json(nextQuiz)
   } catch (err) {
     next(err)
@@ -12,9 +13,10 @@ router.get('/next', async (req, res, next) => {
 
 router.post('/answer', async (req, res, next) => {
   try {
-    // MUST VALIDATE THAT option_id BELONGS TO question_id
+    // TODO: build middleware to check that option_id belongs to question_id
     const { question_id, option_id } = req.body
-    const resp = await Quiz.answerQuiz({ question_id, option_id, user_id: req?.user?.user_id || 2 }) // TODO
+    const user_id = req?.token?.user_id
+    const resp = await Quiz.answerQuiz({ question_id, option_id, user_id })
     res.json(resp)
   } catch (err) {
     next(err)

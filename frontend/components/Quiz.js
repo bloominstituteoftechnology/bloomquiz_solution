@@ -15,23 +15,21 @@ export function Quiz(props) {
         quiz.question ? (
           <>
             <h2>{quiz.question.question_text}</h2>
-
             <div id="quizAnswers">
-              <div className={`answer${quiz.option_id === quiz.question.options[0].answer_id ? ' selected' : ''}`}>
-                {quiz.question.options[0].option_text}
-                <button>
-                  {quiz.option_id === quiz.question.options[0].answer_id ? 'SELECTED' : 'Select'}
-                </button>
-              </div>
-
-              <div className={`answer${quiz.option_id === quiz.question.options[1].answer_id ? ' selected' : ''}`}>
-                {quiz.question.options[1].option_text}
-                <button>
-                  {quiz.option_id === quiz.question.options[1].answer_id ? 'SELECTED' : 'Select'}
-                </button>
-              </div>
+              {
+                quiz.question.options.map(opt => (
+                  <div
+                    key={opt.option_id}
+                    className={`answer${quiz.option_id === opt.option_id ? ' selected' : ''}`}
+                  >
+                    {opt.option_text}
+                    <button>
+                      {quiz.option_id === opt.answer_id ? 'SELECTED' : 'Select'}
+                    </button>
+                  </div>
+                ))
+              }
             </div>
-
             <button id="submitAnswerBtn" disabled={!quiz.option_id}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'

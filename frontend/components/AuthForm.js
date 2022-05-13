@@ -1,33 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../state/action-creators'
 
-const initialFormValues = {
-  username: '',
-  password: '',
-}
-export default function AuthForm(props) {
-  const [values, setValues] = useState(initialFormValues)
-  // ✨ where are my props?
-  const { login } = props
+export function AuthForm(props) {
+  const { inputChange, register, authForm: { username, password } } = props
 
   const onChange = evt => {
     const { id, value } = evt.target
-    setValues({ ...values, [id]: value })
+    inputChange({ id, value })
   }
 
   const onSubmit = evt => {
     evt.preventDefault()
-    // ✨ implement
-    login(values)
+    register({ username, password })
   }
 
   const isDisabled = () => {
-    // ✨ implement
-    // Trimmed username must be >= 3, and
-    // trimmed password must be >= 8 for
-    // the button to become enabled
     return (
-      values.username.trim().length < 3 ||
-      values.password.trim().length < 8
+      username.trim().length < 3 ||
+      password.trim().length < 8
     )
   }
 
@@ -36,14 +27,14 @@ export default function AuthForm(props) {
       <h2>Login</h2>
       <input
         maxLength={20}
-        value={values.username}
+        value={username}
         onChange={onChange}
         placeholder="Enter username"
         id="username"
       />
       <input
         maxLength={20}
-        value={values.password}
+        value={password}
         onChange={onChange}
         placeholder="Enter password"
         id="password"
@@ -52,3 +43,5 @@ export default function AuthForm(props) {
     </form>
   )
 }
+
+export default connect(st => st, actions)(AuthForm)

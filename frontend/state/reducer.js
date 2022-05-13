@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import * as types from './action-types'
 
 const initialCount = 0
 function count(state = initialCount, action) {
@@ -9,7 +10,19 @@ const initialAuthForm = {
   username: '', password: ''
 }
 function authForm(state = initialAuthForm, action) {
-  return state
+  switch (action.type) {
+    case types.RESET_FORM:
+      return initialAuthForm
+    case types.INPUT_CHANGE: {
+      const { id } = action.payload
+      if (id === 'username' || id === 'password') {
+        return { ...state, [action.payload.id]: action.payload.value }
+      }
+      return state
+    }
+    default:
+      return state
+  }
 }
 
 const initialQuestionForm = {
@@ -38,9 +51,20 @@ function quiz(state = initialQuiz, action) {
   return state
 }
 
+const initialMessageState = ''
+function infoMessage(state = initialMessageState, action) {
+  switch (action.type) {
+    case types.SET_INFO_MESSAGE:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   count,
   authForm,
   questionForm,
   quiz,
+  infoMessage,
 })

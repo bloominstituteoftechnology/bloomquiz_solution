@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import PT from 'prop-types'
 
@@ -11,14 +12,16 @@ const StyledMessage = styled.div`
   animation: ${opacity} 1s forwards;
 `
 
-export default function Message({ message }) {
+export function Message({ infoMessage }) {
   return (
-    <StyledMessage key={message} id="message">
-      {message}
+    <StyledMessage key={infoMessage} id="message">
+      {infoMessage}
     </StyledMessage>
   )
 }
 
+export default connect(st => st)(Message)
+
 Message.propTypes = {
-  message: PT.string,
+  infoMessage: PT.string,
 }

@@ -10,7 +10,7 @@ router.post('/register', uniqueUsername, async (req, res) => {
       username,
       password: bcrypt.hashSync(password, 8),
     })
-    res.status(201).json(newUser)
+    res.status(201).json({ message: `Welcome, ${username}!`, data: newUser })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

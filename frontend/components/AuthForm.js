@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function AuthForm(props) {
+  const [isNewUser, setIsNewUser] = useState(false)
   const {
-    inputChange,
+    login,
     register,
+    inputChange,
     authForm: { username, password }
   } = props
 
@@ -16,19 +18,25 @@ export function AuthForm(props) {
 
   const onSubmit = evt => {
     evt.preventDefault()
-    register({ username, password })
+    const callback = isNewUser ? register : login
+    callback({ username, password })
   }
 
   const isDisabled = () => {
     return (
       username.trim().length < 3 ||
-      password.trim().length < 8
+      password.trim().length < 4
     )
+  }
+
+  const toggleMode = evt => {
+    evt.preventDefault()
+    setIsNewUser(!isNewUser)
   }
 
   return (
     <form id="loginForm" onSubmit={onSubmit}>
-      <h2>Login</h2>
+      <h2>{isNewUser ? "Register" : "Login"}</h2>
       <input
         maxLength={20}
         value={username}
@@ -43,7 +51,12 @@ export function AuthForm(props) {
         placeholder="Enter password"
         id="password"
       />
-      <button disabled={isDisabled()} id="submitCredentials">Submit credentials</button>
+      <button disabled={isDisabled()} id="submitCredentials">
+        Submit credentials
+      </button>
+      <button onClick={toggleMode}>
+        {isNewUser ? "Login instead" : "Register instead"}
+      </button>
     </form>
   )
 }

@@ -21,3 +21,16 @@ export function register({ username, password }) {
       })
   }
 }
+
+export function login({ username, password }) {
+  return function (dispatch) {
+    axios.post('http://localhost:9000/api/auth/login', { username, password })
+      .then(res => {
+        dispatch(setMessage(res.data.message))
+      })
+      .catch(err => {
+        const errToDisplay = err.response ? err.response.data.message : err.message
+        dispatch(setMessage(errToDisplay))
+      })
+  }
+}

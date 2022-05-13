@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function AuthForm(props) {
-  const { inputChange, register, authForm: { username, password } } = props
+  const {
+    inputChange,
+    register,
+    authForm: { username, password }
+  } = props
 
   const onChange = evt => {
     const { id, value } = evt.target

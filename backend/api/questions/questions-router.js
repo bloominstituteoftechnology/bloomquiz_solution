@@ -14,6 +14,8 @@ router.post('/', async (req, res, next) => {
   try {
     const { question_title, question_text, question_hint } = req.body
     const validatedQuestion = { options: [] }
+
+    // VALIDATING question_title
     if (
       question_title !== undefined &&
       typeof question_title === 'string' &&
@@ -25,6 +27,7 @@ router.post('/', async (req, res, next) => {
         message: 'question_title of at least 3 chars is required',
       })
     }
+    // VALIDATING question_text
     if (
       question_text !== undefined &&
       typeof question_text === 'string' &&
@@ -36,6 +39,7 @@ router.post('/', async (req, res, next) => {
         message: 'question_text of at least 1 char is required',
       })
     }
+    // VALIDATING question_hint
     if (
       question_hint !== undefined &&
       typeof question_hint === 'string' &&
@@ -48,6 +52,8 @@ router.post('/', async (req, res, next) => {
     for (let option of options) {
       const { option_text, is_distractor, remark } = option
       const validatedOption = {}
+
+      // VALIDATING option_text
       if (
         option_text !== undefined &&
         typeof option_text === 'string' &&
@@ -59,6 +65,7 @@ router.post('/', async (req, res, next) => {
           message: 'option_text of at least 1 char is required',
         })
       }
+      // VALIDATING option_text
       if (
         is_distractor !== undefined &&
         typeof is_distractor === 'boolean'
@@ -69,6 +76,7 @@ router.post('/', async (req, res, next) => {
           message: 'is_distractor (true or false) for each option is required',
         })
       }
+      // VALIDATING option_text
       if (
         remark !== undefined &&
         typeof remark === 'string' &&
@@ -79,21 +87,22 @@ router.post('/', async (req, res, next) => {
       validatedQuestion.options.push(validatedOption)
     }
 
-    if (validatedQuestion.options.length !== 2) {
+    // VALIDATING that at least 2 options are provided
+    if (validatedQuestion.options.length < 2) {
       return res.status(422).json({
-        message: 'provide one correct option and one distractor',
+        message: 'provide one correct option and at least one distractor',
       })
     }
 
-    const areAllDistractors = validatedQuestion.options.every(o => o.is_distractor)
-    const areAllTrue = validatedQuestion.options.every(o => !o.is_distractor)
-
-    if (areAllDistractors || areAllTrue) {
+    // VALIDATING exactly one option is a non-distractor
+    const nonDistractorCount = validatedQuestion.options.filter(o => !o.is_distractor).length
+    if (nonDistractorCount !== 1) {
       return res.status(422).json({
-        message: 'provide one correct option and one distractor',
+        message: 'provide one correct option and at least one distractor',
       })
     }
 
+    // VALIDATING no two options have the same option_text
     if (
       validatedQuestion.options[0].option_text.trim() ===
       validatedQuestion.options[0].option_text.trim()

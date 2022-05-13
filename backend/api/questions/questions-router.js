@@ -31,12 +31,12 @@ router.post('/', async (req, res, next) => {
     if (
       question_text !== undefined &&
       typeof question_text === 'string' &&
-      question_text.trim().length > 0
+      question_text.trim().length > 2
     ) {
       validatedQuestion.question_text = question_text.trim()
     } else {
       return res.status(422).json({
-        message: 'question_text of at least 1 char is required',
+        message: 'question_text of at least 3 char is required',
       })
     }
     // VALIDATING question_hint

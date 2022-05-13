@@ -3,7 +3,6 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Routing from './Routing'
 
-// REDUX
 import { Provider as StoreProvider } from 'react-redux'
 import { legacy_createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'

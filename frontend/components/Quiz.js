@@ -39,7 +39,9 @@ export function Quiz(props) {
                 ))
               }
             </div>
-            <button onClick={onClick} id="submitAnswerBtn" disabled={!option_id}>Submit answer</button>
+            <button onClick={onClick} disabled={!option_id}>
+              Submit answer
+            </button>
           </>
         ) : 'Loading next quiz...'
       }

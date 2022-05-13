@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import PT from 'prop-types'
 
 const initialFormValues = {
   username: '',
   password: '',
 }
-export default function LoginForm(props) {
+export default function AuthForm(props) {
   const [values, setValues] = useState(initialFormValues)
   // ✨ where are my props?
   const { login } = props
@@ -52,9 +51,4 @@ export default function LoginForm(props) {
       <button disabled={isDisabled()} id="submitCredentials">Submit credentials</button>
     </form>
   )
-}
-
-// 🔥 No touchy: LoginForm expects the following props exactly:
-LoginForm.propTypes = {
-  login: PT.func.isRequired,
 }

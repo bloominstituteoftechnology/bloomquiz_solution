@@ -3,34 +3,38 @@ import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function Quiz(props) {
-  const { quiz, nextQuiz } = props
+  const {
+    quiz: { question, option_id },
+    nextQuiz,
+    selectOption,
+  } = props
 
   useEffect(() => {
-    if (!quiz.question) nextQuiz()
+    if (!question) nextQuiz()
   }, [])
 
   return (
     <div id="wrapper">
       {
-        quiz.question ? (
+        question ? (
           <>
-            <h2>{quiz.question.question_text}</h2>
+            <h2>{question.question_text}</h2>
             <div id="quizAnswers">
               {
-                quiz.question.options.map(opt => (
+                question.options.map(opt => (
                   <div
                     key={opt.option_id}
-                    className={`answer${quiz.option_id === opt.option_id ? ' selected' : ''}`}
+                    className={`answer${option_id === opt.option_id ? ' selected' : ''}`}
                   >
                     {opt.option_text}
-                    <button>
-                      {quiz.option_id === opt.answer_id ? 'SELECTED' : 'Select'}
+                    <button onClick={() => selectOption(opt.option_id)}>
+                      {option_id === opt.option_id ? 'SELECTED' : 'Select'}
                     </button>
                   </div>
                 ))
               }
             </div>
-            <button id="submitAnswerBtn" disabled={!quiz.option_id}>Submit answer</button>
+            <button id="submitAnswerBtn" disabled={!option_id}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }

@@ -14,6 +14,10 @@ export function setQuiz(quiz) {
   return { type: types.SET_QUIZ, payload: quiz }
 }
 
+export function selectOption(option_id) {
+  return { type: types.SET_SELECTED_OPTION, payload: option_id }
+}
+
 export function register({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })

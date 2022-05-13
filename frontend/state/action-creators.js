@@ -57,3 +57,20 @@ export function nextQuiz() {
       })
   }
 }
+
+export function answerQuiz({ question_id, option_id, user_id }) {
+  return function (dispatch) {
+    axiosWithAuth().post(
+      'http://localhost:9000/api/quizzes/answer',
+      { question_id, option_id, user_id }
+    )
+      .then(res => {
+        dispatch(setMessage(`${res.data.verdict} ${res.data.remark}`))
+        dispatch(nextQuiz())
+      })
+      .catch(err => {
+        const errToDisplay = err.response ? err.response.data.message : err.message
+        dispatch(setMessage(errToDisplay))
+      })
+  }
+}

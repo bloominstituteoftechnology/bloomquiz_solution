@@ -7,11 +7,16 @@ export function Quiz(props) {
     quiz: { question, option_id },
     nextQuiz,
     selectOption,
+    answerQuiz,
   } = props
 
   useEffect(() => {
     if (!question) nextQuiz()
   }, [])
+
+  const onClick = evt => {
+    answerQuiz({ question_id: question.question_id, option_id })
+  }
 
   return (
     <div id="wrapper">
@@ -34,7 +39,7 @@ export function Quiz(props) {
                 ))
               }
             </div>
-            <button id="submitAnswerBtn" disabled={!option_id}>Submit answer</button>
+            <button onClick={onClick} id="submitAnswerBtn" disabled={!option_id}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }

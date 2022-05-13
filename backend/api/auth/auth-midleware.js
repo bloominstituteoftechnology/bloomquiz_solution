@@ -1,5 +1,40 @@
 const jwt = require('jsonwebtoken')
+const User = require('../user/user-model')
 const secret = process.env.SECRET || 'the secret'
+
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username,
+  }
+  const options = {
+    expiresIn: '1d',
+  }
+  return jwt.sign(payload, secret, options)
+}
+
+async function uniqueUsername(req, res, next) {
+  const { username } = req.body
+  const user = await User.getByUsername(username)
+
+  if (user) {
+    res.status(400).json({ message: 'username taken' })
+  } else {
+    next()
+  }
+}
+
+async function usernameExists(req, res, next) {
+  const { username } = req.body
+  const user = await User.getByUsername(username)
+
+  if (!user) {
+    res.status(400).json({ message: 'invalid credentials' })
+  } else {
+    req.user = user
+    next()
+  }
+}
 
 function restrict(req, res, next) {
   const token = req.headers.authorization
@@ -21,4 +56,7 @@ function restrict(req, res, next) {
 
 module.exports = {
   restrict,
+  uniqueUsername,
+  usernameExists,
+  generateToken,
 }

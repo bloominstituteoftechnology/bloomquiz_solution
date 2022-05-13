@@ -1,8 +1,33 @@
 const db = require('../../data/db-config')
 
 async function randomQuiz() {
-  const [random] = await db.raw('SELECT * FROM questions ORDER BY RANDOM() LIMIT 1')
-  return random
+  const [{ question_id }] = await db.raw(`
+    SELECT question_id FROM questions ORDER BY RANDOM() LIMIT 1
+  `)
+  const rows = await db.raw(`
+    SELECT
+      q.question_id, q.question_text, q.question_hint,
+      o.option_id, o.option_text
+    FROM questions q
+    JOIN options o
+      ON q.question_id = o.question_id
+    WHERE q.question_id = ?
+  `, [question_id])
+
+  const result = rows.reduce((acc, row) => {
+    if (!acc.question_id) {
+      acc.question_id = row.question_id
+      acc.question_text = row.question_text
+      acc.question_hint = row.question_hint
+    }
+    acc.options.push({
+      option_id: row.option_id,
+      option_text: row.option_text,
+    })
+    return acc
+  }, { options: [] })
+
+  return result
 }
 
 async function prevAnswers(user_id) {

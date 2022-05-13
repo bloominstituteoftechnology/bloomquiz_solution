@@ -1,9 +1,10 @@
 import React from 'react'
+import QuizForm from './QuizForm'
 
 export default function Admin(props) {
   return (
     <div>
-      See quizzes, create & edit quizzes, see stats...
+      <QuizForm />
     </div>
   )
 }

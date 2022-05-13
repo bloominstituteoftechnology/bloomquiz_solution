@@ -16,14 +16,12 @@ function generateToken(user) {
 async function uniqueUsername(req, res, next) {
   const user = await User.getByUsername(req.body.username)
   if (user) return res.status(400).json({ message: 'username taken' })
-
   next()
 }
 
 async function usernameExists(req, res, next) {
   const user = await User.getByUsername(req.body.username)
   if (!user) return res.status(400).json({ message: 'invalid credentials' })
-
   req.user = user
   next()
 }

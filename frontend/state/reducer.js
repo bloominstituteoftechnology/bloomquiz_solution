@@ -31,19 +31,47 @@ const initialQuestionForm = {
   question_hint: null,
   options: [
     {
-      option_text: '',
-      is_distractor: false,
-      remark: null,
+      option_text_0: '',
+      is_distractor_0: false,
+      remark_0: null,
     },
     {
-      option_text: '',
-      is_distractor: true,
-      remark: null,
+      option_text_1: '',
+      is_distractor_1: true,
+      remark_1: null,
     },
   ]
 }
 function questionForm(state = initialQuestionForm, action) {
-  return state
+  switch (action.type) {
+    case types.ADD_OPTION: {
+      const { options } = state
+      const nextIdx = options.length - 1
+      if (nextIdx > 9) return state
+      return {
+        ...state, options: [
+          ...options,
+          {
+            ['option_text_' + nextIdx]: '',
+            ['is_distractor_' + nextIdx]: true,
+            ['remark_' + nextIdx]: null,
+          }
+        ]
+      }
+    }
+    case types.REMOVE_OPTION: {
+      const { options } = state
+      const choppedIdx = action.payload
+      if (options.length < 2) return state
+      if (choppedIdx === 0) return state
+      return {
+        ...state, options: state.options
+          .filter((_, i) => i !== choppedIdx)
+      }
+    }
+    default:
+      return state
+  }
 }
 
 const initialQuiz = { question: null, option_id: null }

@@ -23,22 +23,32 @@ function authForm(state = initialAuthForm, action) {
 const initialQuestionForm = {
   question_title: '',
   question_text: '',
-  question_hint: null,
+  question_hint: '',
   options: [
     {
       option_text_0: '',
       is_distractor_0: false,
-      remark_0: null,
+      remark_0: '',
     },
     {
       option_text_1: '',
       is_distractor_1: true,
-      remark_1: null,
+      remark_1: '',
     },
   ]
 }
 function questionForm(state = initialQuestionForm, action) {
   switch (action.type) {
+    case types.QUESTION_FORM_RESET:
+      return initialAuthForm
+    case types.AUTH_FORM_INPUT_CHANGE: {
+      const { id, value } = action.payload
+      if (id in state) return { ...state, [id]: value }
+      const changedOptions = state.options.map(opt => {
+        return ((id in opt)) ? { ...opt, [id]: value } : opt
+      })
+      return { ...state, options: changedOptions }
+    }
     case types.ADD_OPTION: {
       const { options } = state
       const nextIdx = options.length - 1
@@ -56,12 +66,11 @@ function questionForm(state = initialQuestionForm, action) {
     }
     case types.REMOVE_OPTION: {
       const { options } = state
-      const choppedIdx = action.payload
+      const option_id = action.payload
       if (options.length < 2) return state
-      if (choppedIdx === 0) return state
       return {
         ...state, options: state.options
-          .filter((_, i) => i !== choppedIdx)
+          .filter((opt) => opt.option_id !== option_id)
       }
     }
     default:

@@ -7,13 +7,13 @@ export function AuthForm(props) {
   const {
     login,
     register,
-    inputChange,
+    authInputChange,
     authForm: { username, password }
   } = props
 
   const onChange = evt => {
     const { id, value } = evt.target
-    inputChange({ id, value })
+    authInputChange({ id, value })
   }
 
   const onSubmit = evt => {

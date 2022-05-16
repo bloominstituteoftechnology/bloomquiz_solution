@@ -62,7 +62,7 @@ export function QuizForm(props) {
       {
         questionForm.options.slice(1).map(opt => {
           return (
-            <div key={opt.option_id}>
+            <div>
               <textarea
                 maxLength={50}
                 placeholder="Enter option text"

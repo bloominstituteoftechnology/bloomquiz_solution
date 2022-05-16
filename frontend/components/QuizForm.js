@@ -17,8 +17,8 @@ export function QuizForm(props) {
     evt.preventDefault()
     removeOption(option_id)
   }
-  const submit = evt => {
-    evt.preventDefault()
+  const onChange = ({ target: { id, value } }) => {
+    questionInputChange({ id, value })
   }
   return (
     <form id="loginForm">
@@ -28,20 +28,20 @@ export function QuizForm(props) {
         placeholder="Enter question title"
         id="question_title"
         value={questionForm.question_title}
-        onChange={questionInputChange}
+        onChange={onChange}
       />
       <input
         maxLength={50}
         placeholder="Enter question hint"
         id="question_hint"
         value={questionForm.question_hint}
-        onChange={questionInputChange}
+        onChange={onChange}
       />
       <textarea
         placeholder="Enter question text"
         id="question_text"
         value={questionForm.question_text}
-        onChange={questionInputChange}
+        onChange={onChange}
       />
       ENTER THE CORRECT OPTION
       <textarea
@@ -49,14 +49,14 @@ export function QuizForm(props) {
         placeholder="Enter option text"
         id="option_text_1"
         value={questionForm.options[0].option_text_1}
-        onChange={questionInputChange}
+        onChange={onChange}
       />
       <input
         maxLength={50}
         placeholder="Enter option remark"
         id="remark_1"
         value={questionForm.options[0].remark_1}
-        onChange={questionInputChange}
+        onChange={onChange}
       />
       ENTER THE DISTRACTOR OPTIONS
       {
@@ -68,14 +68,14 @@ export function QuizForm(props) {
                 placeholder="Enter option text"
                 id="option_text_2"
                 value={questionForm.option_text_2}
-                onChange={questionInputChange}
+                onChange={onChange}
               />
               <input
                 maxLength={50}
                 placeholder="Enter option remark"
                 id="remark_2"
                 value={questionForm.remark_2}
-                onChange={questionInputChange}
+                onChange={onChange}
               />
               <button
                 disabled={questionForm.options.length < 3}

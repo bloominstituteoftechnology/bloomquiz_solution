@@ -41,7 +41,7 @@ function questionForm(state = initialQuestionForm, action) {
   switch (action.type) {
     case types.QUESTION_FORM_RESET:
       return initialAuthForm
-    case types.AUTH_FORM_INPUT_CHANGE: {
+    case types.QUESTION_FORM_INPUT_CHANGE: {
       const { id, value } = action.payload
       if (id in state) return { ...state, [id]: value }
       const changedOptions = state.options.map(opt => {

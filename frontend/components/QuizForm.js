@@ -48,19 +48,19 @@ export function QuizForm(props) {
         maxLength={50}
         placeholder="Enter option text"
         id="option_text_1"
-        value={questionForm.option_text_1}
+        value={questionForm.options[0].option_text_1}
         onChange={questionInputChange}
       />
       <input
         maxLength={50}
         placeholder="Enter option remark"
         id="remark_1"
-        value={questionForm.remark_1}
+        value={questionForm.options[0].remark_1}
         onChange={questionInputChange}
       />
       ENTER THE DISTRACTOR OPTIONS
       {
-        questionForm.options.map(opt => {
+        questionForm.options.slice(1).map(opt => {
           return (
             <div key={opt.option_id}>
               <textarea

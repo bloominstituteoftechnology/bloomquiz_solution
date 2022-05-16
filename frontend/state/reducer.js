@@ -11,15 +11,10 @@ const initialAuthForm = {
 }
 function authForm(state = initialAuthForm, action) {
   switch (action.type) {
-    case types.RESET_FORM:
+    case types.AUTH_FORM_RESET:
       return initialAuthForm
-    case types.INPUT_CHANGE: {
-      const { id } = action.payload
-      if (id === 'username' || id === 'password') {
-        return { ...state, [action.payload.id]: action.payload.value }
-      }
-      return state
-    }
+    case types.AUTH_FORM_INPUT_CHANGE:
+      return { ...state, [action.payload.id]: action.payload.value }
     default:
       return state
   }

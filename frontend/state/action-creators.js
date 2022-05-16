@@ -3,7 +3,7 @@ import axiosWithAuth from '../axios'
 import axios from 'axios'
 
 export function inputChange({ id, value }) {
-  return { type: types.INPUT_CHANGE, payload: { id, value } }
+  return { type: types.AUTH_FORM_INPUT_CHANGE, payload: { id, value } }
 }
 
 export function setMessage(message) {

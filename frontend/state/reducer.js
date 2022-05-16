@@ -51,7 +51,7 @@ function questionForm(state = initialQuestionForm, action) {
     }
     case types.ADD_OPTION: {
       const { options } = state
-      const nextIdx = options.length - 1
+      const nextIdx = options.length
       if (nextIdx > 9) return state
       return {
         ...state, options: [
@@ -59,18 +59,18 @@ function questionForm(state = initialQuestionForm, action) {
           {
             ['option_text_' + nextIdx]: '',
             ['is_distractor_' + nextIdx]: true,
-            ['remark_' + nextIdx]: null,
+            ['remark_' + nextIdx]: '',
           }
         ]
       }
     }
     case types.REMOVE_OPTION: {
       const { options } = state
-      const option_id = action.payload
-      if (options.length < 2) return state
+      const idx = action.payload
+      if (options.length < 2 || idx == 0) return state
       return {
         ...state, options: state.options
-          .filter((opt) => opt.option_id !== option_id)
+          .filter((_, i) => idx !== i)
       }
     }
     default:

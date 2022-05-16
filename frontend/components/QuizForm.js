@@ -13,9 +13,9 @@ export function QuizForm(props) {
     evt.preventDefault()
     addOption()
   }
-  const remOpt = option_id => evt => {
+  const remOpt = option => evt => {
     evt.preventDefault()
-    removeOption(option_id)
+    removeOption(option)
   }
   const onChange = ({ target: { id, value } }) => {
     questionInputChange({ id, value })
@@ -62,7 +62,7 @@ export function QuizForm(props) {
       {
         questionForm.options.slice(1).map(opt => {
           return (
-            <div>
+            <div key={opt}>
               <textarea
                 maxLength={50}
                 placeholder="Enter option text"

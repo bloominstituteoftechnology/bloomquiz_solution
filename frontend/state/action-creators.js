@@ -11,8 +11,8 @@ export function questionInputChange({ id, value }) {
 export function addOption() {
   return { type: types.ADD_OPTION }
 }
-export function removeOption(option_id) {
-  return { type: types.REMOVE_OPTION, payload: option_id }
+export function removeOption(option) {
+  return { type: types.REMOVE_OPTION, payload: option.option_text.split('_')[1] }
 }
 export function setMessage(message) {
   return { type: types.SET_INFO_MESSAGE, payload: message }

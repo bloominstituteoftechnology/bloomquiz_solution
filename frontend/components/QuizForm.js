@@ -52,7 +52,9 @@ export function QuizForm(props) {
         Object.keys(questionForm.options).map(optionKey => {
           const option = questionForm.options[optionKey]
           return (
-            <div key={optionKey}>
+            <div key={optionKey} style={{
+              border: option.is_distractor ? '10px solid red' : '10px solid green'
+            }}>
               <textarea
                 maxLength={50}
                 placeholder="Enter option text"
@@ -65,6 +67,12 @@ export function QuizForm(props) {
                 placeholder="Enter option remark"
                 name="remark"
                 value={option.remark}
+                onChange={onQuestionOptionChange(optionKey)}
+              />
+              <input
+                type="checkbox"
+                name="is_distractor"
+                checked={option.is_distractor}
                 onChange={onQuestionOptionChange(optionKey)}
               />
               <button

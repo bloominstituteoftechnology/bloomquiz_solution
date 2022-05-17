@@ -30,7 +30,7 @@ exports.up = async function (knex) {
       options.timestamps(false, true)
       options.string('option_text', 500).notNullable()
       options.string('remark', 500)
-      options.boolean('is_distractor')
+      options.boolean('is_correct')
       options.integer('question_id')
         .unsigned()
         .notNullable()

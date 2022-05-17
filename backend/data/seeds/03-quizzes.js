@@ -14,31 +14,31 @@ exports.seed = async function (knex) {
   await knex('options').insert([
     {
       option_text: 'Hand',
-      is_distractor: true,
+      is_correct: false,
       remark: 'Nope...',
       question_id: 1,
     },
     {
       option_text: 'Nothing',
-      is_distractor: true,
-      remark: 'Nice try...',
+      is_correct: false,
+      remark: 'Nice try though...',
       question_id: 1,
     },
     {
       option_text: 'The One Ring',
-      is_distractor: false,
+      is_correct: true,
       remark: 'There ya go!',
       question_id: 1,
     },
     {
       option_text: 'Work',
-      is_distractor: true,
+      is_correct: false,
       remark: 'Really??',
       question_id: 2,
     },
     {
       option_text: 'Family and friends',
-      is_distractor: false,
+      is_correct: true,
       remark: 'There ya go!',
       question_id: 2,
     },

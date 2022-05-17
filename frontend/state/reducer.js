@@ -21,8 +21,8 @@ const initialQuestionForm = {
   question_text: '',
   question_hint: '',
   options: {
-    [getId()]: { option_text: '', is_distractor: false, remark: '' },
-    [getId()]: { option_text: '', is_distractor: true, remark: '' },
+    [getId()]: { option_text: '', is_correct: true, remark: '' },
+    [getId()]: { option_text: '', is_correct: false, remark: '' },
   }
 }
 function questionForm(state = initialQuestionForm, action) {
@@ -45,7 +45,7 @@ function questionForm(state = initialQuestionForm, action) {
         ...state,
         options: {
           ...state.options,
-          [action.payload]: { option_text: '', is_distractor: true, remark: '' }
+          [action.payload]: { option_text: '', is_correct: false, remark: '' }
         }
       }
     }

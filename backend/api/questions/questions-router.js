@@ -50,7 +50,7 @@ router.post('/', async (req, res, next) => {
 
     const { options } = req.body
     for (let option of options) {
-      const { option_text, is_distractor, remark } = option
+      const { option_text, is_correct, remark } = option
       const validatedOption = {}
 
       // VALIDATING option_text
@@ -67,13 +67,13 @@ router.post('/', async (req, res, next) => {
       }
       // VALIDATING option_text
       if (
-        is_distractor !== undefined &&
-        typeof is_distractor === 'boolean'
+        is_correct !== undefined &&
+        typeof is_correct === 'boolean'
       ) {
-        validatedOption.is_distractor = is_distractor
+        validatedOption.is_correct = is_correct
       } else {
         return res.status(422).json({
-          message: 'is_distractor (true or false) for each option is required',
+          message: 'is_correct (true or false) for each option is required',
         })
       }
       // VALIDATING option_text
@@ -97,7 +97,7 @@ router.post('/', async (req, res, next) => {
     }
 
     // VALIDATING exactly one option is a non-distractor
-    const nonDistractorCount = validatedOptions.filter(o => !o.is_distractor).length
+    const nonDistractorCount = validatedOptions.filter(o => o.is_correct).length
     if (nonDistractorCount !== 1) {
       return res.status(422).json({
         message: 'provide one correct option and at least one distractor',

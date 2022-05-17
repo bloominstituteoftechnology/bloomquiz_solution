@@ -60,11 +60,11 @@ async function nextQuiz({ user_id }) {
 async function answerQuiz({ question_id, option_id, user_id }) {
   const option = await db('options').where('option_id', option_id).first()
   if (user_id) {
-    await db('answers').insert({ user_id, question_id, is_correct: !option.is_distractor })
+    await db('answers').insert({ user_id, question_id, is_correct: option.is_correct })
   }
   return {
     remark: option.remark,
-    verdict: `You ${option.is_distractor ? "screwed up!" : "did great!"}`,
+    verdict: `You ${option.is_correct ? "did great!" : "screwed up."}`,
   }
 }
 

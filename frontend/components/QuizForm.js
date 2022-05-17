@@ -55,7 +55,7 @@ export function QuizForm(props) {
           const option = questionForm.options[optionKey]
           return (
             <div key={optionKey} style={{
-              border: option.is_distractor ? '10px solid red' : '10px solid green'
+              border: option.is_correct ? '10px solid green' : '10px solid red'
             }}>
               <textarea
                 maxLength={50}
@@ -73,8 +73,8 @@ export function QuizForm(props) {
               />
               <input
                 type="checkbox"
-                name="is_distractor"
-                checked={option.is_distractor}
+                name="is_correct"
+                checked={option.is_correct}
                 onChange={onQuestionOptionChange(optionKey)}
               />
               <button

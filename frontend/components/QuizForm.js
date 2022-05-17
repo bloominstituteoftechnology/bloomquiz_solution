@@ -7,18 +7,22 @@ export function QuizForm(props) {
     addOption,
     removeOption,
     questionInputChange,
+    questionOptionInputChange,
     questionForm,
   } = props
-  const addOpt = evt => {
+  const onAddOption = evt => {
     evt.preventDefault()
     addOption()
   }
-  const remOpt = option => evt => {
+  const onRemoveOption = optionKey => evt => {
     evt.preventDefault()
-    removeOption(option)
+    removeOption(optionKey)
   }
-  const onChange = ({ target: { id, value } }) => {
-    questionInputChange({ id, value })
+  const onQuestionChange = ({ target: { name, value } }) => {
+    questionInputChange({ name, value })
+  }
+  const onQuestionOptionChange = optionKey => ({ target: { name, value } }) => {
+    questionOptionInputChange({ optionKey, name, value })
   }
   return (
     <form id="loginForm">
@@ -26,67 +30,51 @@ export function QuizForm(props) {
       <input
         maxLength={50}
         placeholder="Enter question title"
-        id="question_title"
+        name="question_title"
         value={questionForm.question_title}
-        onChange={onChange}
+        onChange={onQuestionChange}
       />
       <input
         maxLength={50}
         placeholder="Enter question hint"
-        id="question_hint"
+        name="question_hint"
         value={questionForm.question_hint}
-        onChange={onChange}
+        onChange={onQuestionChange}
       />
       <textarea
         placeholder="Enter question text"
-        id="question_text"
+        name="question_text"
         value={questionForm.question_text}
-        onChange={onChange}
+        onChange={onQuestionChange}
       />
-      ENTER THE CORRECT OPTION
-      <textarea
-        maxLength={50}
-        placeholder="Enter option text"
-        id="option_text_1"
-        value={questionForm.options[0].option_text_1}
-        onChange={onChange}
-      />
-      <input
-        maxLength={50}
-        placeholder="Enter option remark"
-        id="remark_1"
-        value={questionForm.options[0].remark_1}
-        onChange={onChange}
-      />
-      ENTER THE DISTRACTOR OPTIONS
+      OPTIONS
       {
-        questionForm.options.slice(1).map(opt => {
+        Object.keys(questionForm.options).map(optionKey => {
+          const option = questionForm.options[optionKey]
           return (
-            <div key={opt}>
+            <div key={optionKey}>
               <textarea
                 maxLength={50}
                 placeholder="Enter option text"
-                id="option_text_2"
-                value={questionForm.option_text_2}
-                onChange={onChange}
+                name="option_text"
+                value={option.option_text}
+                onChange={onQuestionOptionChange(optionKey)}
               />
               <input
                 maxLength={50}
                 placeholder="Enter option remark"
-                id="remark_2"
-                value={questionForm.remark_2}
-                onChange={onChange}
+                name="remark"
+                value={option.remark}
+                onChange={onQuestionOptionChange(optionKey)}
               />
               <button
                 disabled={questionForm.options.length < 3}
-                onClick={remOpt(opt.option_id)}>remove</button>
+                onClick={onRemoveOption(optionKey)}>remove</button>
             </div>
           )
         })
       }
-      <button
-        disabled={questionForm.options.length > 9}
-        onClick={addOpt}>add distractor</button>
+      <button onClick={onAddOption}>add option</button>
       <button>
         Submit Quiz
       </button>

@@ -1,18 +1,22 @@
 import * as types from './action-types'
 import axiosWithAuth from '../axios'
+import { getId } from '../../shared/utils'
 import axios from 'axios'
 
 export function authInputChange({ id, value }) {
   return { type: types.AUTH_FORM_INPUT_CHANGE, payload: { id, value } }
 }
-export function questionInputChange({ id, value }) {
-  return { type: types.QUESTION_FORM_INPUT_CHANGE, payload: { id, value } }
+export function questionInputChange({ name, value }) {
+  return { type: types.QUESTION_FORM_INPUT_CHANGE, payload: { name, value } }
+}
+export function questionOptionInputChange({ optionKey, name, value }) {
+  return { type: types.QUESTION_FORM_OPTION_INPUT_CHANGE, payload: { optionKey, name, value } }
 }
 export function addOption() {
-  return { type: types.ADD_OPTION }
+  return { type: types.QUESTION_FORM_OPTION_ADDITION, payload: getId() }
 }
-export function removeOption(option) {
-  return { type: types.REMOVE_OPTION, payload: option.option_text.split('_')[1] }
+export function removeOption(optionKey) {
+  return { type: types.QUESTION_FORM_OPTION_REMOVAL, payload: optionKey }
 }
 export function setMessage(message) {
   return { type: types.SET_INFO_MESSAGE, payload: message }
@@ -21,7 +25,7 @@ export function setQuiz(quiz) {
   return { type: types.SET_QUIZ, payload: quiz }
 }
 export function selectOption(option_id) {
-  return { type: types.SET_SELECTED_OPTION, payload: option_id }
+  return { type: types.QUIZ_SET_SELECTED_OPTION, payload: option_id }
 }
 export function register({ username, password }) {
   return function (dispatch) {

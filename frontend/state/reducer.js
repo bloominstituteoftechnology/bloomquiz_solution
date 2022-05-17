@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import * as types from './action-types'
-
+import { getId } from '../../shared/utils'
 const initialCount = 0
 function count(state = initialCount, action) {
   return state
@@ -24,54 +24,40 @@ const initialQuestionForm = {
   question_title: '',
   question_text: '',
   question_hint: '',
-  options: [
-    {
-      option_text_0: '',
-      is_distractor_0: false,
-      remark_0: '',
-    },
-    {
-      option_text_1: '',
-      is_distractor_1: true,
-      remark_1: '',
-    },
-  ]
+  options: {
+    [getId()]: { option_text: '', is_distractor: false, remark: '' },
+    [getId()]: { option_text: '', is_distractor: true, remark: '' },
+  }
 }
 function questionForm(state = initialQuestionForm, action) {
   switch (action.type) {
     case types.QUESTION_FORM_RESET:
       return initialAuthForm
     case types.QUESTION_FORM_INPUT_CHANGE: {
-      const { id, value } = action.payload
-      if (id in state) return { ...state, [id]: value }
-      const changedOptions = state.options.map(opt => {
-        return ((id in opt)) ? { ...opt, [id]: value } : opt
-      })
-      return { ...state, options: changedOptions }
+      return { ...state, [action.payload.name]: action.payload.value }
     }
-    case types.ADD_OPTION: {
+    case types.QUESTION_FORM_OPTION_INPUT_CHANGE: {
+      const { optionKey, name, value } = action.payload
+      const optionToChange = state.options[optionKey]
+      const changed = { ...optionToChange, [name]: value }
+      return { ...state, options: { ...state.options, [optionKey]: changed } }
+    }
+    case types.QUESTION_FORM_OPTION_ADDITION: {
       const { options } = state
-      const nextIdx = options.length
-      if (nextIdx > 9) return state
+      if (Object.keys(options).length >= 10) return state
       return {
-        ...state, options: [
-          ...options,
-          {
-            ['option_text_' + nextIdx]: '',
-            ['is_distractor_' + nextIdx]: true,
-            ['remark_' + nextIdx]: '',
-          }
-        ]
+        ...state,
+        options: {
+          ...state.options,
+          [action.payload]: { option_text: '', is_distractor: true, remark: '' }
+        }
       }
     }
-    case types.REMOVE_OPTION: {
-      const { options } = state
-      const idx = action.payload
-      if (options.length < 2 || idx == 0) return state
-      return {
-        ...state, options: state.options
-          .filter((_, i) => idx !== i)
-      }
+    case types.QUESTION_FORM_OPTION_REMOVAL: {
+      const options = { ...state.options }
+      if (Object.keys(options).length <= 2) return state
+      delete options[action.payload]
+      return { ...state, options }
     }
     default:
       return state
@@ -83,7 +69,7 @@ function quiz(state = initialQuiz, action) {
   switch (action.type) {
     case types.SET_QUIZ:
       return { option_id: null, question: action.payload }
-    case types.SET_SELECTED_OPTION:
+    case types.QUIZ_SET_SELECTED_OPTION:
       return { ...state, option_id: action.payload }
     default:
       return state

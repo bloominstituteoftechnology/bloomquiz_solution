@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { getId } from '../../shared/utils'
-const initialCount = 0
-function count(state = initialCount, action) {
-  return state
-}
 
 const initialAuthForm = {
   username: '', password: ''
@@ -87,7 +83,6 @@ function infoMessage(state = initialMessageState, action) {
 }
 
 export default combineReducers({
-  count,
   authForm,
   questionForm,
   quiz,

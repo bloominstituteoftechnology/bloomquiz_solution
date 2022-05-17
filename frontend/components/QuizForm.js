@@ -21,8 +21,10 @@ export function QuizForm(props) {
   const onQuestionChange = ({ target: { name, value } }) => {
     questionInputChange({ name, value })
   }
-  const onQuestionOptionChange = optionKey => ({ target: { name, value } }) => {
-    questionOptionInputChange({ optionKey, name, value })
+  const onQuestionOptionChange = optionKey => ({ target }) => {
+    const { type, checked, name, value } = target
+    const valueToUse = type === 'checkbox' ? checked : value
+    questionOptionInputChange({ optionKey, name, value: valueToUse })
   }
   return (
     <form id="loginForm">

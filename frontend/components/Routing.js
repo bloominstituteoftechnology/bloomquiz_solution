@@ -35,12 +35,9 @@ export function App(props) {
       <Spinner />
       <Message />
       <Opacity>
-        {
-          props.auth.user
-            ? <button onClick={onLogout} id="logout">Logout</button>
-            : <button onClick={onLogin} id="logout">Login</button>
-        }
-        <h1>Welcome</h1>
+        {props.auth.user && <button onClick={onLogout} id="logout">Logout</button>}
+        {!props.auth.user && location.pathname !== '/auth' && <button onClick={onLogin} id="logout">Login</button>}
+        <h1>QuizMaster</h1>
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
           {props.auth.user && <NavLink to="/stats">Stats</NavLink>}

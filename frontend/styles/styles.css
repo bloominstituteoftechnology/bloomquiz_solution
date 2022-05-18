@@ -3,7 +3,8 @@
   src: url('../fonts/TitilliumWeb-SemiBold.ttf');
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
 
@@ -19,12 +20,17 @@ body::after {
   z-index: -1;
 }
 
-body, input, select, button, textarea {
+body,
+input,
+select,
+button,
+textarea {
   font-family: 'Titillium Web', sans-serif;
   color: #666666;
 }
 
-#root, #wrapper {
+#root,
+#wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,12 +53,14 @@ nav a.active {
 h1 {
   font-size: 1.8rem;
   line-height: 4rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
   width: 100%;
   font-size: 1.3rem;
   color: #484848cc;
+  margin-bottom: 0.5rem;
 }
 
 button {
@@ -87,7 +95,11 @@ button:disabled {
   color: #4848486b;
 }
 
-input:active, input:focus, textarea:active, textarea:focus, select:focus {
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:focus {
   box-shadow: 0 0 5px #93005a;
   border: 1px solid #93005a;
 }
@@ -101,7 +113,12 @@ form {
   justify-content: space-between;
 }
 
-input, select, textarea {
+input[type=text],
+input[type=password],
+select,
+textarea {
+  margin-bottom: 1rem;
+  padding-top: 0.2rem;
   padding-left: 0.5rem;
   border-radius: 0;
   border: 1px solid #DDDDDD;
@@ -113,7 +130,7 @@ input, select, textarea {
 
 #logout {
   position: absolute;
-  top: 5px;
+  top: 15px;
   right: 5px;
 }
 
@@ -143,6 +160,7 @@ footer {
   border: 1px solid rgb(238, 238, 238);
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .answer.selected {
@@ -152,4 +170,14 @@ footer {
 
 #quizAnswers {
   min-width: 450px;
+}
+
+.option {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: rgb(255, 226, 226);
+}
+
+.option.truthy {
+  background-color: rgb(154, 255, 154);
 }

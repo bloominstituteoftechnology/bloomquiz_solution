@@ -39,6 +39,7 @@ export function QuizForm(props) {
     <form id="loginForm" onSubmit={onSubmit}>
       <h2>New Quiz</h2>
       <input
+        type="text"
         maxLength={50}
         placeholder="Enter question title"
         name="question_title"
@@ -46,6 +47,7 @@ export function QuizForm(props) {
         onChange={onQuestionChange}
       />
       <input
+        type="text"
         maxLength={50}
         placeholder="Enter question hint"
         name="question_hint"
@@ -63,9 +65,7 @@ export function QuizForm(props) {
         Object.keys(questionForm.options).map(optionKey => {
           const option = questionForm.options[optionKey]
           return (
-            <div key={optionKey} style={{
-              border: option.is_correct ? '10px solid green' : '10px solid red'
-            }}>
+            <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <textarea
                 maxLength={50}
                 placeholder="Enter option text"
@@ -74,6 +74,7 @@ export function QuizForm(props) {
                 onChange={onQuestionOptionChange(optionKey)}
               />
               <input
+                type="text"
                 maxLength={50}
                 placeholder="Enter option remark"
                 name="remark"

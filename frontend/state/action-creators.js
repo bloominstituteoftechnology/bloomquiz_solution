@@ -33,8 +33,8 @@ export function selectOption(option_id) {
 export function questionFormReset() {
   return { type: types.QUESTION_FORM_RESET }
 }
-export function setAuthStatus({ user, admin }) {
-  return { type: types.SET_AUTH_STATUS, payload: { user, admin } }
+export function setAuthStatus({ user, admin, username }) {
+  return { type: types.SET_AUTH_STATUS, payload: { user, admin, username } }
 }
 export function flushAuthStatus() {
   return { type: types.FLUSH_AUTH_STATUS }

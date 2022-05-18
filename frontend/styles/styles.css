@@ -113,8 +113,7 @@ form {
   justify-content: space-between;
 }
 
-input[type=text],
-input[type=password],
+input,
 select,
 textarea {
   margin-bottom: 1rem;
@@ -175,9 +174,9 @@ footer {
 .option {
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: rgb(255, 226, 226);
+  background-color: red;
 }
 
 .option.truthy {
-  background-color: rgb(154, 255, 154);
+  background-color: green;
 }

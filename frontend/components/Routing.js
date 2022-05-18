@@ -30,18 +30,20 @@ export function App(props) {
     navigate('/auth', { replace: true })
   }
 
+  const { user, admin, username } = props.auth
+
   return (
     <>
       <Spinner />
       <Message />
       <Opacity>
-        {props.auth.user && <button onClick={onLogout} id="logout">Logout</button>}
-        {!props.auth.user && location.pathname !== '/auth' && <button onClick={onLogin} id="logout">Login</button>}
+        {user && <button onClick={onLogout} id="logout">Logout {username}</button>}
+        {!user && location.pathname !== '/auth' && <button onClick={onLogin} id="logout">Login</button>}
         <h1>QuizMaster</h1>
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
-          {props.auth.user && <NavLink to="/stats">Stats</NavLink>}
-          {props.auth.admin && <NavLink to="/admin">Admin</NavLink>}
+          {user && <NavLink to="/stats">Stats</NavLink>}
+          {admin && <NavLink to="/admin">Admin</NavLink>}
         </nav>
         <Routes>
           <Route path="/" element={<Quiz />} />

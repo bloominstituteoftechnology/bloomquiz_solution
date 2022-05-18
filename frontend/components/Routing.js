@@ -38,12 +38,11 @@ export function App(props) {
         {
           props.auth.user
             ? <button onClick={onLogout} id="logout">Logout</button>
-            : <button onClick={onLogin} id="logout">Login to save your stats!</button>
+            : <button onClick={onLogin} id="logout">Login</button>
         }
         <h1>Welcome</h1>
         <nav>
-          <NavLink to="/">Test your knowledge</NavLink>
-          <NavLink to="/auth">Login into account</NavLink>
+          <NavLink to="/">Test yourself!</NavLink>
           {props.auth.user && <NavLink to="/stats">Stats</NavLink>}
           {props.auth.admin && <NavLink to="/admin">Admin</NavLink>}
         </nav>

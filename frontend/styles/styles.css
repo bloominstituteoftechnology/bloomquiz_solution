@@ -30,7 +30,7 @@ body, input, select, button, textarea {
   align-items: center;
   justify-content: center;
   position: relative;
-  min-width: 600px;
+  min-width: 450px;
 }
 
 nav a {
@@ -52,46 +52,7 @@ h1 {
 h2 {
   width: 100%;
   font-size: 1.3rem;
-  margin-bottom: 2rem;
   color: #484848cc;
-}
-
-.articles {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0.55rem;
-  justify-content: space-evenly;
-  min-height: 3.8rem;
-  background-color: rgb(252, 252, 252);
-  border: 1px solid rgb(238, 238, 238);
-  margin: 1rem 0 1rem 0;
-}
-
-.article {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-top: 1px solid rgb(238, 238, 238);
-}
-
-.article p, .article h3 {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.35rem;
-}
-
-.article h3 {
-  font-size: 1.3rem;
-  line-height: 1.55rem;
-  color: #ff4b0091;
-  margin-bottom: 0.2rem;
 }
 
 button {
@@ -132,8 +93,6 @@ input:active, input:focus, textarea:active, textarea:focus, select:focus {
 }
 
 form {
-  width: 400px;
-  line-height: 2.5rem;
   padding: 0.55rem;
   background-color: rgb(252, 252, 252);
   border: 1px solid rgb(238, 238, 238);
@@ -145,16 +104,11 @@ form {
 input, select, textarea {
   padding-left: 0.5rem;
   border-radius: 0;
-  margin-bottom: 1rem;
   border: 1px solid #DDDDDD;
   background-color: white;
   outline: none;
   width: 100%;
   height: 2.4rem;
-}
-
-form button {
-  width: 100%;
 }
 
 #logout {
@@ -189,10 +143,13 @@ footer {
   border: 1px solid rgb(238, 238, 238);
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
 }
 
 .answer.selected {
   background-color: rgb(252, 252, 252);
   border: 1px dashed #48484871;
+}
+
+#quizAnswers {
+  min-width: 450px;
 }

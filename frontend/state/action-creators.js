@@ -36,6 +36,9 @@ export function questionFormReset() {
 export function setAuthStatus({ user, admin }) {
   return { type: types.SET_AUTH_STATUS, payload: { user, admin } }
 }
+export function flushAuthStatus() {
+  return { type: types.FLUSH_AUTH_STATUS }
+}
 export function register({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
@@ -112,7 +115,7 @@ export function getAuthStatus() {
         dispatch(setAuthStatus(res.data))
       })
       .catch(() => {
-        dispatch(setAuthStatus({ user: false, admin: false }))
+        dispatch(flushAuthStatus())
       })
   }
 }

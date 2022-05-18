@@ -88,11 +88,13 @@ function infoMessage(state = initialMessageState, action) {
   }
 }
 
-const initialAuth = { user: false, admin: false }
+const initialAuth = { user: false, admin: false, username: null }
 function auth(state = initialAuth, action) {
   switch (action.type) {
     case types.SET_AUTH_STATUS:
       return action.payload
+    case types.FLUSH_AUTH_STATUS:
+      return initialAuth
     default:
       return state
   }

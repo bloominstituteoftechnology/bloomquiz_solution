@@ -30,6 +30,7 @@ body, input, select, button, textarea {
   align-items: center;
   justify-content: center;
   position: relative;
+  min-width: 600px;
 }
 
 nav a {

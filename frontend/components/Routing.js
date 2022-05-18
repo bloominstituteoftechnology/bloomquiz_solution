@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink, Routes, Route, useLocation } from 'react-router-dom'
+import { NavLink, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 // components
@@ -13,22 +13,38 @@ import Stats from './Stats'
 
 export function App(props) {
   const location = useLocation()
+  const navigate = useNavigate()
+
   useEffect(() => {
-    console.log('routing changed, re-checked auth status...')
     props.getAuthStatus()
   }, [location])
+
+  const onLogin = () => {
+    navigate('/auth')
+  }
+
+  const onLogout = () => {
+    props.flushAuthStatus()
+    props.setMessage('Bye!')
+    window.localStorage.removeItem('token')
+    navigate('/auth', { replace: true })
+  }
+
   return (
     <>
       <Spinner />
       <Message />
       <Opacity>
-        <button id="logout">Logout from app</button>
-        <button id="logout">Logout from app</button>
+        {
+          props.auth.user
+            ? <button onClick={onLogout} id="logout">Logout</button>
+            : <button onClick={onLogin} id="logout">Login to save your stats!</button>
+        }
         <h1>Welcome</h1>
         <nav>
           <NavLink to="/">Test your knowledge</NavLink>
           <NavLink to="/auth">Login into account</NavLink>
-          <NavLink to="/stats">Stats</NavLink>
+          {props.auth.user && <NavLink to="/stats">Stats</NavLink>}
           {props.auth.admin && <NavLink to="/admin">Admin</NavLink>}
         </nav>
         <Routes>

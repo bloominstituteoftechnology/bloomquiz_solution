@@ -24,7 +24,7 @@ async function getById(question_id) {
 
 async function create(question) {
   let { options, ...rest } = question
-  const [question_id] = await db('questions').insert(rest)
+  const [question_id] = await db('questions').insert([rest], ['question_id'])
   options = options.map(o => ({ ...o, question_id }))
   await db('options').insert(options)
   const newQuestion = await getById(question_id)

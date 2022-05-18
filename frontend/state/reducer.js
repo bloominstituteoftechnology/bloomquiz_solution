@@ -58,7 +58,11 @@ function questionForm(state = initialQuestionForm, action) {
     case types.QUESTION_FORM_OPTION_REMOVAL: {
       const options = { ...state.options }
       if (Object.keys(options).length <= 2) return state
+      const isNonDistractor = options[action.payload].is_correct
       delete options[action.payload]
+      if (isNonDistractor) {
+        Object.values(options)[0].is_correct = true
+      }
       return { ...state, options }
     }
     default:

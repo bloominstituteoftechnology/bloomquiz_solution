@@ -58,7 +58,7 @@ export function QuizForm(props) {
         value={questionForm.question_text}
         onChange={onQuestionChange}
       />
-      OPTIONS
+      Options
       {
         Object.keys(questionForm.options).map(optionKey => {
           const option = questionForm.options[optionKey]

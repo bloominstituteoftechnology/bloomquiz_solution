@@ -16,17 +16,17 @@ function authForm(state = initialAuthForm, action) {
   }
 }
 
-const initialQuestionForm = {
+const initialQuestionForm = () => ({
   question_title: '', question_text: '', question_hint: '',
   options: {
     [getId()]: { option_text: '', is_correct: true, remark: '' },
     [getId()]: { option_text: '', is_correct: false, remark: '' },
   }
-}
-function questionForm(state = initialQuestionForm, action) {
+})
+function questionForm(state = initialQuestionForm(), action) {
   switch (action.type) {
     case types.QUESTION_FORM_RESET:
-      return initialQuestionForm
+      return initialQuestionForm()
     case types.QUESTION_FORM_INPUT_CHANGE: {
       return { ...state, [action.payload.name]: action.payload.value }
     }

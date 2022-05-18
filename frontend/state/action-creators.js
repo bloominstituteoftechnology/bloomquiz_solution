@@ -84,7 +84,7 @@ export function answerQuiz({ question_id, option_id, user_id }) {
       { question_id, option_id, user_id }
     )
       .then(res => {
-        dispatch(setMessage(`${res.data.verdict} ${res.data.remark}`))
+        dispatch(setMessage(`${res.data.verdict}`))
       })
       .catch(err => {
         const errToDisplay = err.response ? err.response.data.message : err.message

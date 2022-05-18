@@ -36,6 +36,13 @@ function questionForm(state = initialQuestionForm, action) {
       const changed = { ...optionToChange, [name]: value }
       return { ...state, options: { ...state.options, [optionKey]: changed } }
     }
+    case types.QUESTION_FORM_SET_CORRECT_OPTION: {
+      const options = { ...state.options }
+      for (let key in options) {
+        options[key].is_correct = key === action.payload
+      }
+      return { ...state, options }
+    }
     case types.QUESTION_FORM_OPTION_ADDITION: {
       const { options } = state
       const optionKey = action.payload

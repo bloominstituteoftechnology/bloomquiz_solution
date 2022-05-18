@@ -12,6 +12,9 @@ export function questionInputChange({ name, value }) {
 export function questionOptionInputChange({ optionKey, name, value }) {
   return { type: types.QUESTION_FORM_OPTION_INPUT_CHANGE, payload: { optionKey, name, value } }
 }
+export function questionOptionSetCorrect(optionKey) {
+  return { type: types.QUESTION_FORM_SET_CORRECT_OPTION, payload: optionKey }
+}
 export function addOption() {
   return { type: types.QUESTION_FORM_OPTION_ADDITION, payload: getId() }
 }

@@ -8,6 +8,7 @@ export function QuizForm(props) {
     removeOption,
     questionInputChange,
     questionOptionInputChange,
+    questionOptionSetCorrect,
     questionForm,
   } = props
   const onAddOption = evt => {
@@ -22,9 +23,11 @@ export function QuizForm(props) {
     questionInputChange({ name, value })
   }
   const onQuestionOptionChange = optionKey => ({ target }) => {
-    const { type, checked, name, value } = target
-    const valueToUse = type === 'checkbox' ? checked : value
-    questionOptionInputChange({ optionKey, name, value: valueToUse })
+    const { name, value } = target
+    questionOptionInputChange({ optionKey, name, value })
+  }
+  const onQuestionSetCorrect = optionKey => () => {
+    questionOptionSetCorrect(optionKey)
   }
   return (
     <form id="loginForm">
@@ -75,7 +78,7 @@ export function QuizForm(props) {
                 type="checkbox"
                 name="is_correct"
                 checked={option.is_correct}
-                onChange={onQuestionOptionChange(optionKey)}
+                onChange={onQuestionSetCorrect(optionKey)}
               />
               <button
                 disabled={questionForm.options.length < 3}

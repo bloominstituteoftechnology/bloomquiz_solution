@@ -7,6 +7,7 @@ const initialAuthForm = {
 }
 function authForm(state = initialAuthForm, action) {
   switch (action.type) {
+    case types.RESET:
     case types.AUTH_FORM_RESET:
       return initialAuthForm
     case types.AUTH_FORM_INPUT_CHANGE:
@@ -25,6 +26,7 @@ const initialQuestionForm = () => ({
 })
 function questionForm(state = initialQuestionForm(), action) {
   switch (action.type) {
+    case types.RESET:
     case types.QUESTION_FORM_RESET:
       return initialQuestionForm()
     case types.QUESTION_FORM_INPUT_CHANGE: {
@@ -70,21 +72,10 @@ function questionForm(state = initialQuestionForm(), action) {
   }
 }
 
-const initialQuiz = { question: null, option_id: null }
-function quiz(state = initialQuiz, action) {
+function infoMessage(state = '', action) {
   switch (action.type) {
-    case types.SET_QUIZ:
-      return { option_id: null, question: action.payload }
-    case types.QUIZ_SET_SELECTED_OPTION:
-      return { ...state, option_id: action.payload }
-    default:
-      return state
-  }
-}
-
-const initialMessageState = ''
-function infoMessage(state = initialMessageState, action) {
-  switch (action.type) {
+    case types.RESET:
+      return ''
     case types.SET_INFO_MESSAGE:
       return action.payload
     default:
@@ -95,10 +86,22 @@ function infoMessage(state = initialMessageState, action) {
 const initialAuth = { user: false, admin: false, username: null }
 function auth(state = initialAuth, action) {
   switch (action.type) {
+    case types.RESET:
+      return initialAuth
     case types.SET_AUTH_STATUS:
       return action.payload
-    case types.FLUSH_AUTH_STATUS:
-      return initialAuth
+    default:
+      return state
+  }
+}
+
+const initialQuiz = { question: null, option_id: null }
+function quiz(state = initialQuiz, action) {
+  switch (action.type) {
+    case types.SET_QUIZ:
+      return { option_id: null, question: action.payload }
+    case types.QUIZ_SET_SELECTED_OPTION:
+      return { ...state, option_id: action.payload }
     default:
       return state
   }

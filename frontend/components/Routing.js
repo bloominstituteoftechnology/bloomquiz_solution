@@ -24,7 +24,7 @@ export function App(props) {
   }
 
   const onLogout = () => {
-    props.flushAuthStatus()
+    props.reset()
     props.setMessage('Bye!')
     window.localStorage.removeItem('token')
     navigate('/auth', { replace: true })

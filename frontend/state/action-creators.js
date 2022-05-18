@@ -36,8 +36,8 @@ export function questionFormReset() {
 export function setAuthStatus({ user, admin, username }) {
   return { type: types.SET_AUTH_STATUS, payload: { user, admin, username } }
 }
-export function flushAuthStatus() {
-  return { type: types.FLUSH_AUTH_STATUS }
+export function reset() {
+  return { type: types.RESET }
 }
 export function register({ username, password }) {
   return function (dispatch) {
@@ -115,7 +115,7 @@ export function getAuthStatus() {
         dispatch(setAuthStatus(res.data))
       })
       .catch(() => {
-        dispatch(flushAuthStatus())
+        dispatch(reset())
       })
   }
 }

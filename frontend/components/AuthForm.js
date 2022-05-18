@@ -64,7 +64,11 @@ export function AuthForm(props) {
         Submit credentials
       </button>
       <a onClick={toggleMode}>
-        {isNewUser ? "Already have an account? Login instead" : "New to the site? Register instead"}
+        {
+          isNewUser
+            ? "Already have an account? Login instead"
+            : "New to the site? Register instead"
+        }
       </a>
     </form>
   )

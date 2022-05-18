@@ -33,6 +33,9 @@ export function selectOption(option_id) {
 export function questionFormReset() {
   return { type: types.QUESTION_FORM_RESET }
 }
+export function setAuthStatus({ user, admin }) {
+  return { type: types.SET_AUTH_STATUS, payload: { user, admin } }
+}
 export function register({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
@@ -51,6 +54,7 @@ export function login({ username, password }) {
       .then(res => {
         localStorage.setItem('token', res.data.token)
         dispatch(setMessage(res.data.message))
+        dispatch(getAuthStatus())
       })
       .catch(err => {
         const errToDisplay = err.response ? err.response.data.message : err.message
@@ -98,6 +102,17 @@ export function createQuestion(question) {
       .catch(err => {
         const errToDisplay = err.response ? err.response.data.message : err.message
         dispatch(setMessage(errToDisplay))
+      })
+  }
+}
+export function getAuthStatus() {
+  return function (dispatch) {
+    axiosWithAuth().get('http://localhost:9000/api/auth/check')
+      .then(res => {
+        dispatch(setAuthStatus(res.data))
+      })
+      .catch(() => {
+        dispatch(setAuthStatus({ user: false, admin: false }))
       })
   }
 }

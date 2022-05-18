@@ -94,9 +94,7 @@ export function QuizForm(props) {
         })
       }
       <button onClick={onAddOption}>add option</button>
-      <button>
-        Submit Quiz
-      </button>
+      <button>Submit Quiz</button>
     </form>
   )
 }

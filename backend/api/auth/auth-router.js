@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs')
 const router = require('express').Router()
 const User = require('../user/user-model')
-const { uniqueUsername, usernameExists, generateToken } = require('./auth-middleware')
+const mid = require('./auth-middleware')
 
-router.post('/register', uniqueUsername, async (req, res) => {
+router.post('/register', mid.uniqueUsername, async (req, res) => {
   try {
     const { username, password } = req.body
     const newUser = await User.insert({
@@ -16,11 +16,14 @@ router.post('/register', uniqueUsername, async (req, res) => {
   }
 })
 
-router.post('/login', usernameExists, async (req, res) => {
+router.post('/login', mid.usernameExists, async (req, res) => {
   try {
     const { body: { password }, user } = req
     if (bcrypt.compareSync(password, user.password)) {
-      res.json({ message: `welcome, ${user.username}`, token: generateToken(user) })
+      res.json({
+        message: `welcome, ${user.username}`,
+        token: mid.generateToken(user),
+      })
     } else {
       res.status(401).json({ message: 'invalid credentials' })
     }
@@ -28,5 +31,7 @@ router.post('/login', usernameExists, async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 })
+
+router.get('/check', mid.isRegisteredUser)
 
 module.exports = router

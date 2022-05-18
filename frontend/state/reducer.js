@@ -88,9 +88,20 @@ function infoMessage(state = initialMessageState, action) {
   }
 }
 
+const initialAuth = { user: false, admin: false }
+function auth(state = initialAuth, action) {
+  switch (action.type) {
+    case types.SET_AUTH_STATUS:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   authForm,
   questionForm,
   quiz,
   infoMessage,
+  auth,
 })

@@ -6,6 +6,7 @@ function generateToken(user) {
   const payload = {
     subject: user.user_id,
     username: user.username,
+    role_id: user.role_id,
   }
   const options = {
     expiresIn: '1d',
@@ -39,12 +40,18 @@ function restrict(req, res, next) {
 
 function processToken(req, res, next) {
   const token = req.headers.authorization
-  if (!token) return next()
+  if (!token) return next() // anon user
 
   jwt.verify(token, secret, (err, decoded) => {
     if (!err) req.token = decoded
     next()
   })
+}
+
+function isRegisteredUser(req, res) {
+  if (req.token && req.token.role_id === 1) res.json({ user: true, admin: true })
+  else if (req.token) res.json({ user: true, admin: false })
+  else res.json({ user: false, admin: false })
 }
 
 module.exports = {
@@ -53,4 +60,5 @@ module.exports = {
   usernameExists,
   generateToken,
   processToken,
+  isRegisteredUser,
 }

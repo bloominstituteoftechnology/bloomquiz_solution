@@ -26,7 +26,7 @@ const initialQuestionForm = {
 function questionForm(state = initialQuestionForm, action) {
   switch (action.type) {
     case types.QUESTION_FORM_RESET:
-      return initialAuthForm
+      return initialQuestionForm
     case types.QUESTION_FORM_INPUT_CHANGE: {
       return { ...state, [action.payload.name]: action.payload.value }
     }

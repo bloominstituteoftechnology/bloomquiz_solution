@@ -30,6 +30,9 @@ export function setQuiz(quiz) {
 export function selectOption(option_id) {
   return { type: types.QUIZ_SET_SELECTED_OPTION, payload: option_id }
 }
+export function questionFormReset() {
+  return { type: types.QUESTION_FORM_RESET }
+}
 export function register({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
@@ -82,6 +85,19 @@ export function answerQuiz({ question_id, option_id, user_id }) {
       })
       .finally(() => {
         dispatch(nextQuiz())
+      })
+  }
+}
+export function createQuestion(question) {
+  return function (dispatch) {
+    axiosWithAuth().post('http://localhost:9000/api/questions', question)
+      .then(res => {
+        dispatch(setMessage(`${res.data.question_title} is a brilliant question`))
+        dispatch(questionFormReset())
+      })
+      .catch(err => {
+        const errToDisplay = err.response ? err.response.data.message : err.message
+        dispatch(setMessage(errToDisplay))
       })
   }
 }

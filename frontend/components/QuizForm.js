@@ -9,6 +9,7 @@ export function QuizForm(props) {
     questionInputChange,
     questionOptionInputChange,
     questionOptionSetCorrect,
+    createQuestion,
     questionForm,
   } = props
   const onAddOption = evt => {
@@ -29,8 +30,13 @@ export function QuizForm(props) {
   const onQuestionSetCorrect = optionKey => () => {
     questionOptionSetCorrect(optionKey)
   }
+  const onSubmit = evt => {
+    evt.preventDefault()
+    const payload = { ...questionForm, options: Object.values(questionForm.options) }
+    createQuestion(payload)
+  }
   return (
-    <form id="loginForm">
+    <form id="loginForm" onSubmit={onSubmit}>
       <h2>New Quiz</h2>
       <input
         maxLength={50}

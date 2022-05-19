@@ -41,7 +41,7 @@ export function QuizForm(props) {
       <input
         type="text"
         maxLength={50}
-        placeholder="Enter question title"
+        placeholder="Question title"
         name="question_title"
         value={questionForm.question_title}
         onChange={onQuestionChange}
@@ -49,18 +49,18 @@ export function QuizForm(props) {
       <input
         type="text"
         maxLength={50}
-        placeholder="Enter question hint"
+        placeholder="Question hint"
         name="question_hint"
         value={questionForm.question_hint}
         onChange={onQuestionChange}
       />
       <textarea
-        placeholder="Enter question text"
+        placeholder="Question text"
         name="question_text"
         value={questionForm.question_text}
         onChange={onQuestionChange}
       />
-      Options
+      <h2>Options</h2>
       {
         Object.keys(questionForm.options).map(optionKey => {
           const option = questionForm.options[optionKey]
@@ -68,7 +68,7 @@ export function QuizForm(props) {
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <textarea
                 maxLength={50}
-                placeholder="Enter option text"
+                placeholder="Option text"
                 name="option_text"
                 value={option.option_text}
                 onChange={onQuestionOptionChange(optionKey)}
@@ -76,7 +76,7 @@ export function QuizForm(props) {
               <input
                 type="text"
                 maxLength={50}
-                placeholder="Enter option remark"
+                placeholder="Option remark"
                 name="remark"
                 value={option.remark}
                 onChange={onQuestionOptionChange(optionKey)}
@@ -88,7 +88,7 @@ export function QuizForm(props) {
                 onChange={onQuestionSetCorrect(optionKey)}
               />
               <button
-                disabled={questionForm.options.length < 3}
+                disabled={Object.keys(questionForm.options).length < 3}
                 onClick={onRemoveOption(optionKey)}>remove</button>
             </div>
           )

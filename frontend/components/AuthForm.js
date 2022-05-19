@@ -43,7 +43,6 @@ export function AuthForm(props) {
 
   return (
     <form id="loginForm" onSubmit={onSubmit}>
-      <h2>{isNewUser ? "Register New User" : "Login"}</h2>
       <input
         type="text"
         maxLength={20}
@@ -61,7 +60,7 @@ export function AuthForm(props) {
         id="password"
       />
       <button disabled={isDisabled()} id="submitCredentials">
-        Submit credentials
+        {isNewUser ? "Register New User" : "Login"}
       </button>
       <a onClick={toggleMode}>
         {

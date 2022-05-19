@@ -24,7 +24,7 @@ export function Quiz(props) {
       {
         question ? (
           <>
-            <h2>{question.question_text}</h2>
+            <Md className="md">{question.question_text}</Md>
             <div id="quizAnswers">
               {
                 question.options.map(opt => (

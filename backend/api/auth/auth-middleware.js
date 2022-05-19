@@ -22,7 +22,7 @@ async function uniqueUsername(req, res, next) {
 
 async function usernameExists(req, res, next) {
   const user = await User.getByUsername(req.body.username)
-  if (!user) return res.status(422).json({ message: 'invalid credentials' })
+  if (!user) return res.status(401).json({ message: 'invalid credentials' })
   req.user = user
   next()
 }

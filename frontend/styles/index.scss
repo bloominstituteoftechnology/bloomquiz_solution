@@ -168,20 +168,23 @@ footer {
   color: #adadad;
 }
 
-.answer {
+.question {
   width: 100%;
-  line-height: 2.5rem;
+  line-height: 1.5rem;
   padding: 0.55rem;
   background-color: rgb(252, 252, 252);
   border: 1px solid rgb(238, 238, 238);
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 0.5rem;
-}
 
-.answer.selected {
-  background-color: rgb(252, 252, 252);
-  border: 1px dashed #48484871;
+  &.answer {
+    display: flex;
+    justify-content: space-between;
+
+    &.selected {
+      background-color: rgb(252, 252, 252);
+      border: 1px dashed #48484871;
+    }
+  }
 }
 
 #quizAnswers {

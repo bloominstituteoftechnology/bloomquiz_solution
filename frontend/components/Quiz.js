@@ -24,13 +24,13 @@ export function Quiz(props) {
       {
         question ? (
           <>
-            <Md className="md">{question.question_text}</Md>
             <div id="quizAnswers">
+            <Md className="question md">{question.question_text}</Md>
               {
                 question.options.map(opt => (
                   <div
                     key={opt.option_id}
-                    className={`answer${option_id === opt.option_id ? ' selected' : ''}`}
+                    className={`question answer${option_id === opt.option_id ? ' selected' : ''}`}
                   >
                     <Md className="md">{opt.option_text}</Md>
                     <button onClick={() => selectOption(opt.option_id)}>

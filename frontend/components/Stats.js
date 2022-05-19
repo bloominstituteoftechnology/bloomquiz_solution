@@ -13,12 +13,8 @@ export function Stats(props) {
 
   return (
     <>
-      <h3>
-        You answered correctly {stats.general.corrects} times
-      </h3>
-      <h3>
-        You answered incorrectly {stats.general.incorrects} times
-      </h3>
+      <h1>{stats.general.corrects}</h1>correct answers
+      <h1>{stats.general.incorrects}</h1>incorrect answers
     </>
   )
 }

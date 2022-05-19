@@ -1,7 +1,6 @@
 const db = require('../../data/db-config')
 
 async function generalStats(user_id) {
-  console.log(user_id)
   const [{ corrects }] = await db('answers')
     .where({ user_id, is_correct: true })
     .count('answer_id as corrects')

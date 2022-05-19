@@ -33,7 +33,6 @@ function restrict(req, res, next) {
 
   jwt.verify(token, secret, (err, decoded) => {
     if (err) return next({ status: 401, message: 'token invalid' })
-    console.log(decoded)
     req.token = decoded
     next()
   })

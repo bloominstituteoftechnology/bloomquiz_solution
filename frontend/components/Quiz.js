@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
+import Md from 'react-markdown'
 
 export function Quiz(props) {
   const {
@@ -14,7 +15,7 @@ export function Quiz(props) {
     if (!question) nextQuiz()
   }, [])
 
-  const onClick = evt => {
+  const onClick = () => {
     answerQuiz({ question_id: question.question_id, option_id })
   }
 
@@ -31,7 +32,7 @@ export function Quiz(props) {
                     key={opt.option_id}
                     className={`answer${option_id === opt.option_id ? ' selected' : ''}`}
                   >
-                    {opt.option_text}
+                    <Md className="md">{opt.option_text}</Md>
                     <button onClick={() => selectOption(opt.option_id)}>
                       {option_id === opt.option_id ? 'SELECTED' : 'Select'}
                     </button>

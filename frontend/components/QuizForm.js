@@ -59,7 +59,7 @@ export function QuizForm(props) {
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <textarea
-                maxLength={50}
+                maxLength={400}
                 placeholder="Option text"
                 name="option_text"
                 value={option.option_text}
@@ -67,7 +67,7 @@ export function QuizForm(props) {
               />
               <input
                 type="text"
-                maxLength={50}
+                maxLength={400}
                 placeholder="Option remark"
                 name="remark"
                 value={option.remark}

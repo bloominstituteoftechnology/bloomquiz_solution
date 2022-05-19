@@ -1,11 +1,17 @@
-@font-face {
+/* @font-face {
   font-family: 'Titillium Web';
   src: url('../fonts/TitilliumWeb-SemiBold.ttf');
+} */
+
+@font-face {
+  font-family: Arial;
+  src: url('../fonts/arial.ttf');
 }
 
 html,
 body {
   min-height: 100vh;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 body::after {
@@ -24,7 +30,7 @@ input,
 select,
 button,
 textarea {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: inherit;
   color: #666666;
 }
 

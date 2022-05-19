@@ -45,7 +45,7 @@ export function AuthForm(props) {
     <form id="loginForm" onSubmit={onSubmit}>
       <input
         type="text"
-        maxLength={20}
+        maxLength={200}
         value={username}
         onChange={onChange}
         placeholder="Enter username"
@@ -53,7 +53,7 @@ export function AuthForm(props) {
       />
       <input
         type="password"
-        maxLength={20}
+        maxLength={100}
         value={password}
         onChange={onChange}
         placeholder="Enter password"

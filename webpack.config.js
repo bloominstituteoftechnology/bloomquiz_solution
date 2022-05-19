@@ -8,6 +8,7 @@ const IS_DEV = ENV === DEVELOPMENT
 const HTML_LOADER = 'html-loader'
 const STYLE_LOADER = 'style-loader'
 const CSS_LOADER = 'css-loader'
+const SASS_LOADER = 'sass-loader'
 const BABEL_LOADER = 'babel-loader'
 const STRING_REPLACE_LOADER = 'string-replace-loader'
 
@@ -59,6 +60,15 @@ const config = {
         use: [
           STYLE_LOADER,
           CSS_LOADER,
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: [
+          STYLE_LOADER,
+          CSS_LOADER,
+          SASS_LOADER,
         ],
       },
     ],

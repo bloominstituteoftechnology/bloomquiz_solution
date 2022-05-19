@@ -6,7 +6,7 @@ async function randomQuiz() {
   `)
   const rows = await db.raw(`
     SELECT
-      q.question_id, q.question_text, q.question_hint,
+      q.question_id, q.question_text,
       o.option_id, o.option_text
     FROM questions q
     JOIN options o
@@ -18,7 +18,6 @@ async function randomQuiz() {
     if (!acc.question_id) {
       acc.question_id = row.question_id
       acc.question_text = row.question_text
-      acc.question_hint = row.question_hint
     }
     acc.options.push({
       option_id: row.option_id,

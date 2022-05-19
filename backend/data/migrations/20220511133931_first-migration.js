@@ -23,7 +23,6 @@ exports.up = async function (knex) {
       questions.timestamps(false, true)
       questions.string('question_title', 100).notNullable()
       questions.string('question_text', 500).notNullable()
-      questions.string('question_hint', 500)
     })
     .createTable('options', (options) => {
       options.increments('option_id')

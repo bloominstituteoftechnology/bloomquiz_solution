@@ -18,7 +18,7 @@ function authForm(state = initialAuthForm, action) {
 }
 
 const initialQuestionForm = () => ({
-  question_title: '', question_text: '', question_hint: '',
+  question_title: '', question_text: '',
   options: {
     [getId()]: { option_text: '', is_correct: true, remark: '' },
     [getId()]: { option_text: '', is_correct: false, remark: '' },

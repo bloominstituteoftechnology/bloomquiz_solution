@@ -3,8 +3,6 @@ import QuizForm from './QuizForm'
 
 export default function Admin(props) {
   return (
-    <div>
-      <QuizForm />
-    </div>
+    <QuizForm />
   )
 }

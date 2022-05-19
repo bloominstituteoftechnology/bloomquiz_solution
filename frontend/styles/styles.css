@@ -117,11 +117,13 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 input,
 select,
 textarea {
+  display: block;
   margin-bottom: 1rem;
   padding-top: 0.2rem;
   padding-left: 0.5rem;
@@ -180,10 +182,9 @@ footer {
 .option {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  padding: 1rem;
-  border-top  : 1px solid grey;
+  padding: 0.65rem;
 }
 
 .option.truthy {
-  /* border: 3px solid blue; */
+  border: 1px dashed blue;
 }

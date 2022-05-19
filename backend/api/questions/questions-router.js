@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { question_title, question_text, question_hint } = req.body
+    const { question_title, question_text } = req.body
     const validatedQuestion = { options: [] }
 
     // VALIDATING question_title
@@ -38,14 +38,6 @@ router.post('/', async (req, res, next) => {
       return res.status(422).json({
         message: 'question_text of at least 3 char is required',
       })
-    }
-    // VALIDATING question_hint
-    if (
-      question_hint !== undefined &&
-      typeof question_hint === 'string' &&
-      question_hint.trim().length > 0
-    ) {
-      validatedQuestion.question_hint = question_hint.trim()
     }
 
     const { options } = req.body

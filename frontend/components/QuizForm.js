@@ -46,14 +46,6 @@ export function QuizForm(props) {
         value={questionForm.question_title}
         onChange={onQuestionChange}
       />
-      <input
-        type="text"
-        maxLength={50}
-        placeholder="Question hint"
-        name="question_hint"
-        value={questionForm.question_hint}
-        onChange={onQuestionChange}
-      />
       <textarea
         placeholder="Question text"
         name="question_text"

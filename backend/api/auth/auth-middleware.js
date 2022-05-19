@@ -4,7 +4,7 @@ const secret = process.env.SECRET || 'the secret'
 
 function generateToken(user) {
   const payload = {
-    subject: user.user_id,
+    user_id: user.user_id,
     username: user.username,
     role_id: user.role_id,
   }
@@ -33,6 +33,7 @@ function restrict(req, res, next) {
 
   jwt.verify(token, secret, (err, decoded) => {
     if (err) return next({ status: 401, message: 'token invalid' })
+    console.log(decoded)
     req.token = decoded
     next()
   })

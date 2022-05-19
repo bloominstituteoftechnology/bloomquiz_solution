@@ -36,6 +36,9 @@ export function questionFormReset() {
 export function setAuthStatus({ user, admin, username }) {
   return { type: types.SET_AUTH_STATUS, payload: { user, admin, username } }
 }
+export function setGeneralStats({ corrects, incorrects }) {
+  return { type: types.SET_GENERAL_STATS, payload: { corrects, incorrects } }
+}
 export function reset() {
   return { type: types.RESET }
 }
@@ -113,6 +116,17 @@ export function getAuthStatus() {
     axiosWithAuth().get('http://localhost:9000/api/auth/check')
       .then(res => {
         dispatch(setAuthStatus(res.data))
+      })
+      .catch(() => {
+        dispatch(reset())
+      })
+  }
+}
+export function getGeneralStats() {
+  return function (dispatch) {
+    axiosWithAuth().get('http://localhost:9000/api/stats/general')
+      .then(res => {
+        dispatch(setGeneralStats(res.data))
       })
       .catch(() => {
         dispatch(reset())

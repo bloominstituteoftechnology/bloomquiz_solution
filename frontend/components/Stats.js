@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../state/action-creators'
 
-export default function Stats(props) {
+export function Stats(props) {
+  const { stats, getGeneralStats } = props
+
+  useEffect(() => {
+    getGeneralStats()
+  }, [])
+
+  if (!stats.general) return null
+
   return (
-    <div>
-      You are in the top 5%...
-    </div>
+    <>
+      <h3>
+        You answered correctly {stats.general.corrects} times
+      </h3>
+      <h3>
+        You answered incorrectly {stats.general.incorrects} times
+      </h3>
+    </>
   )
 }
+
+export default connect(st => st, actions)(Stats)

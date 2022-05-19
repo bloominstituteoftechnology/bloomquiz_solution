@@ -107,10 +107,23 @@ function quiz(state = initialQuiz, action) {
   }
 }
 
+const initialStats = {}
+function stats(state = initialStats, action) {
+  switch (action.type) {
+    case types.RESET:
+      return initialStats
+    case types.SET_GENERAL_STATS:
+      return { ...state, general: action.payload }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   authForm,
   questionForm,
   quiz,
   infoMessage,
   auth,
+  stats,
 })

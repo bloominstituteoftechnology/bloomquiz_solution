@@ -5,6 +5,7 @@ const path = require('path')
 const questionsRouter = require('./api/questions/questions-router')
 const authRouter = require('./api/auth/auth-router')
 const quizzesRouter = require('./api/quizzes/quizzes-router')
+const statsRouter = require('./api/stats/stats-router')
 
 const { processToken } = require('./api/auth/auth-middleware')
 
@@ -17,6 +18,7 @@ server.use(processToken)
 server.use('/api/questions', questionsRouter)
 server.use('/api/auth', authRouter)
 server.use('/api/quizzes', quizzesRouter)
+server.use('/api/stats', statsRouter)
 
 // SPA
 server.get('*', (req, res) => {

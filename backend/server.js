@@ -31,7 +31,7 @@ server.use((req, res) => {
 // ERR
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
-    error: 'The app crashed for some reason, see message & stack',
+    error: 'Something bad happened',
     message: err.message,
     stack: err.stack,
   })

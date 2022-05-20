@@ -8,7 +8,7 @@
 
 ❗ Other browser/Node/NPM configurations might work but haven't been tested.
 
-## Nice To Haves
+### Nice To Haves
 
 - Postman HTTP client or similar.
 - React Devtools & Redux Devtools Chrome extensions.

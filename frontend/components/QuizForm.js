@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
@@ -12,6 +12,15 @@ export function QuizForm(props) {
     createQuestion,
     questionForm,
   } = props
+
+  const [optionBars, setOptionBars] = useState(() => {
+    let state = {}
+    Object.keys(questionForm.options).forEach(key => {
+      state[key] = false
+    })
+    return state
+  })
+
   const onAddOption = evt => {
     evt.preventDefault()
     addOption()
@@ -35,6 +44,9 @@ export function QuizForm(props) {
     const payload = { ...questionForm, options: Object.values(questionForm.options) }
     createQuestion(payload)
   }
+  const toggleBar = optionId => {
+    setOptionBars({ ...optionBars, [optionId]: !optionBars[optionId] })
+  }
   return (
     <form id="loginForm" onSubmit={onSubmit}>
       <h2>New Quiz</h2>
@@ -52,43 +64,52 @@ export function QuizForm(props) {
         value={questionForm.question_text}
         onChange={onQuestionChange}
       />
-      <h2>Options</h2>
+      <div className="options-heading"><h2>Options</h2><button onClick={onAddOption}>add option</button></div>
       {
-        Object.keys(questionForm.options).map(optionKey => {
+        Object.keys(questionForm.options).map((optionKey, idx) => {
           const option = questionForm.options[optionKey]
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
-              <textarea
-                maxLength={400}
-                placeholder="Option text"
-                name="option_text"
-                value={option.option_text}
-                onChange={onQuestionOptionChange(optionKey)}
-              />
-              <input
-                type="text"
-                maxLength={400}
-                placeholder="Option remark"
-                name="remark"
-                value={option.remark}
-                onChange={onQuestionOptionChange(optionKey)}
-              />
-              <input
-                type="checkbox"
-                name="is_correct"
-                checked={option.is_correct}
-                onChange={onQuestionSetCorrect(optionKey)}
-              />
-              <button
-                disabled={Object.keys(questionForm.options).length < 3}
-                onClick={onRemoveOption(optionKey)}>remove</button>
+              <div className="option-bar" onClick={() => toggleBar(optionKey)}>
+                Option {idx + 1}&nbsp;&nbsp;&nbsp;&nbsp;{!optionBars[optionKey] && (option.option_text.slice(0, 30))}
+                <button
+                    disabled={Object.keys(questionForm.options).length < 3}
+                    onClick={onRemoveOption(optionKey)}>✖️</button>
+              </div>
+              {
+                optionBars[optionKey] &&
+                <div className="option-inputs">
+                  <textarea
+                    maxLength={400}
+                    placeholder="Option text"
+                    name="option_text"
+                    value={option.option_text}
+                    onChange={onQuestionOptionChange(optionKey)}
+                  />
+                  <input
+                    type="text"
+                    maxLength={400}
+                    placeholder="Option remark"
+                    name="remark"
+                    value={option.remark}
+                    onChange={onQuestionOptionChange(optionKey)}
+                  />
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="is_correct"
+                      checked={option.is_correct}
+                      onChange={onQuestionSetCorrect(optionKey)}
+                    />&nbsp;&nbsp;correct option
+                  </label>
+                </div>
+              }
             </div>
           )
         })
       }
-      <button onClick={onAddOption}>add option</button>
       <button>Submit Quiz</button>
-    </form>
+    </form >
   )
 }
 

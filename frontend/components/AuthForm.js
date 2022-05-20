@@ -59,7 +59,7 @@ export function AuthForm(props) {
         placeholder="Enter password"
         id="password"
       />
-      <button disabled={isDisabled()} id="submitCredentials">
+      <button className="jumbo-button" disabled={isDisabled()} id="submitCredentials">
         {isNewUser ? "Register New User" : "Login"}
       </button>
       <div>

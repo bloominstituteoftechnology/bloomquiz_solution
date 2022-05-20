@@ -75,10 +75,18 @@ export function QuizForm(props) {
           const removeBtnDisabled = Object.keys(questionForm.options).length < 3
           const optionSlice = option.option_text.slice(0, 30)
 
+          const rightArrow = <>&#9658;</>
+          const downArrow = <>&#9660;</>
+          const whitespace = <>&nbsp;</>
+
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <div className="option-bar" onClick={() => toggleBar(optionKey)}>
-                <span>{optionIsCollapsed ? <>&#9655;</> : <>&#9661;</>} Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && optionSlice}</span>
+                <span>
+                  {optionIsCollapsed ? rightArrow : downArrow}
+                  {whitespace} Option {idx + 1} {whitespace}
+                  {optionIsCollapsed && optionSlice}
+                </span>
                 <button
                   className="option-operation"
                   disabled={removeBtnDisabled}

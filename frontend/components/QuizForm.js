@@ -78,11 +78,11 @@ export function QuizForm(props) {
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <div className="option-bar" onClick={() => toggleBar(optionKey)}>
-                Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && optionSlice}
+                <span>{optionIsCollapsed ? <>&#9655;</> : <>&#9661;</>} Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && optionSlice}</span>
                 <button
                   className="option-operation"
                   disabled={removeBtnDisabled}
-                  onClick={onRemoveOption(optionKey)}>❌</button>
+                  onClick={onRemoveOption(optionKey)}>&#10060;</button>
               </div>
               {
                 optionIsExpanded &&
@@ -116,7 +116,7 @@ export function QuizForm(props) {
           )
         })
       }
-      <button>Submit Quiz</button>
+      <button className="jumbo-button">Submit Quiz</button>
     </form >
   )
 }

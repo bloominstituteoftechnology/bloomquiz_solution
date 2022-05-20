@@ -126,7 +126,22 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+
+  button {
+    width: 100%
+  }
+
+  a {
+    margin-top: 1.5rem;
+    text-decoration: underline;
+    display: block;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 input,
@@ -195,6 +210,7 @@ footer {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.65rem;
+  width: 100%;
 }
 
 .option.truthy {

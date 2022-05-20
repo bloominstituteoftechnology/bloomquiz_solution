@@ -62,13 +62,13 @@ export function AuthForm(props) {
       <button disabled={isDisabled()} id="submitCredentials">
         {isNewUser ? "Register New User" : "Login"}
       </button>
-      <a onClick={toggleMode}>
-        {
-          isNewUser
+      <div>
+        <a onClick={toggleMode}>
+          {isNewUser
             ? "Already have an account? Login instead"
-            : "New to the site? Register instead"
-        }
-      </a>
+            : "New to the site? Register instead"}
+        </a>
+      </div>
     </form>
   )
 }

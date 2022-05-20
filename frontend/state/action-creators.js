@@ -47,6 +47,7 @@ export function register({ username, password }) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
       .then(res => {
         dispatch(setMessage(res.data.message))
+        dispatch(login({ username, password }))
       })
       .catch(err => {
         const errToDisplay = err.response ? err.response.data.message : err.message

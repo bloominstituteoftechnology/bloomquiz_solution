@@ -173,14 +173,14 @@ select:focus {
   border: 1px solid $active-button-glow-color;
 }
 
-input[type=checkbox]:active,
-input[type=checkbox]:focus,
+input[type=radio]:active,
+input[type=radio]:focus,
 select:focus {
   box-shadow: initial;
   border: initial;
 }
 
-input[type=checkbox] {
+input[type=radio] {
   display: inline;
   text-decoration: none;
   width: initial;

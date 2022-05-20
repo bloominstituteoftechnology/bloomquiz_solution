@@ -93,7 +93,7 @@ export function QuizForm(props) {
                     value={option.option_text}
                     onChange={onQuestionOptionChange(optionKey)}
                   />
-                  <input
+                  <textarea
                     type="text"
                     maxLength={400}
                     placeholder="Option remark"
@@ -103,7 +103,7 @@ export function QuizForm(props) {
                   />
                   <label>
                     <input
-                      type="checkbox"
+                      type="radio"
                       name="is_correct"
                       checked={option.is_correct}
                       onChange={onQuestionSetCorrect(optionKey)}

@@ -15,19 +15,19 @@
 
 ## Set Up
 
-- Clone and `npm install` and `npm run resetdb`.
-- Launch the project in a development server executing `npm run dev`.
-- Visit your app by navigating to `http://localhost:3000` with Chrome.
+1. Clone and `npm install` and `npm run resetdb`.
+2. Launch the project in a development server executing `npm run dev`.
+3. Visit your app by navigating to `http://localhost:3000` with Chrome.
 
 ## Accounts
 
-- Admin account (username: `admin`, password: `admin`).
-- Non-admin account (username: `foo`, password: `1234`).
+- Admin account, username: `admin`, password: `admin`.
+- Non-admin account, username: `foo`, password: `1234`.
 
-Feel free to register additional accounts.
+Feel free to register additional accounts (will be non-admin).
 
 ## Notes
 
 - Anonymous users can answer multiple-choice questions, but stats aren't stored.
-- Registered users get their stats stored in the backend and have access to them.
+- Registered users have access to their stats stored in the backend.
 - Admin users can create new multiple-choice questions.

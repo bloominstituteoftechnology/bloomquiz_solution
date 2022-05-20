@@ -64,20 +64,26 @@ export function QuizForm(props) {
         value={questionForm.question_text}
         onChange={onQuestionChange}
       />
-      <div className="options-heading"><h2>Options</h2><button onClick={onAddOption}>add option</button></div>
+      <div className="options-heading">
+        <h2>Options</h2><button onClick={onAddOption}>➕</button>
+      </div>
       {
         Object.keys(questionForm.options).map((optionKey, idx) => {
           const option = questionForm.options[optionKey]
+          const optionIsCollapsed = !optionBars[optionKey]
+          const optionIsExpanded = optionBars[optionKey]
+          const removeBtnDisabled = Object.keys(questionForm.options).length < 3
+
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <div className="option-bar" onClick={() => toggleBar(optionKey)}>
-                Option {idx + 1}&nbsp;&nbsp;&nbsp;&nbsp;{!optionBars[optionKey] && (option.option_text.slice(0, 30))}
+                Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && (option.option_text.slice(0, 30))}
                 <button
-                    disabled={Object.keys(questionForm.options).length < 3}
-                    onClick={onRemoveOption(optionKey)}>✖️</button>
+                  disabled={removeBtnDisabled}
+                  onClick={onRemoveOption(optionKey)}>➖</button>
               </div>
               {
-                optionBars[optionKey] &&
+                optionIsExpanded &&
                 <div className="option-inputs">
                   <textarea
                     maxLength={400}

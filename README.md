@@ -1,4 +1,4 @@
-# Codealong Web for Units 3 & 4
+# Codealong for Web - Units 3 & 4
 
 ## Requirements
 

@@ -15,14 +15,14 @@
 
 ## Set Up
 
-1. Clone and `npm install` and `npm run resetdb`.
+1. Clone repo and `npm install` and `npm run resetdb`.
 2. Launch the project in a development server executing `npm run dev`.
 3. Visit your app by navigating to `http://localhost:3000` with Chrome.
 
 ## Accounts
 
-- Admin account, username: `admin` password: `admin`
-- Non-admin account, username: `foo` password: `1234`
+1. __Admin__, username: `admin` password: `admin`
+2. __Non-admin__, username: `foo` password: `1234`
 
 Feel free to register additional accounts (will be non-admin).
 

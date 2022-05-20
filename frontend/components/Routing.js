@@ -38,7 +38,7 @@ export function App(props) {
           <NavLink to="/">Test yourself!</NavLink>
           {user && <NavLink to="/stats">Stats</NavLink>}
           {admin && <NavLink to="/admin">Admin</NavLink>}
-          {!user && location.pathname !== '/auth' && <NavLink to="/auth">Login to see your stats</NavLink>}
+          {!user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
         </nav>
         <Routes>
           <Route path="/" element={<Quiz />} />

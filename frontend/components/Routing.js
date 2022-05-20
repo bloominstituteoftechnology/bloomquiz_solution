@@ -19,10 +19,6 @@ export function App(props) {
     props.getAuthStatus()
   }, [location])
 
-  const onLogin = () => {
-    navigate('/auth')
-  }
-
   const onLogout = () => {
     props.reset()
     props.setMessage('Bye!')
@@ -38,12 +34,12 @@ export function App(props) {
       <Message />
       <Opacity>
         {user && <button onClick={onLogout} id="logout">Logout {username}</button>}
-        {!user && location.pathname !== '/auth' && <button onClick={onLogin} id="logout">Login</button>}
         <h1>QuizMaster</h1>
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
           {user && <NavLink to="/stats">Stats</NavLink>}
           {admin && <NavLink to="/admin">Admin</NavLink>}
+          {!user && location.pathname !== '/auth' && <NavLink to="/auth">Login to see your stats</NavLink>}
         </nav>
         <Routes>
           <Route path="/" element={<Quiz />} />

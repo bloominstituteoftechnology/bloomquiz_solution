@@ -49,7 +49,7 @@ export function QuizForm(props) {
   }
   return (
     <form id="loginForm" onSubmit={onSubmit}>
-      <h2>New Quiz</h2>
+      <h2>Create New Question</h2>
       <input
         type="text"
         maxLength={50}

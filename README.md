@@ -21,8 +21,8 @@
 
 ## Accounts
 
-- Admin account, username: `admin`, password: `admin`.
-- Non-admin account, username: `foo`, password: `1234`.
+- Admin account, username: `admin` password: `admin`
+- Non-admin account, username: `foo` password: `1234`
 
 Feel free to register additional accounts (will be non-admin).
 

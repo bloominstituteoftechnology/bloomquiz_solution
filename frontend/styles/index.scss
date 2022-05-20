@@ -44,7 +44,6 @@ textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
   min-width: 450px;
 }
 
@@ -167,8 +166,8 @@ select:focus {
 
 #logout {
   position: absolute;
-  top: 15px;
-  right: 5px;
+  top: 6px;
+  right: 6px;
 }
 
 #spinner {

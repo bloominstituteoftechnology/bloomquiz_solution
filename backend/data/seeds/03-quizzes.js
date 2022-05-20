@@ -12,49 +12,94 @@ exports.seed = async function (knex) {
       question_title: 'Closures',
       question_text: 'What is a closure?',
     },
+    {
+      question_title: 'Median of An Array of Numbers',
+      question_text: 'What is the median of a sorted array of numbers?',
+    },
+    {
+      question_title: 'Models in Machine Learning',
+      question_text: 'What is a model in machine learning?',
+    },
+    {
+      question_title: 'The Remember-Formulate-Predict Framework',
+      question_text: 'How do humans think?',
+    },
   ])
   await knex('options').insert([
     {
       option_text: 'Hand',
       is_correct: false,
-      remark: 'Nope...',
       question_id: 1,
     },
     {
       option_text: 'Nothing',
       is_correct: false,
-      remark: 'Nice try though...',
       question_id: 1,
     },
     {
       option_text: 'The One Ring',
       is_correct: true,
-      remark: 'There ya go!',
       question_id: 1,
     },
     {
       option_text: 'Work',
       is_correct: false,
-      remark: 'Really??',
       question_id: 2,
     },
     {
       option_text: 'Family and friends',
       is_correct: true,
-      remark: 'There ya go!',
       question_id: 2,
     },
     {
       option_text: 'Function object plus bindings',
       is_correct: true,
-      remark: 'Nice one',
       question_id: 3,
     },
     {
       option_text: 'Some kind of elephant',
       is_correct: false,
-      remark: 'How could you!',
       question_id: 3,
+    },
+    {
+      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the average of the two middle elements",
+      is_correct: true,
+      question_id: 4,
+    },
+    {
+      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the median of the two middle elements",
+      is_correct: false,
+      question_id: 4,
+    },
+    {
+      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the mean of the two middle elements",
+      is_correct: false,
+      question_id: 4,
+    },
+    {
+      option_text: "A representation of reality using a set of rules that mimic the existing data as closely as possible",
+      is_correct: true,
+      question_id: 5,
+    },
+    {
+      option_text: "The data that represents the predictions that can be made about our rules",
+      is_correct: false,
+      question_id: 5,
+    },
+    {
+      option_text: "Remember, formulate, predict",
+      is_correct: true,
+      question_id: 6,
+    },
+    {
+      option_text: "Formulate, predict, remember.",
+      is_correct: false,
+      question_id: 6,
+    },
+    {
+      option_text: "Predict, formulate, remember.",
+      is_correct: false,
+      question_id: 6,
     },
   ])
 }

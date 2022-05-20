@@ -91,7 +91,6 @@ button {
 
 #message {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 3rem;
@@ -99,6 +98,15 @@ button {
   font-size: 0.9rem;
   color: white;
   background-color: $highlight-color;
+
+  h1 {
+    font-size: 62px;
+    display: inline;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    opacity: 0.2
+  }
 }
 
 form {

@@ -34,7 +34,6 @@ export function App(props) {
       <Message />
       <Opacity>
         {user && <button onClick={onLogout} id="logout">Logout {username}</button>}
-        <h1>QuizMaster</h1>
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
           {user && <NavLink to="/stats">Stats</NavLink>}

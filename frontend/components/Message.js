@@ -15,7 +15,7 @@ const StyledMessage = styled.div`
 export function Message({ infoMessage }) {
   return (
     <StyledMessage key={infoMessage} id="message">
-      {infoMessage}
+      <h1>QuizMaster</h1> {infoMessage}
     </StyledMessage>
   )
 }

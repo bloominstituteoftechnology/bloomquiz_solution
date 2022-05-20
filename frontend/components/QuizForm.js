@@ -73,15 +73,16 @@ export function QuizForm(props) {
           const optionIsCollapsed = !optionBars[optionKey]
           const optionIsExpanded = optionBars[optionKey]
           const removeBtnDisabled = Object.keys(questionForm.options).length < 3
+          const optionSlice = option.option_text.slice(0, 30)
 
           return (
             <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
               <div className="option-bar" onClick={() => toggleBar(optionKey)}>
-                Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && (option.option_text.slice(0, 30))}
+                Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && optionSlice}
                 <button
                   className="option-operation"
                   disabled={removeBtnDisabled}
-                  onClick={onRemoveOption(optionKey)}>➖</button>
+                  onClick={onRemoveOption(optionKey)}>❌</button>
               </div>
               {
                 optionIsExpanded &&

@@ -72,7 +72,7 @@ function questionForm(state = initialQuestionForm(), action) {
   }
 }
 
-function infoMessage(state = '', action) {
+function infoMessage(state = 'Test your knowledge...', action) {
   switch (action.type) {
     case types.RESET:
       return ''

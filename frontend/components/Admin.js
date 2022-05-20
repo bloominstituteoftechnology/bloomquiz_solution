@@ -9,7 +9,7 @@ export function Admin(props) {
 
   useEffect(() => {
     if (!auth.admin) navigate('/auth')
-  }, [auth.user])
+  }, [auth])
 
   return (
     <QuizForm />

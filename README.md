@@ -6,7 +6,7 @@
 - NPM >= 8.x (upgrade executing `npm i -g npm`)
 - Chrome >= 100.x
 
-Other browser/Node/NPM configurations might work but haven't been tested.
+❗ Other browser/Node/NPM configurations might work but haven't been tested.
 
 ## Nice To Haves
 
@@ -24,4 +24,10 @@ Other browser/Node/NPM configurations might work but haven't been tested.
 - Admin account (username: `admin`, password: `admin`).
 - Non-admin account (username: `foo`, password: `1234`).
 
-Feel free to register more accounts.
+Feel free to register additional accounts.
+
+## Notes
+
+- Anonymous users can answer multiple-choice questions, but stats aren't stored.
+- Registered users get their stats stored in the backend and have access to them.
+- Admin users can create new multiple-choice questions.

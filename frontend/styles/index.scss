@@ -241,10 +241,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-
-  button {
-    width: 124px;
-  }
 }
 
 .option {
@@ -259,10 +255,6 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-
-    button {
-      width: 34px;
-    }
   }
 
   .option-inputs {
@@ -273,4 +265,9 @@ footer {
 .option.truthy {
   background-color: $app-background-color;
   border: 1px dashed $text-color;
+}
+
+button.option-operation {
+  width: 34px;
+  padding-top: 2px;
 }

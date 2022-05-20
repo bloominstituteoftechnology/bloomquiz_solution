@@ -65,7 +65,7 @@ export function QuizForm(props) {
         onChange={onQuestionChange}
       />
       <div className="options-heading">
-        <h2>Options</h2><button onClick={onAddOption}>➕</button>
+        <h2>Options</h2><button className="option-operation" onClick={onAddOption}>➕</button>
       </div>
       {
         Object.keys(questionForm.options).map((optionKey, idx) => {
@@ -79,6 +79,7 @@ export function QuizForm(props) {
               <div className="option-bar" onClick={() => toggleBar(optionKey)}>
                 Option {idx + 1}&nbsp;&nbsp;&nbsp;{optionIsCollapsed && (option.option_text.slice(0, 30))}
                 <button
+                  className="option-operation"
                   disabled={removeBtnDisabled}
                   onClick={onRemoveOption(optionKey)}>➖</button>
               </div>

@@ -10,22 +10,18 @@
   src: url('../fonts/arial.ttf');
 }
 
+$app-background-color: white;
+$base-color: #c6538c;
+$text-color: #666666;
+$active-link-color: #ff5959;
+$faint-border-color: #DDDDDD;
+$message-color: #ff5959;
+
 html,
 body {
   min-height: 100vh;
   font-family: 'Titillium Web', sans-serif;
-  // font-family: Arial, sans-serif;
-}
-
-body::after {
-  content: "";
-  opacity: 0.3;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
+  background-color: $app-background-color;
 }
 
 body,
@@ -34,7 +30,7 @@ select,
 button,
 textarea {
   font-family: inherit;
-  color: #666666;
+  color: $text-color;
 }
 
 #root,
@@ -47,32 +43,37 @@ textarea {
   min-width: 450px;
 }
 
-nav a {
-  line-height: 4rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  color: #484848;
-}
+nav {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 
-nav a.active {
-  color: #93005a;
+  a {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: $text-color;
+
+    &:active,
+    &.active {
+      color: $active-link-color;
+      font-size: 1.4em;
+      text-decoration: underline;
+    }
+  }
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   line-height: 4rem;
-  margin-bottom: 1rem;
 }
 
 h2 {
   width: 100%;
   font-size: 1.3rem;
-  color: #484848cc;
   margin-bottom: 0.5rem;
 }
 
 button {
-  border: 1px solid #DDDDDD;
+  border: 1px solid $faint-border-color;
   border-radius: 0;
   min-height: 2.2rem;
 }
@@ -89,7 +90,7 @@ button {
   min-height: 3rem;
   min-width: 100%;
   font-size: 0.9rem;
-  color: #93005a;
+  color: $message-color;
   background-color: #b4b36213;
 }
 

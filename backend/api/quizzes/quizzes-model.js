@@ -1,5 +1,20 @@
 const db = require('../../data/db-config')
 
+function randomizeArray(arr) {
+  const result = [...arr]
+  // In production we should use a fair PRNG, or a CSPRNG
+  for (let idx in result) {
+    const randomIdx = Math.floor(Math.random() * arr.length)
+    // Items that will swap positions
+    const item1 = result[idx]
+    const item2 = result[randomIdx]
+    // Perform the swap
+    result[idx] = item2
+    result[randomIdx] = item1
+  }
+  return result
+}
+
 async function randomQuiz() {
   const [{ question_id }] = await db.raw(`
     SELECT question_id FROM questions ORDER BY RANDOM() LIMIT 1
@@ -25,7 +40,8 @@ async function randomQuiz() {
     })
     return acc
   }, { options: [] })
-
+  const randomOptions = randomizeArray(result.options)
+  result.options = randomOptions
   return result
 }
 

@@ -27,6 +27,11 @@ exports.seed = async function (knex) {
   ])
   await knex('options').insert([
     {
+      option_text: 'The One Ring',
+      is_correct: true,
+      question_id: 1,
+    },
+    {
       option_text: 'Hand',
       is_correct: false,
       question_id: 1,
@@ -37,18 +42,13 @@ exports.seed = async function (knex) {
       question_id: 1,
     },
     {
-      option_text: 'The One Ring',
+      option_text: 'Family and friends',
       is_correct: true,
-      question_id: 1,
+      question_id: 2,
     },
     {
       option_text: 'Work',
       is_correct: false,
-      question_id: 2,
-    },
-    {
-      option_text: 'Family and friends',
-      is_correct: true,
       question_id: 2,
     },
     {

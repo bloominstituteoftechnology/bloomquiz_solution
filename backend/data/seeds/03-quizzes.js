@@ -14,11 +14,11 @@ exports.seed = async function (knex) {
     },
     {
       question_title: 'Median of An Array of Numbers',
-      question_text: 'What is the median of a sorted array of numbers?',
+      question_text: 'What is __the median__ of a _sorted_ array of numbers?',
     },
     {
       question_title: 'Models in Machine Learning',
-      question_text: 'What is a model in machine learning?',
+      question_text: 'What is a __model__ in machine learning?',
     },
     {
       question_title: 'The Remember-Formulate-Predict Framework',

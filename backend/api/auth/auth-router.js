@@ -20,10 +20,12 @@ router.post('/login', mid.usernameExists, async (req, res) => {
   try {
     const { body: { password }, user } = req
     if (bcrypt.compareSync(password, user.password)) {
-      res.json({
-        message: `welcome, ${user.username}`,
-        token: mid.generateToken(user),
-      })
+      setTimeout(() => {
+        res.json({
+          message: `welcome, ${user.username}`,
+          token: mid.generateToken(user),
+        })
+      }, 1000)
     } else {
       res.status(401).json({ message: 'invalid credentials' })
     }

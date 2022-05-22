@@ -11,7 +11,7 @@ import Quiz from './Quiz'
 import Admin from './Admin'
 import Stats from './Stats'
 
-export function App(props) {
+export function Routing(props) {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -52,4 +52,4 @@ export function App(props) {
   )
 }
 
-export default connect(st => st, actions)(App)
+export default connect(st => st, actions)(Routing)

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import PT from 'prop-types'
+import { connect } from 'react-redux'
 
 const rotation = keyframes`
   from { transform: rotate(0deg); }
@@ -21,7 +21,7 @@ const StyledSpinner = styled.div`
   }
 `
 
-export default function Spinner({ on = false }) {
+export function Spinner({ on }) {
   if (!on) return null
   return (
     <StyledSpinner id="spinner">
@@ -30,6 +30,6 @@ export default function Spinner({ on = false }) {
   )
 }
 
-Spinner.propTypes = {
-  on: PT.bool,
-}
+export default connect(st => ({
+  on: st.spinnerOn
+}))(Spinner)

@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 
 const opacity = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 `
 
 const getColor = code => {
   switch (code) {
     case 0: return '#3a3a7b' // blue
-    case 1: return 'green'
+    case 1: return '#226a22' // green
     case 2: return '#ff5959' // red
   }
 }

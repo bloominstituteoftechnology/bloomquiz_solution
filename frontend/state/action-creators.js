@@ -140,14 +140,26 @@ export function answerQuiz({ question_id, option_id, user_id }) {
       })
   }
 }
-export function createQuestion(question) {
+export function createQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().post('http://localhost:9000/api/questions', question)
       .then(res => {
-        dispatch(setMessage({
-          main: `${res.data.question_title} is a brilliant question`, code: 0
-        }))
+        dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question`, code: 0 }))
         dispatch(questionFormReset())
+        redirect()
+      })
+      .catch(err => {
+        setError(err, dispatch)
+      })
+  }
+}
+export function editQuestion(question, redirect) {
+  return function (dispatch) {
+    axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
+      .then(res => { // eslint-disable-line
+        dispatch(setMessage({ main: `Brilliant update`, code: 0 }))
+        dispatch(questionFormReset())
+        redirect()
       })
       .catch(err => {
         setError(err, dispatch)

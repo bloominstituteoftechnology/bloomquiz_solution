@@ -3,7 +3,7 @@ const db = require('../../data/db-config')
 async function getAll() {
   const questions = await db('questions').orderBy('updated_at', 'desc')
   let options = await db('options')
-  options = options.map(o => ({ ...o, is_distractor: !!o.is_distractor }))
+  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
   questions.forEach(q => {
     const q_options = options.filter(o => o.question_id == q.question_id)
     q.options = q_options
@@ -14,7 +14,7 @@ async function getAll() {
 async function getById(question_id) {
   const question = await db('questions').where('question_id', question_id).first()
   let options = await db('options').where('question_id', question_id)
-  options = options.map(o => ({ ...o, is_distractor: !!o.is_distractor }))
+  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
   question.options = options
   return question
 }
@@ -28,8 +28,23 @@ async function create(question) {
   return newQuestion
 }
 
+async function editById(question_id, { options, ...rest }) {
+  const promises = options.map(option => {
+    return db('options').where('option_id', option.option_id).update({
+      option_text: option.option_text,
+      remark: option.remark,
+      is_correct: option.is_correct,
+    })
+  })
+  await Promise.all(promises)
+  const { question_title, question_text } = rest
+  await db('questions').where('question_id', question_id).update({ question_title, question_text })
+  return await getById(question_id)
+}
+
 module.exports = {
   getAll,
   create,
   getById,
+  editById,
 }

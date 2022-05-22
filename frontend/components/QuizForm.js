@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import * as actions from '../state/action-creators'
 
@@ -22,6 +23,7 @@ export function QuizForm(props) {
     questionOptionInputChange,
     questionOptionSetCorrect,
     createQuestion,
+    editQuestion,
     questionForm,
   } = props
 
@@ -32,6 +34,12 @@ export function QuizForm(props) {
     })
     return state
   })
+
+  const navigate = useNavigate()
+
+  const redirect = () => {
+    navigate('/admin')
+  }
 
   const onAddOption = evt => {
     evt.preventDefault()
@@ -54,14 +62,15 @@ export function QuizForm(props) {
   const onSubmit = evt => {
     evt.preventDefault()
     const payload = { ...questionForm, options: Object.values(questionForm.options) }
-    createQuestion(payload)
+    const callback = questionForm.question_id ? editQuestion : createQuestion
+    callback(payload, redirect)
   }
   const toggleBar = optionId => {
     setOptionBars({ ...optionBars, [optionId]: !optionBars[optionId] })
   }
   return (
     <form onSubmit={onSubmit}>
-      <h2>Create New Question</h2>
+      <h2>{questionForm.question_id ? "Edit" : "Create New"} Question</h2>
       <input
         type="text"
         maxLength={50}
@@ -136,7 +145,7 @@ export function QuizForm(props) {
           )
         })
       }
-      <button className="jumbo-button">Submit Quiz</button>
+      <button className="jumbo-button">Submit</button>
     </form >
   )
 }

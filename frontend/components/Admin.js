@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import QuizForm from './QuizForm'
+import QuizList from './QuizList'
 
 export function Admin(props) {
   const navigate = useNavigate()
@@ -12,7 +13,10 @@ export function Admin(props) {
   }, [auth])
 
   return (
-    <QuizForm />
+    <>
+      <QuizForm />
+      <QuizList />
+    </>
   )
 }
 

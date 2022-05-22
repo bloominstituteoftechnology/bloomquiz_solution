@@ -21,9 +21,6 @@ export function addOption() {
 export function removeOption(optionKey) {
   return { type: types.QUESTION_FORM_OPTION_REMOVAL, payload: optionKey }
 }
-export function setMessage(message) {
-  return { type: types.SET_INFO_MESSAGE, payload: message }
-}
 export function setQuiz(quiz) {
   return { type: types.SET_QUIZ, payload: quiz }
 }
@@ -42,16 +39,27 @@ export function setGeneralStats({ corrects, incorrects }) {
 export function reset() {
   return { type: types.RESET }
 }
+export function setMessage({ main, code }) {
+  window.scrollTo(0, 0)
+  return {
+    type: types.SET_INFO_MESSAGE, payload: {
+      main, code, time: new Date().valueOf()
+    }
+  }
+}
+function setError(err, dispatch) {
+  const errToDisplay = err.response ? err.response.data.message : err.message
+  dispatch(setMessage({ main: errToDisplay, code: 2 }))
+}
 export function register({ username, password }) {
   return function (dispatch) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
       .then(res => {
-        dispatch(setMessage(res.data.message))
+        dispatch(setMessage({ main: res.data.message, code: 0 }))
         dispatch(login({ username, password }))
       })
       .catch(err => {
-        const errToDisplay = err.response ? err.response.data.message : err.message
-        dispatch(setMessage(errToDisplay))
+        setError(err, dispatch)
       })
   }
 }
@@ -60,12 +68,11 @@ export function login({ username, password }) {
     axios.post('http://localhost:9000/api/auth/login', { username, password })
       .then(res => {
         localStorage.setItem('token', res.data.token)
-        dispatch(setMessage(res.data.message))
+        dispatch(setMessage({ main: res.data.message, code: 0 }))
         dispatch(getAuthStatus())
       })
       .catch(err => {
-        const errToDisplay = err.response ? err.response.data.message : err.message
-        dispatch(setMessage(errToDisplay))
+        setError(err, dispatch)
       })
   }
 }
@@ -76,8 +83,7 @@ export function nextQuiz() {
         dispatch(setQuiz(res.data))
       })
       .catch(err => {
-        const errToDisplay = err.response ? err.response.data.message : err.message
-        dispatch(setMessage(errToDisplay))
+        setError(err, dispatch)
       })
   }
 }
@@ -88,11 +94,13 @@ export function answerQuiz({ question_id, option_id, user_id }) {
       { question_id, option_id, user_id }
     )
       .then(res => {
-        dispatch(setMessage(`${res.data.verdict}`))
+        dispatch(setMessage({
+          main: `${res.data.verdict}`,
+          code: res.data.is_correct ? 1 : 2
+        }))
       })
       .catch(err => {
-        const errToDisplay = err.response ? err.response.data.message : err.message
-        dispatch(setMessage(errToDisplay))
+        setError(err, dispatch)
       })
       .finally(() => {
         dispatch(nextQuiz())
@@ -103,12 +111,13 @@ export function createQuestion(question) {
   return function (dispatch) {
     axiosWithAuth().post('http://localhost:9000/api/questions', question)
       .then(res => {
-        dispatch(setMessage(`${res.data.question_title} is a brilliant question`))
+        dispatch(setMessage({
+          main: `${res.data.question_title} is a brilliant question`, code: 0
+        }))
         dispatch(questionFormReset())
       })
       .catch(err => {
-        const errToDisplay = err.response ? err.response.data.message : err.message
-        dispatch(setMessage(errToDisplay))
+        setError(err, dispatch)
       })
   }
 }

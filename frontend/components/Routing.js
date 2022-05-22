@@ -21,7 +21,7 @@ export function App(props) {
 
   const onLogout = () => {
     props.reset()
-    props.setMessage('Bye!')
+    props.setMessage({ main: 'Bye!', code: 0 })
     window.localStorage.removeItem('token')
     navigate('/auth', { replace: true })
   }

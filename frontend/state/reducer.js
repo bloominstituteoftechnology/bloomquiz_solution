@@ -2,6 +2,19 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { getId } from '../../shared/utils'
 
+const initialMessage = { main: 'Test your knowledge...', code: 0, time: null }
+const emptyMessage = { main: '', code: 0, time: null }
+function infoMessage(state = initialMessage, action) {
+  switch (action.type) {
+    case types.RESET:
+      return emptyMessage
+    case types.SET_INFO_MESSAGE:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const initialAuthForm = {
   username: '', password: ''
 }
@@ -67,17 +80,6 @@ function questionForm(state = initialQuestionForm(), action) {
       }
       return { ...state, options }
     }
-    default:
-      return state
-  }
-}
-
-function infoMessage(state = 'Test your knowledge...', action) {
-  switch (action.type) {
-    case types.RESET:
-      return ''
-    case types.SET_INFO_MESSAGE:
-      return action.payload
     default:
       return state
   }

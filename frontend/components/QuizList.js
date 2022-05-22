@@ -21,7 +21,7 @@ export function QuizList(props) {
   }, [])
 
   return (
-    <>
+    <div>
       <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       {
         props.quizList.map(q => {
@@ -31,7 +31,7 @@ export function QuizList(props) {
           </div>
         })
       }
-    </>
+    </div>
   )
 }
 

@@ -31,8 +31,8 @@ export function Routing(props) {
   return (
     <>
       <Spinner />
-      <Message />
       <Opacity>
+        <Message />
         {user && <button onClick={onLogout} id="logout">Logout {username}</button>}
         <nav>
           <NavLink to="/">Test yourself!</NavLink>

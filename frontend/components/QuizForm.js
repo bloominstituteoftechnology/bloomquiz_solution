@@ -1,6 +1,18 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import styled, { keyframes } from 'styled-components'
 import * as actions from '../state/action-creators'
+
+const scale = keyframes`
+  0% { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+`
+
+const StyledInputGroup = styled.div`
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: ${scale} 0.25s forwards;
+`
 
 export function QuizForm(props) {
   const {
@@ -94,7 +106,7 @@ export function QuizForm(props) {
               </div>
               {
                 optionIsExpanded &&
-                <div className="option-inputs">
+                <StyledInputGroup className="option-inputs">
                   <textarea
                     maxLength={400}
                     placeholder="Option text"
@@ -118,7 +130,7 @@ export function QuizForm(props) {
                       onChange={onQuestionSetCorrect(optionKey)}
                     />&nbsp;&nbsp;correct option
                   </label>
-                </div>
+                </StyledInputGroup>
               }
             </div>
           )

@@ -7,7 +7,7 @@ const authRouter = require('./api/auth/auth-router')
 const quizzesRouter = require('./api/quizzes/quizzes-router')
 const statsRouter = require('./api/stats/stats-router')
 
-const { processToken } = require('./api/auth/auth-middleware')
+const { processToken, only } = require('./api/auth/auth-middleware')
 
 const server = express()
 server.use(express.json())
@@ -15,7 +15,7 @@ server.use(express.static(path.join(__dirname, '../dist')))
 server.use(cors())
 
 server.use(processToken)
-server.use('/api/questions', questionsRouter)
+server.use('/api/questions', only(1), questionsRouter)
 server.use('/api/auth', authRouter)
 server.use('/api/quizzes', quizzesRouter)
 server.use('/api/stats', statsRouter)

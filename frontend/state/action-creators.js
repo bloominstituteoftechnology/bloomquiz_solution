@@ -42,6 +42,9 @@ export function setAuthStatus({ user, admin, username }) {
 export function setGeneralStats({ corrects, incorrects }) {
   return { type: types.SET_GENERAL_STATS, payload: { corrects, incorrects } }
 }
+export function setAllQuestions(questions) {
+  return { type: types.SET_ALL_QUIZZES, payload: questions }
+}
 export function reset() {
   return { type: types.RESET }
 }
@@ -159,6 +162,21 @@ export function getGeneralStats() {
       })
       .catch(() => {
         dispatch(reset())
+      })
+  }
+}
+export function getQuizzes() {
+  return function (dispatch) {
+    dispatch(spinnerOn())
+    axiosWithAuth().get('http://localhost:9000/api/questions')
+      .then(res => {
+        dispatch(setAllQuestions(res.data))
+      })
+      .catch(() => {
+        dispatch(reset())
+      })
+      .finally(() => {
+        dispatch(spinnerOff())
       })
   }
 }

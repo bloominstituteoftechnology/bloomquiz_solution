@@ -121,6 +121,18 @@ function stats(state = initialStats, action) {
   }
 }
 
+const initialQuizList = []
+function quizList(state = initialQuizList, action) {
+  switch (action.type) {
+    case types.RESET:
+      return initialQuizList
+    case types.SET_ALL_QUIZZES:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 function spinnerOn(state = false, action) {
   switch (action.type) {
     case types.SPINNER_OFF:
@@ -139,5 +151,6 @@ export default combineReducers({
   infoMessage,
   auth,
   stats,
+  quizList,
   spinnerOn,
 })

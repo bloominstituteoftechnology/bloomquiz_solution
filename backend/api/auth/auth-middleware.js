@@ -48,6 +48,15 @@ function processToken(req, res, next) {
   })
 }
 
+function only(role_id) {
+  return function (req, res, next) {
+    if (req?.token?.role_id !== role_id) {
+      return next({ status: 403, message: 'incorrect' })
+    }
+    next()
+  }
+}
+
 function isRegisteredUser(req, res) {
   if (req.token && req.token.role_id === 1) res.json({ user: true, admin: true, username: req.token.username })
   else if (req.token) res.json({ user: true, admin: false, username: req.token.username })
@@ -61,4 +70,5 @@ module.exports = {
   generateToken,
   processToken,
   isRegisteredUser,
+  only,
 }

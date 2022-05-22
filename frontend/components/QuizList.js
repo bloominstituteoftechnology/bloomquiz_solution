@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function QuizList(props) {
-  const {
-    addOption,
-
-  } = props
+  useEffect(() => {
+    props.getQuizzes()
+  }, [])
 
   return (
-'quizlist'
+    <>
+      {
+        props.quizList.map(q => {
+          return <div className="question answser" key={q.question_id}>{q.question_title}</div>
+        })
+      }
+    </>
   )
 }
 

@@ -20,7 +20,7 @@ export function Quiz(props) {
   }
 
   return (
-    <div id="wrapper">
+    <div>
       {
         question ? (
           <>

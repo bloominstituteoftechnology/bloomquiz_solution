@@ -37,7 +37,7 @@ textarea {
 }
 
 #root,
-#wrapper {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,7 @@ textarea {
   min-width: 450px;
 }
 
-#wrapper {
+.container {
   padding-left: 2rem;
   padding-right: 2rem;
 }

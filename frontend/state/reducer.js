@@ -42,6 +42,8 @@ function questionForm(state = initialQuestionForm(), action) {
     case types.RESET:
     case types.QUESTION_FORM_RESET:
       return initialQuestionForm()
+    case types.QUESTION_FORM_SET_EXISTING:
+      return action.payload
     case types.QUESTION_FORM_INPUT_CHANGE: {
       return { ...state, [action.payload.name]: action.payload.value }
     }

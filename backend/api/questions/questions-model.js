@@ -1,7 +1,7 @@
 const db = require('../../data/db-config')
 
 async function getAll() {
-  const questions = await db('questions')
+  const questions = await db('questions').orderBy('updated_at', 'desc')
   let options = await db('options')
   options = options.map(o => ({ ...o, is_distractor: !!o.is_distractor }))
   questions.forEach(q => {

@@ -119,7 +119,7 @@ export function QuizForm(props) {
                     maxLength={400}
                     placeholder="Option remark"
                     name="remark"
-                    value={option.remark}
+                    value={option.remark ?? ''}
                     onChange={onQuestionOptionChange(optionKey)}
                   />
                   <label>

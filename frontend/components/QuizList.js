@@ -7,11 +7,13 @@ export function QuizList(props) {
   const navigate = useNavigate()
 
   const onNew = () => {
+    props.questionFormReset()
     navigate('/admin/edit/new')
   }
 
-  const onEdit = id => () => {
-    navigate('/admin/edit/' + id)
+  const onEdit = question_id => () => {
+    props.questionFormSetExisting(props.quizList.find(q => q.question_id === question_id))
+    navigate('/admin/edit/' + question_id)
   }
 
   useEffect(() => {

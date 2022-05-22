@@ -48,6 +48,17 @@ export function setAllQuestions(questions) {
 export function reset() {
   return { type: types.RESET }
 }
+export function questionFormSetExisting(question) {
+  const ids = question.options.map(() => getId())
+  const options = {}
+  ids.forEach((id, idx) => {
+    options[id] = question.options[idx]
+  })
+  return {
+    type: types.QUESTION_FORM_SET_EXISTING,
+    payload: { ...question, options }
+  }
+}
 export function setMessage({ main, code }) {
   window.scrollTo(0, 0)
   return {

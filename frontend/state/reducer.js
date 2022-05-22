@@ -121,6 +121,17 @@ function stats(state = initialStats, action) {
   }
 }
 
+function spinnerOn(state = false, action) {
+  switch (action.type) {
+    case types.SPINNER_OFF:
+      return false
+    case types.SPINNER_ON:
+      return true
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   authForm,
   questionForm,
@@ -128,4 +139,5 @@ export default combineReducers({
   infoMessage,
   auth,
   stats,
+  spinnerOn,
 })

@@ -3,6 +3,12 @@ import axiosWithAuth from '../axios'
 import { getId } from '../../shared/utils'
 import axios from 'axios'
 
+export function spinnerOn() {
+  return { type: types.SPINNER_ON }
+}
+export function spinnerOff() {
+  return { type: types.SPINNER_OFF }
+}
 export function authInputChange({ id, value }) {
   return { type: types.AUTH_FORM_INPUT_CHANGE, payload: { id, value } }
 }
@@ -53,6 +59,7 @@ function setError(err, dispatch) {
 }
 export function register({ username, password }) {
   return function (dispatch) {
+    dispatch(spinnerOn())
     axios.post('http://localhost:9000/api/auth/register', { username, password })
       .then(res => {
         dispatch(setMessage({ main: res.data.message, code: 0 }))
@@ -61,10 +68,14 @@ export function register({ username, password }) {
       .catch(err => {
         setError(err, dispatch)
       })
+      .finally(() => {
+        dispatch(spinnerOff())
+      })
   }
 }
 export function login({ username, password }) {
   return function (dispatch) {
+    dispatch(spinnerOn())
     axios.post('http://localhost:9000/api/auth/login', { username, password })
       .then(res => {
         localStorage.setItem('token', res.data.token)
@@ -74,10 +85,14 @@ export function login({ username, password }) {
       .catch(err => {
         setError(err, dispatch)
       })
+      .finally(() => {
+        dispatch(spinnerOff())
+      })
   }
 }
 export function nextQuiz() {
   return function (dispatch) {
+    dispatch(spinnerOn())
     axiosWithAuth().get('http://localhost:9000/api/quizzes/next')
       .then(res => {
         dispatch(setQuiz(res.data))
@@ -85,10 +100,14 @@ export function nextQuiz() {
       .catch(err => {
         setError(err, dispatch)
       })
+      .finally(() => {
+        dispatch(spinnerOff())
+      })
   }
 }
 export function answerQuiz({ question_id, option_id, user_id }) {
   return function (dispatch) {
+    dispatch(spinnerOn())
     axiosWithAuth().post(
       'http://localhost:9000/api/quizzes/answer',
       { question_id, option_id, user_id }

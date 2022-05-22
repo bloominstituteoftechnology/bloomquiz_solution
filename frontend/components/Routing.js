@@ -43,7 +43,7 @@ export function Routing(props) {
         <Routes>
           <Route path="/" element={<Quiz />} />
           <Route path="auth" element={<AuthForm />} />
-          <Route path="admin" element={<Admin />} />
+          <Route path="admin/*" element={<Admin />} />
           <Route path="stats" element={<Stats />} />
         </Routes>
         <footer>Bloom Institute of Technology {new Date().getFullYear()}</footer>

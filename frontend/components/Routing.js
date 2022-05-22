@@ -26,14 +26,14 @@ export function Routing(props) {
     navigate('/auth', { replace: true })
   }
 
-  const { user, admin, username } = props.auth
+  const { user, admin } = props.auth
 
   return (
     <>
       <Spinner />
       <Opacity>
         <Message />
-        {user && <button onClick={onLogout} id="logout">Logout {username}</button>}
+        {user && <button onClick={onLogout} id="logout">Logout</button>}
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
           {user && <NavLink to="/stats">Stats</NavLink>}

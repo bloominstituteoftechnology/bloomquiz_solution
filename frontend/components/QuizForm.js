@@ -60,7 +60,7 @@ export function QuizForm(props) {
     setOptionBars({ ...optionBars, [optionId]: !optionBars[optionId] })
   }
   return (
-    <form id="loginForm" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <h2>Create New Question</h2>
       <input
         type="text"

@@ -42,7 +42,7 @@ export function AuthForm(props) {
   }
 
   return (
-    <form id="loginForm" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <input
         type="text"
         maxLength={200}

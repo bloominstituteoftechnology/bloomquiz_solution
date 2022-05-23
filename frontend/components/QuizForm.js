@@ -36,7 +36,7 @@ export function QuizForm(props) {
   })
 
   const redirect = evt => {
-    evt.preventDefault()
+    if (evt) evt.preventDefault()
     navigate('/admin')
   }
 

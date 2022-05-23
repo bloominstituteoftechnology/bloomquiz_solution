@@ -25,7 +25,7 @@ export function Quiz(props) {
         question ? (
           <>
             <div id="quizAnswers">
-            <Md className="question text md">{question.question_text}</Md>
+              <Md className="question text md">{question.question_text}</Md>
               {
                 question.options.map(opt => (
                   <div
@@ -40,9 +40,11 @@ export function Quiz(props) {
                 ))
               }
             </div>
-            <button className="jumbo-button" onClick={onClick} disabled={!option_id}>
-              Submit answer
-            </button>
+            <div className="button-group">
+              <button className="jumbo-button" onClick={onClick} disabled={!option_id}>
+                Submit answer
+              </button>
+            </div>
           </>
         ) : 'Loading next quiz...'
       }

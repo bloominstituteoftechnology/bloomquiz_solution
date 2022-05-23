@@ -58,9 +58,11 @@ export function AuthForm(props) {
         placeholder="Enter password"
         id="password"
       />
-      <button className="jumbo-button" disabled={isDisabled()} id="submitCredentials">
-        {isNewUser ? "Register New User" : "Login"}
-      </button>
+      <div className="button-group">
+        <button className="jumbo-button" disabled={isDisabled()} id="submitCredentials">
+          {isNewUser ? "Register New User" : "Login"}
+        </button>
+      </div>
       <div>
         <a onClick={toggleMode}>
           {isNewUser

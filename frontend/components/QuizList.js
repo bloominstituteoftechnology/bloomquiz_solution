@@ -27,7 +27,9 @@ export function QuizList(props) {
 
   return (
     <div>
-      <button className="jumbo-button" onClick={onNew}>New Quiz</button>
+      <div className="button-group">
+        <button className="jumbo-button" onClick={onNew}>New Quiz</button>
+      </div><br />
       {
         quizList.map(q => {
           return <div className="question answer" key={q.question_id}>

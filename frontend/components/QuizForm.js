@@ -93,7 +93,7 @@ export function QuizForm(props) {
           const optionIsCollapsed = !optionBars[optionKey]
           const optionIsExpanded = optionBars[optionKey]
           const removeBtnDisabled = Object.keys(questionForm.options).length < 3
-          const optionSlice = option.option_text.slice(0, 30)
+          const optionSlice = option.option_text.slice(0, 40)
 
           const rightArrow = <>&#9658;</>
           const downArrow = <>&#9660;</>

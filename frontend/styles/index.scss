@@ -14,6 +14,7 @@ $app-background-color: white;
 $dark-grey: #4848486b;
 $text-color: #666666;
 $highlight-color: #ff5959;
+$button-color: rgb(239, 239, 239);
 $button-border-color: #DDDDDD;
 $button-active-color: white;
 $input-border-color: #DDDDDD;
@@ -78,6 +79,7 @@ button {
   border: 1px solid $button-border-color;
   border-radius: 0;
   min-height: 2rem;
+  background-color: $button-color;
 }
 
 .button-group {

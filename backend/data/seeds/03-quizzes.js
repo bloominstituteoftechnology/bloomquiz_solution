@@ -13,8 +13,8 @@ exports.seed = async function (knex) {
       question_text: 'What is a closure?',
     },
     {
-      question_title: 'Median of An Array of Numbers',
-      question_text: 'What is __the median__ of a _sorted_ array of numbers?',
+      question_title: 'Median of A Sorted, Even-Length Array of Numbers',
+      question_text: 'The _median_ of a _sorted, even-length_ array of numbers is...',
     },
     {
       question_title: 'Models in Machine Learning',
@@ -62,17 +62,17 @@ exports.seed = async function (knex) {
       question_id: 3,
     },
     {
-      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the average of the two middle elements",
+      option_text: "The average of the two middle elements",
       is_correct: true,
       question_id: 4,
     },
     {
-      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the median of the two middle elements",
+      option_text: "The median of the two middle elements",
       is_correct: false,
       question_id: 4,
     },
     {
-      option_text: "In an even-length array, it's the middle element, in an odd-length array it's the mean of the two middle elements",
+      option_text: "The mean of the two middle elements",
       is_correct: false,
       question_id: 4,
     },

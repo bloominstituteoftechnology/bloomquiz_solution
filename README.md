@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node >= 16.x (use current LTS version)
+- Node >= 16.x (prefer current LTS version)
 - NPM >= 8.x (upgrade executing `npm i -g npm`)
 - Chrome >= 100.x
 
@@ -15,7 +15,7 @@
 
 ## Set Up
 
-1. Clone repo and `npm install` and `npm run resetdb`.
+1. Clone repo and execute `npm run prep` to install deps and set up your database.
 2. Launch the project in a development server executing `npm run dev`.
 3. Visit your app by navigating to `http://localhost:3000` with Chrome.
 

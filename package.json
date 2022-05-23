@@ -2,6 +2,7 @@
   "name": "codealong-web-u3-u4",
   "version": "0.0.1",
   "scripts": {
+    "prep": "npm i && npm run resetdb",
     "dev": "fkill :9000 :3000 -s && concurrently \"npm:backend\" \"npm:frontend\"",
     "test": "cross-env NODE_ENV=testing jest --watch",
     "webpack": "cross-env NODE_ENV=production webpack",

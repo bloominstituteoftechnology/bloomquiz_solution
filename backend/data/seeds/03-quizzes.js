@@ -31,67 +31,67 @@ exports.seed = async function (knex) {
   ])
   await knex('options').insert([
     {
-      option_text: 'The One Ring',
+      option_text: 'The One Ring.',
       is_correct: true,
       question_id: 1,
     },
     {
-      option_text: 'Hand',
+      option_text: 'Hand.',
       is_correct: false,
       question_id: 1,
     },
     {
-      option_text: 'Nothing',
+      option_text: 'Nothing.',
       is_correct: false,
       question_id: 1,
     },
     {
-      option_text: 'Variables declared with `const` may not be re-assigned',
+      option_text: 'Variables declared with `const` may not be re-assigned.',
       is_correct: true,
       question_id: 2,
     },
     {
-      option_text: 'Variables declared with `const` may not be re-declared',
+      option_text: 'Variables declared with `const` may not be re-declared.',
       is_correct: false,
       question_id: 2,
     },
     {
-      option_text: 'Function object plus bindings',
+      option_text: 'Function object plus bindings.',
       is_correct: true,
       question_id: 3,
     },
     {
-      option_text: 'Some kind of elephant',
+      option_text: 'Some kind of pink elephant.',
       is_correct: false,
       question_id: 3,
     },
     {
-      option_text: "The average of the two middle elements",
+      option_text: "The average of the two middle elements.",
       is_correct: true,
       question_id: 4,
     },
     {
-      option_text: "The median of the two middle elements",
+      option_text: "The median of the two middle elements.",
       is_correct: false,
       question_id: 4,
     },
     {
-      option_text: "The mean of the two middle elements",
+      option_text: "The mean of the two middle elements.",
       is_correct: false,
       question_id: 4,
     },
     {
-      option_text: "A representation of reality using a set of rules that mimic the existing data as closely as possible",
+      option_text: "A representation of reality using a set of rules that mimic the existing data as closely as possible.",
       is_correct: true,
       question_id: 5,
     },
     {
-      option_text: "The data that represents the predictions that can be made about our rules",
+      option_text: "The data that represents the predictions that can be made about our rules.",
       is_correct: false,
       question_id: 5,
     },
     {
-      option_text: "Remember, formulate, predict",
+      option_text: "Remember, formulate, predict.",
       is_correct: true,
       question_id: 6,
     },

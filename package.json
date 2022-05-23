@@ -17,7 +17,8 @@
     "migrate:prod": "heroku run knex migrate:latest -a codealong-web",
     "rollback:prod": "heroku run knex migrate:rollback -a codealong-web",
     "seed:prod": "heroku run knex seed:run -a codealong-web",
-    "resetdb:prod": "npm run rollback:prod && npm run migrate:prod && npm run seed:prod"
+    "resetdb:prod": "npm run rollback:prod && npm run migrate:prod && npm run seed:prod",
+    "ketchup": "git fetch && git reset --hard origin/lecture && npm run prep"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",

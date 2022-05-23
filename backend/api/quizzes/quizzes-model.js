@@ -50,7 +50,7 @@ async function prevAnswers(user_id) {
     .where('user_id', user_id)
     .groupBy('question_id')
     .count('question_id')
-    .sum('is_correct')
+    .sum('correctly_answered')
     .select('question_id')
   return answers
 }
@@ -75,7 +75,7 @@ async function nextQuiz({ user_id }) {
 async function answerQuiz({ question_id, option_id, user_id }) {
   const option = await db('options').where('option_id', option_id).first()
   if (user_id) {
-    await db('answers').insert({user_id, question_id, is_correct: option.is_correct })
+    await db('answers').insert({user_id, question_id, correctly_answered: option.is_correct })
   }
   return {
     remark: option.remark,

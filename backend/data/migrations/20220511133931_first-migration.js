@@ -41,7 +41,7 @@ exports.up = async function (knex) {
     .createTable('answers', (answers) => {
       answers.increments('answer_id')
       answers.timestamps(false, true)
-      answers.boolean('is_correct')
+      answers.boolean('correctly_answered')
       answers.integer('user_id')
         .unsigned()
         .notNullable()

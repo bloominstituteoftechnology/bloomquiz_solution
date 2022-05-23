@@ -5,8 +5,12 @@ exports.seed = async function (knex) {
       question_text: 'What\'s in Bilbo\'s pocket?',
     },
     {
-      question_title: 'Meaning of Life',
-      question_text: 'What is the meaning of life?',
+      question_title: 'Reassignment of Vars Declared with "const"',
+      question_text: `What is wrong with the following code?\n
+\`\`\`js
+  const pioneer = "Ada Lovelace";
+  pioneer = "foo";
+\`\`\``
     },
     {
       question_title: 'Closures',
@@ -42,12 +46,12 @@ exports.seed = async function (knex) {
       question_id: 1,
     },
     {
-      option_text: 'Family and friends',
+      option_text: 'Variables declared with `const` may not be re-assigned',
       is_correct: true,
       question_id: 2,
     },
     {
-      option_text: 'Work',
+      option_text: 'Variables declared with `const` may not be re-declared',
       is_correct: false,
       question_id: 2,
     },

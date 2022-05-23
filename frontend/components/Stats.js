@@ -6,7 +6,7 @@ export function Stats(props) {
   const { stats, getGeneralStats, navigate, auth } = props
 
   useEffect(() => {
-    if (!auth.user) navigate('/auth')
+    if (auth.user === false) navigate('/auth')
   }, [auth])
 
   useEffect(() => {

@@ -8,7 +8,9 @@ export function Admin(props) {
   const { auth, navigate } = props
 
   useEffect(() => {
-    if (!auth.admin) navigate('/auth')
+    if (auth.admin === false) {
+      navigate('/auth')
+    }
   }, [auth])
 
   return (

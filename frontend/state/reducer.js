@@ -87,7 +87,7 @@ function questionForm(state = initialQuestionForm(), action) {
   }
 }
 
-const initialAuth = { user: false, admin: false, username: null }
+const initialAuth = { user: null, admin: null, username: null }
 function auth(state = initialAuth, action) {
   switch (action.type) {
     case types.RESET:

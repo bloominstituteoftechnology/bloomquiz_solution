@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import QuizForm from './QuizForm'
 import QuizList from './QuizList'
 
 export function Admin(props) {
-  const navigate = useNavigate()
-
-  const { auth } = props
+  const { auth, navigate } = props
 
   useEffect(() => {
     if (!auth.admin) navigate('/auth')
@@ -15,8 +13,8 @@ export function Admin(props) {
 
   return (
     <Routes>
-      <Route path="edit/:id" element={<QuizForm />} />
-      <Route path="/" element={<QuizList />} />
+      <Route path="edit/:id" element={<QuizForm navigate={navigate} />} />
+      <Route path="/" element={<QuizList navigate={navigate} />} />
     </Routes>
   )
 }

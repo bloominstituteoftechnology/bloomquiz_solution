@@ -41,10 +41,10 @@ export function Routing(props) {
           {!user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
         </nav>
         <Routes>
-          <Route path="/" element={<Quiz />} />
-          <Route path="auth" element={<AuthForm />} />
-          <Route path="admin/*" element={<Admin />} />
-          <Route path="stats" element={<Stats />} />
+          <Route path="/" element={<Quiz navigate={navigate} />} />
+          <Route path="auth" element={<AuthForm navigate={navigate} />} />
+          <Route path="admin/*" element={<Admin navigate={navigate} />} />
+          <Route path="stats" element={<Stats navigate={navigate} />} />
         </Routes>
         <footer>Bloom Institute of Technology {new Date().getFullYear()}</footer>
       </Opacity>

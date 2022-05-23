@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import * as actions from '../state/action-creators'
 
@@ -25,6 +24,7 @@ export function QuizForm(props) {
     createQuestion,
     editQuestion,
     questionForm,
+    navigate,
   } = props
 
   const [optionBars, setOptionBars] = useState(() => {
@@ -34,8 +34,6 @@ export function QuizForm(props) {
     })
     return state
   })
-
-  const navigate = useNavigate()
 
   const redirect = () => {
     navigate('/admin')

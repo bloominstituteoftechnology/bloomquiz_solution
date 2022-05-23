@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function AuthForm(props) {
-  const navigate = useNavigate()
   const [isNewUser, setIsNewUser] = useState(false)
   const {
     login,
     register,
     authInputChange,
     authForm: { username, password },
+    navigate,
     auth,
   } = props
 

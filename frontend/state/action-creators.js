@@ -76,14 +76,13 @@ export function register({ username, password }) {
     dispatch(spinnerOn())
     axios.post('http://localhost:9000/api/auth/register', { username, password })
       .then(res => {
+        dispatch(spinnerOff())
         dispatch(setMessage({ main: res.data.message, code: 0 }))
         dispatch(login({ username, password }))
       })
       .catch(err => {
-        setError(err, dispatch)
-      })
-      .finally(() => {
         dispatch(spinnerOff())
+        setError(err, dispatch)
       })
   }
 }
@@ -93,14 +92,13 @@ export function login({ username, password }) {
     axios.post('http://localhost:9000/api/auth/login', { username, password })
       .then(res => {
         localStorage.setItem('token', res.data.token)
+        dispatch(spinnerOff())
         dispatch(setMessage({ main: res.data.message, code: 0 }))
         dispatch(getAuthStatus())
       })
       .catch(err => {
-        setError(err, dispatch)
-      })
-      .finally(() => {
         dispatch(spinnerOff())
+        setError(err, dispatch)
       })
   }
 }
@@ -109,13 +107,12 @@ export function nextQuiz() {
     dispatch(spinnerOn())
     axiosWithAuth().get('http://localhost:9000/api/quizzes/next')
       .then(res => {
+        dispatch(spinnerOff())
         dispatch(setQuiz(res.data))
       })
       .catch(err => {
-        setError(err, dispatch)
-      })
-      .finally(() => {
         dispatch(spinnerOff())
+        setError(err, dispatch)
       })
   }
 }
@@ -127,16 +124,16 @@ export function answerQuiz({ question_id, option_id, user_id }) {
       { question_id, option_id, user_id }
     )
       .then(res => {
+        dispatch(spinnerOff())
         dispatch(setMessage({
           main: `${res.data.verdict}`,
           code: res.data.is_correct ? 1 : 2
         }))
+        dispatch(nextQuiz())
       })
       .catch(err => {
+        dispatch(spinnerOff())
         setError(err, dispatch)
-      })
-      .finally(() => {
-        dispatch(nextQuiz())
       })
   }
 }

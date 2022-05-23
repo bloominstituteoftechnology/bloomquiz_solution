@@ -35,7 +35,8 @@ export function QuizForm(props) {
     return state
   })
 
-  const redirect = () => {
+  const redirect = evt => {
+    evt.preventDefault()
     navigate('/admin')
   }
 
@@ -143,7 +144,10 @@ export function QuizForm(props) {
           )
         })
       }
-      <button className="jumbo-button">Submit</button>
+      <div className="button-group">
+        <button className="jumbo-button">Submit</button>
+        <button onClick={redirect}>Cancel</button>
+      </div>
     </form >
   )
 }

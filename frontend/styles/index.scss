@@ -301,3 +301,15 @@ button.jumbo-button {
     background-color: $app-background-color;
   }
 }
+
+.button-group {
+  display: flex;
+  width: 100%;
+
+  button:nth-of-type(1) {
+    flex: 4;
+  }
+  button:nth-of-type(2) {
+    flex: 1;
+  }
+}

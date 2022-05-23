@@ -6,7 +6,7 @@ exports.seed = async function (knex) {
     },
     {
       question_title: 'Reassignment of Vars Declared with "const"',
-      question_text: `What is _wrong_ with the following code?\n
+      question_text: `What is wrong with the following code?\n
 \`\`\`js
   const pioneer = "Ada Lovelace";
   pioneer = "foo";

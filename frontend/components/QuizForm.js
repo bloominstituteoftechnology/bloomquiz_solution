@@ -35,7 +35,7 @@ export function QuizForm(props) {
     questionForm,
     navigate,
   } = props
-  console.log(props)
+
   /* =============== 👉 9.1 STEP 2 =============== */
   const [optionBars, setOptionBars] = useState(() => {
     let state = {}

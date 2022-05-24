@@ -35,11 +35,10 @@ export function QuizForm(props) {
     return state
   })
 
-  const redirect = evt => {
+  const onRedirect = evt => {
     if (evt) evt.preventDefault()
     navigate('/admin')
   }
-
   const onAddOption = evt => {
     evt.preventDefault()
     addOption()
@@ -62,7 +61,7 @@ export function QuizForm(props) {
     evt.preventDefault()
     const payload = { ...questionForm, options: Object.values(questionForm.options) }
     const callback = questionForm.question_id ? editQuestion : createQuestion
-    callback(payload, redirect)
+    callback(payload, onRedirect)
   }
   const toggleBar = optionId => {
     setOptionBars({ ...optionBars, [optionId]: !optionBars[optionId] })
@@ -146,7 +145,7 @@ export function QuizForm(props) {
       }
       <div className="button-group">
         <button className="jumbo-button">Submit</button>
-        <button onClick={redirect}>Cancel</button>
+        <button onClick={onRedirect}>Cancel</button>
       </div>
     </form >
   )

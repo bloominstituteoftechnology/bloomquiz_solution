@@ -4,7 +4,6 @@ import styled, { keyframes } from 'styled-components'
 import * as actions from '../state/action-creators'
 
 const scale = keyframes`
-  0% { transform: scaleY(0); }
   100% { transform: scaleY(1); }
 `
 

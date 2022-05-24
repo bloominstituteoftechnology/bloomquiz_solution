@@ -8,12 +8,13 @@ const rotation = keyframes`
 `
 
 const opacity = keyframes`
-  from { opacity: 0.2; }
-  to { opacity: 1; }
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
 `
 
 const StyledSpinner = styled.div`
-  animation: ${opacity} 1s infinite linear;
+  animation: ${opacity} 0.5s infinite linear;
 
   h3 {
     transform-origin: center center;

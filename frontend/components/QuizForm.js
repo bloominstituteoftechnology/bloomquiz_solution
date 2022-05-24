@@ -2,7 +2,15 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { connect } from 'react-redux'
-import * as actions from '../state/action-creators'
+import {
+  addOption,
+  removeOption,
+  questionInputChange,
+  questionOptionInputChange,
+  questionOptionSetCorrect,
+  createQuestion,
+  editQuestion,
+} from '../state/action-creators'
 
 /* =============== 👉 9.1 STEP 6 =============== */
 const scale = keyframes`
@@ -27,7 +35,7 @@ export function QuizForm(props) {
     questionForm,
     navigate,
   } = props
-
+  console.log(props)
   /* =============== 👉 9.1 STEP 2 =============== */
   const [optionBars, setOptionBars] = useState(() => {
     let state = {}
@@ -157,4 +165,14 @@ export function QuizForm(props) {
   )
 }
 
-export default connect(st => st, actions)(QuizForm)
+export default connect(st => ({
+  questionForm: st.questionForm,
+}), {
+  addOption,
+  removeOption,
+  questionInputChange,
+  questionOptionInputChange,
+  questionOptionSetCorrect,
+  createQuestion,
+  editQuestion,
+})(QuizForm)

@@ -45,8 +45,8 @@ export function QuizForm(props) {
     return state
   })
   /* =============== 👉 9.1 STEP 3 =============== */
-  const toggleBar = optionId => {
-    setOptionBars({ ...optionBars, [optionId]: !optionBars[optionId] })
+  const toggleBar = optionKey => {
+    setOptionBars({ ...optionBars, [optionKey]: !optionBars[optionKey] })
   }
   const onRedirect = evt => {
     if (evt) evt.preventDefault()

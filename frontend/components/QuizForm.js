@@ -98,7 +98,7 @@ export class QuizForm extends React.Component {
         </div>
         {
           Object.keys(questionForm.options).map((optionKey, idx) => {
-            const optionHeading = <>Option {idx + 1}&nbsp;&nbsp;</>
+            const optionHeading = <>Option {idx + 1} &nbsp;&nbsp;</>
             const removeBtnDisabled = Object.keys(questionForm.options).length < 3
             const option = questionForm.options[optionKey]
 

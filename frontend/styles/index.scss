@@ -21,10 +21,14 @@ $input-border-color: #DDDDDD;
 $form-background-color: rgb(252, 252, 252);
 $form-border-color: rgb(238, 238, 238);
 
-html,
-body {
+html {
   min-height: 100vh;
   font-family: 'Titillium Web', sans-serif;
+
+}
+
+body {
+  min-height: 100vh;
   background-color: $app-background-color;
   overflow-x: hidden;
 }

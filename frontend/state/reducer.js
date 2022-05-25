@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import * as types from './action-types'
-import { getId } from '../../shared/utils'
+import { initialQuestionForm } from '../../shared/utils'
 
 const initialMessage = { main: 'Test your knowledge...', code: 0, time: null }
 const emptyMessage = { main: '', code: 0, time: null }
@@ -30,18 +30,10 @@ function authForm(state = initialAuthForm, action) {
   }
 }
 
-const initialQuestionForm = () => ({
-  question_title: '', question_text: '',
-  options: {
-    [getId()]: { option_text: '', is_correct: true, remark: '' },
-    [getId()]: { option_text: '', is_correct: false, remark: '' },
-  }
-})
 function questionForm(state = initialQuestionForm(), action) {
   switch (action.type) {
-    case types.RESET:
     case types.QUESTION_FORM_RESET:
-      return initialQuestionForm()
+      return action.payload
     case types.QUESTION_FORM_SET_EXISTING:
       return action.payload
     case types.QUESTION_FORM_INPUT_CHANGE: {

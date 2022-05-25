@@ -45,7 +45,7 @@ export class QuizForm extends React.Component {
   }
   onRedirect = evt => {
     if (evt) evt.preventDefault()
-    this.props.navigate('/admin')
+    this.props.navigate('/')
   }
   onAddOption = evt => {
     evt.preventDefault()

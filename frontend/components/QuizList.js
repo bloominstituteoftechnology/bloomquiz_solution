@@ -9,6 +9,7 @@ export function QuizList(props) {
     getQuizzes,
     quizList,
     navigate,
+    setQuiz
   } = props
 
   const onNew = () => {
@@ -19,6 +20,11 @@ export function QuizList(props) {
   const onEdit = question_id => () => {
     questionFormSetExisting(quizList.find(q => q.question_id === question_id))
     navigate('/admin/edit/' + question_id)
+  }
+
+  const onView = question_id => () => {
+    setQuiz(quizList.find(q => q.question_id === question_id))
+    navigate('/')
   }
 
   useEffect(() => {
@@ -32,10 +38,15 @@ export function QuizList(props) {
       </div><br />
       {
         quizList.map(q => {
-          return <div className="question answer" key={q.question_id}>
-            {q.question_title}
-            <button onClick={onEdit(q.question_id)}>🔧</button>
-          </div>
+          return (
+            <div className="question answer" key={q.question_id}>
+              {q.question_title}
+              <div>
+                <button onClick={onView(q.question_id)}>👁️</button>
+                <button onClick={onEdit(q.question_id)}>🔧</button>
+              </div>
+            </div>
+          )
         })
       }
     </div>

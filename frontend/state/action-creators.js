@@ -1,6 +1,6 @@
 import * as types from './action-types'
 import axiosWithAuth from '../axios'
-import { getId } from '../../shared/utils'
+import { getId, initialQuestionForm } from '../../shared/utils'
 import axios from 'axios'
 
 export function spinnerOn() {
@@ -33,9 +33,6 @@ export function setQuiz(quiz) {
 export function selectOption(option_id) {
   return { type: types.QUIZ_SET_SELECTED_OPTION, payload: option_id }
 }
-export function questionFormReset() {
-  return { type: types.QUESTION_FORM_RESET }
-}
 export function setAuthStatus({ user, admin, username }) {
   return { type: types.SET_AUTH_STATUS, payload: { user, admin, username } }
 }
@@ -47,6 +44,12 @@ export function setAllQuestions(questions) {
 }
 export function reset() {
   return { type: types.RESET }
+}
+export function questionFormReset() {
+  return {
+    type: types.QUESTION_FORM_RESET,
+    payload: initialQuestionForm(),
+  }
 }
 export function questionFormSetExisting(question) {
   const ids = question.options.map(() => getId())
@@ -143,6 +146,7 @@ export function createQuestion(question, redirect) {
       .then(res => {
         dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question`, code: 0 }))
         dispatch(questionFormReset())
+        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {
@@ -153,9 +157,10 @@ export function createQuestion(question, redirect) {
 export function editQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
-      .then(res => { // eslint-disable-line
+      .then(res => {
         dispatch(setMessage({ main: `Brilliant update`, code: 0 }))
         dispatch(questionFormReset())
+        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {

@@ -34,7 +34,7 @@ export function Quiz(props) {
                     onClick={() => selectOption(opt.option_id)}
                   >
                     <Md className="md">{opt.option_text}</Md>
-                    <button>
+                    <button className="wide">
                       {option_id === opt.option_id ? 'SELECTED' : 'Select'}
                     </button>
                   </div>

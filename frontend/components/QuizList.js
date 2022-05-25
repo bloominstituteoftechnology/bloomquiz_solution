@@ -34,7 +34,7 @@ export function QuizList(props) {
         quizList.map(q => {
           return <div className="question answer" key={q.question_id}>
             {q.question_title}
-            <button onClick={onEdit(q.question_id)}>Edit</button>
+            <button onClick={onEdit(q.question_id)}>🔧</button>
           </div>
         })
       }

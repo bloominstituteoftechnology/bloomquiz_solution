@@ -71,6 +71,10 @@ export class QuizForm extends React.Component {
   }
   render() {
     const { questionForm } = this.props
+    const plusButton = <>&#10060;</>
+    const downArrow = <>&#9660;&nbsp;&nbsp;</>
+    const rightArrow = <>&#9658;&nbsp;&nbsp;</>
+
     return (
       <form onSubmit={this.onSubmit}>
         <h2>{questionForm.question_id ? "Edit" : "Create New"} Question</h2>
@@ -94,27 +98,25 @@ export class QuizForm extends React.Component {
         </div>
         {
           Object.keys(questionForm.options).map((optionKey, idx) => {
-            const option = questionForm.options[optionKey]
+            const optionHeading = <>Option {idx + 1}&nbsp;&nbsp;</>
             const removeBtnDisabled = Object.keys(questionForm.options).length < 3
+            const option = questionForm.options[optionKey]
+
             const optionIsExpanded = this.state.optionBars[optionKey]
             const optionSlice = option.option_text.slice(0, 40)
-
-            const rightArrow = <>&#9658;</>
-            const downArrow = <>&#9660;</>
-            const whitespace = <>&nbsp;</>
 
             return (
               <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
                 <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}>
                   <span>
                     {!optionIsExpanded ? rightArrow : downArrow}
-                    {whitespace} Option {idx + 1} {whitespace}
+                    {optionHeading}
                     {!optionIsExpanded && optionSlice}
                   </span>
                   <button
                     className="option-operation"
                     disabled={removeBtnDisabled}
-                    onClick={this.onRemoveOption(optionKey)}>&#10060;</button>
+                    onClick={this.onRemoveOption(optionKey)}>{plusButton}</button>
                 </div>
                 {
                   optionIsExpanded &&

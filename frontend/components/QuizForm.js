@@ -109,7 +109,7 @@ export class QuizForm extends React.Component {
               <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
                 <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}>
                   <span>
-                    {!optionIsExpanded ? rightArrow : downArrow}
+                    {optionIsExpanded ? downArrow : rightArrow}
                     {optionHeading}
                     {!optionIsExpanded && optionSlice}
                   </span>

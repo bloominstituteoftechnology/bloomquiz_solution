@@ -267,17 +267,17 @@ footer {
   border: 1px solid $input-border-color;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  padding: 0.65rem;
   width: 100%;
 
   .option-bar {
+    padding: 0.65rem;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
   }
 
   .option-inputs {
-    padding-top: 1rem;
+    padding: 0.65rem;
   }
 }
 

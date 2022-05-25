@@ -1,5 +1,5 @@
 /* =============== 👉 9.1 STEP 1 =============== */
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { connect } from 'react-redux'
 import {
@@ -12,7 +12,6 @@ import {
   editQuestion,
 } from '../state/action-creators'
 
-/* =============== 👉 9.1 STEP 6 =============== */
 const scale = keyframes`
   100% { transform: scaleY(1); }
 `
@@ -23,146 +22,139 @@ const StyledInputGroup = styled.div`
   animation: ${scale} 0.25s forwards;
 `
 
-export function QuizForm(props) {
-  const {
-    addOption,
-    removeOption,
-    questionInputChange,
-    questionOptionInputChange,
-    questionOptionSetCorrect,
-    createQuestion,
-    editQuestion,
-    questionForm,
-    navigate,
-  } = props
-
-  /* =============== 👉 9.1 STEP 2 =============== */
-  const [optionBars, setOptionBars] = useState(() => {
-    let state = {}
-    Object.keys(questionForm.options).forEach(key => {
-      state[key] = false
+export class QuizForm extends React.Component {
+  constructor(props) {
+    super(props)
+    const optionBars = {}
+    const { options } = props.questionForm
+    Object.keys(options).forEach(key => { optionBars[key] = false })
+    this.state = { optionBars }
+  }
+  toggleBar = optionKey => () => {
+    const { optionBars } = this.state
+    this.setState({
+      ...this.state,
+      optionBars: {
+        ...optionBars,
+        [optionKey]: !optionBars[optionKey],
+      },
     })
-    return state
-  })
-  /* =============== 👉 9.1 STEP 3 =============== */
-  const toggleBar = optionKey => {
-    setOptionBars({ ...optionBars, [optionKey]: !optionBars[optionKey] })
   }
-  const onRedirect = evt => {
+  onRedirect = evt => {
     if (evt) evt.preventDefault()
-    navigate('/admin')
+    this.props.navigate('/admin')
   }
-  const onAddOption = evt => {
+  onAddOption = evt => {
     evt.preventDefault()
-    addOption()
+    this.props.addOption()
   }
-  const onRemoveOption = optionKey => evt => {
+  onRemoveOption = optionKey => evt => {
     evt.preventDefault()
-    removeOption(optionKey)
+    this.props.removeOption(optionKey)
   }
-  const onQuestionChange = ({ target: { name, value } }) => {
-    questionInputChange({ name, value })
+  onQuestionChange = ({ target: { name, value } }) => {
+    this.props.questionInputChange({ name, value })
   }
-  const onQuestionOptionChange = optionKey => ({ target }) => {
+  onQuestionOptionChange = optionKey => ({ target }) => {
     const { name, value } = target
-    questionOptionInputChange({ optionKey, name, value })
+    this.props.questionOptionInputChange({ optionKey, name, value })
   }
-  const onQuestionSetCorrect = optionKey => () => {
-    questionOptionSetCorrect(optionKey)
+  onQuestionSetCorrect = optionKey => () => {
+    this.props.questionOptionSetCorrect(optionKey)
   }
-  const onSubmit = evt => {
+  onSubmit = evt => {
     evt.preventDefault()
+    const { questionForm, editQuestion, createQuestion } = this.props
     const payload = { ...questionForm, options: Object.values(questionForm.options) }
     const callback = questionForm.question_id ? editQuestion : createQuestion
-    callback(payload, onRedirect)
+    callback(payload, this.onRedirect)
   }
-  return (
-    <form onSubmit={onSubmit}>
-      <h2>{questionForm.question_id ? "Edit" : "Create New"} Question</h2>
-      <input
-        type="text"
-        maxLength={50}
-        placeholder="Question title"
-        name="question_title"
-        value={questionForm.question_title}
-        onChange={onQuestionChange}
-      />
-      <textarea
-        placeholder="Question text"
-        name="question_text"
-        value={questionForm.question_text}
-        onChange={onQuestionChange}
-      />
-      <div className="options-heading">
-        <h2>Options</h2><button className="option-operation" onClick={onAddOption}>➕</button>
-      </div>
-      {
-        Object.keys(questionForm.options).map((optionKey, idx) => {
-          const option = questionForm.options[optionKey]
-          const removeBtnDisabled = Object.keys(questionForm.options).length < 3
-          /* =============== 👉 9.1 STEP 4 =============== */
-          const optionIsExpanded = optionBars[optionKey]
-          const optionSlice = option.option_text.slice(0, 40)
+  render() {
+    const { questionForm } = this.props
+    return (
+      <form onSubmit={this.onSubmit}>
+        <h2>{questionForm.question_id ? "Edit" : "Create New"} Question</h2>
+        <input
+          type="text"
+          maxLength={50}
+          placeholder="Question title"
+          name="question_title"
+          value={questionForm.question_title}
+          onChange={this.onQuestionChange}
+        />
+        <textarea
+          maxLength={400}
+          placeholder="Question text"
+          name="question_text"
+          value={questionForm.question_text}
+          onChange={this.onQuestionChange}
+        />
+        <div className="options-heading">
+          <h2>Options</h2><button className="option-operation" onClick={this.onAddOption}>➕</button>
+        </div>
+        {
+          Object.keys(questionForm.options).map((optionKey, idx) => {
+            const option = questionForm.options[optionKey]
+            const removeBtnDisabled = Object.keys(questionForm.options).length < 3
+            const optionIsExpanded = this.state.optionBars[optionKey]
+            const optionSlice = option.option_text.slice(0, 40)
 
-          const rightArrow = <>&#9658;</>
-          const downArrow = <>&#9660;</>
-          const whitespace = <>&nbsp;</>
+            const rightArrow = <>&#9658;</>
+            const downArrow = <>&#9660;</>
+            const whitespace = <>&nbsp;</>
 
-          return (
-            <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
-              {/* =============== 👉 9.1 STEP 3 (continued) =============== */}
-              <div className="option-bar" onClick={() => toggleBar(optionKey)}>
-                {/* =============== 👉 9.1 STEP 4 (continued) =============== */}
-                <span>
-                  {!optionIsExpanded ? rightArrow : downArrow}
-                  {whitespace} Option {idx + 1} {whitespace}
-                  {!optionIsExpanded && optionSlice}
-                </span>
-                <button
-                  className="option-operation"
-                  disabled={removeBtnDisabled}
-                  onClick={onRemoveOption(optionKey)}>&#10060;</button>
+            return (
+              <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
+                <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}>
+                  <span>
+                    {!optionIsExpanded ? rightArrow : downArrow}
+                    {whitespace} Option {idx + 1} {whitespace}
+                    {!optionIsExpanded && optionSlice}
+                  </span>
+                  <button
+                    className="option-operation"
+                    disabled={removeBtnDisabled}
+                    onClick={this.onRemoveOption(optionKey)}>&#10060;</button>
+                </div>
+                {
+                  optionIsExpanded &&
+                  <StyledInputGroup className="option-inputs">
+                    <textarea
+                      maxLength={400}
+                      placeholder="Option text"
+                      name="option_text"
+                      value={option.option_text}
+                      onChange={this.onQuestionOptionChange(optionKey)}
+                    />
+                    <textarea
+                      type="text"
+                      maxLength={400}
+                      placeholder="Option remark"
+                      name="remark"
+                      value={option.remark ?? ''}
+                      onChange={this.onQuestionOptionChange(optionKey)}
+                    />
+                    <label>
+                      <input
+                        type="radio"
+                        name="is_correct"
+                        checked={option.is_correct}
+                        onChange={this.onQuestionSetCorrect(optionKey)}
+                      />&nbsp;&nbsp;correct option
+                    </label>
+                  </StyledInputGroup>
+                }
               </div>
-              {
-                /* =============== 👉 9.1 STEP 5 =============== */
-                optionIsExpanded &&
-                /* =============== 👉 9.1 STEP 6 (continued) =============== */
-                <StyledInputGroup className="option-inputs">
-                  <textarea
-                    maxLength={400}
-                    placeholder="Option text"
-                    name="option_text"
-                    value={option.option_text}
-                    onChange={onQuestionOptionChange(optionKey)}
-                  />
-                  <textarea
-                    type="text"
-                    maxLength={400}
-                    placeholder="Option remark"
-                    name="remark"
-                    value={option.remark ?? ''}
-                    onChange={onQuestionOptionChange(optionKey)}
-                  />
-                  <label>
-                    <input
-                      type="radio"
-                      name="is_correct"
-                      checked={option.is_correct}
-                      onChange={onQuestionSetCorrect(optionKey)}
-                    />&nbsp;&nbsp;correct option
-                  </label>
-                </StyledInputGroup>
-              }
-            </div>
-          )
-        })
-      }
-      <div className="button-group">
-        <button className="jumbo-button">Submit</button>
-        <button onClick={onRedirect}>Cancel</button>
-      </div>
-    </form >
-  )
+            )
+          })
+        }
+        <div className="button-group">
+          <button className="jumbo-button">Submit</button>
+          <button onClick={this.onRedirect}>Cancel</button>
+        </div>
+      </form >
+    )
+  }
 }
 
 export default connect(st => ({

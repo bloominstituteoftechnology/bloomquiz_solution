@@ -20,8 +20,8 @@ const StyledMessage = styled.div`
   animation: ${opacity} 1s forwards;
 `
 
-export function Message(props) {
-  const { main, code, time } = props.infoMessage
+export function Message({ infoMessage }) {
+  const { main, code, time } = infoMessage
   return (
     <StyledMessage key={time} code={code} id="message">
       <h1>QuizMaster</h1> {main}
@@ -29,4 +29,4 @@ export function Message(props) {
   )
 }
 
-export default connect(st => st)(Message)
+export default connect(st => ({ infoMessage: st.infoMessage }))(Message)

@@ -43,9 +43,9 @@ export class QuizForm extends React.Component {
       },
     })
   }
-  onRedirect = evt => {
+  onRedirect = path => evt => {
     if (evt) evt.preventDefault()
-    this.props.navigate('/')
+    this.props.navigate(path)
   }
   onAddOption = evt => {
     evt.preventDefault()
@@ -70,7 +70,7 @@ export class QuizForm extends React.Component {
     const { questionForm, editQuestion, createQuestion } = this.props
     const payload = { ...questionForm, options: Object.values(questionForm.options) }
     const callback = questionForm.question_id ? editQuestion : createQuestion
-    callback(payload, this.onRedirect)
+    callback(payload, this.onRedirect('/'))
   }
   render() {
     const { questionForm } = this.props
@@ -160,7 +160,7 @@ export class QuizForm extends React.Component {
         }
         <div className="button-group">
           <button className="jumbo-button">Submit</button>
-          <button onClick={this.onRedirect}>Cancel</button>
+          <button onClick={this.onRedirect('/admin')}>Cancel</button>
         </div>
       </form >
     )

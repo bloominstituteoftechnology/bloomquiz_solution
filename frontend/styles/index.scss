@@ -26,6 +26,7 @@ body {
   min-height: 100vh;
   font-family: 'Titillium Web', sans-serif;
   background-color: $app-background-color;
+  overflow-x: hidden;
 }
 
 body,
@@ -43,7 +44,6 @@ textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 450px;
 }
 
 nav {

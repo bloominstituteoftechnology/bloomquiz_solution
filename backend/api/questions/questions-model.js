@@ -29,11 +29,13 @@ async function create(question) {
 }
 
 async function editById(question_id, { options, ...rest }) {
+  await db('options').where('question_id', question_id).delete()
   const promises = options.map(option => {
-    return db('options').where('option_id', option.option_id).update({
+    return db('options').where('option_id', option.option_id).insert({
       option_text: option.option_text,
       remark: option.remark,
       is_correct: option.is_correct,
+      question_id,
     })
   })
   await Promise.all(promises)

@@ -144,7 +144,10 @@ export function createQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().post('http://localhost:9000/api/questions', question)
       .then(res => {
-        dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question`, code: 0 }))
+        dispatch(setMessage({
+          main: `${res.data.question_title} is a brilliant question`,
+          code: 0,
+        }))
         dispatch(questionFormReset())
         dispatch(setQuiz(res.data))
         redirect()

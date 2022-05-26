@@ -21,7 +21,7 @@ export function Routing(props) {
 
   const onLogout = () => {
     props.reset()
-    props.setMessage({ main: 'Bye!', code: 0 })
+    props.setMessage({ main: 'Bye', code: 0 })
     window.localStorage.removeItem('token')
     navigate('/auth', { replace: true })
   }

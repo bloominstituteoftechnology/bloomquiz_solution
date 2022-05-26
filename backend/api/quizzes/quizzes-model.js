@@ -88,7 +88,7 @@ async function answerQuiz({ question_id, option_id, user_id }) {
   return {
     remark: option.remark,
     is_correct: !!option.is_correct,
-    verdict: `You ${option.is_correct ? "are CORRECT!" : "screwed up"}`,
+    verdict: `You ${option.is_correct ? "are CORRECT" : "screwed up"}`,
   }
 }
 

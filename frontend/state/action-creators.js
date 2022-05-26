@@ -33,8 +33,8 @@ export function setQuiz(quiz) {
 export function selectOption(option_id) {
   return { type: types.QUIZ_SET_SELECTED_OPTION, payload: option_id }
 }
-export function setAuthStatus({ user, admin, username }) {
-  return { type: types.SET_AUTH_STATUS, payload: { user, admin, username } }
+export function setAuthStatus({ user, admin }) {
+  return { type: types.SET_AUTH_STATUS, payload: { user, admin } }
 }
 export function setGeneralStats({ corrects, incorrects }) {
   return { type: types.SET_GENERAL_STATS, payload: { corrects, incorrects } }

@@ -15,14 +15,14 @@ function randomizeArray(arr) {
   return result
 }
 
-async function randomQuiz() {
+async function randomQuiz({ role_id }) {
   const [{ question_id }] = await db.raw(`
     SELECT question_id FROM questions ORDER BY RANDOM() LIMIT 1
   `)
   const rows = await db.raw(`
     SELECT
-      q.question_id, q.question_text,
-      o.option_id, o.option_text
+      q.question_id, q.question_text, q.question_title,
+      o.option_id, o.option_text, o.is_correct
     FROM questions q
     JOIN options o
       ON q.question_id = o.question_id
@@ -33,11 +33,19 @@ async function randomQuiz() {
     if (!acc.question_id) {
       acc.question_id = row.question_id
       acc.question_text = row.question_text
+
+      if (role_id === 1) {
+        acc.question_title = row.question_title
+      }
     }
-    acc.options.push({
+    const option = {
       option_id: row.option_id,
       option_text: row.option_text,
-    })
+    }
+    if (role_id === 1) {
+      option.is_correct = row.is_correct
+    }
+    acc.options.push(option)
     return acc
   }, { options: [] })
   const randomOptions = randomizeArray(result.options)
@@ -55,27 +63,27 @@ async function prevAnswers(user_id) {
   return answers
 }
 
-async function nextQuiz({ user_id }) {
+async function nextQuiz({ user_id, role_id }) {
   if (!user_id) {
-    const random = await randomQuiz()
+    const random = await randomQuiz({ role_id })
     return random
   }
 
   const answers = prevAnswers(user_id)
   if (!answers.length) {
-    const random = await randomQuiz()
+    const random = await randomQuiz({ role_id })
     return random
   }
 
   // TODO: build intelligent question choosing based on the history of answers
-  const random = await randomQuiz()
+  const random = await randomQuiz({ role_id })
   return random
 }
 
 async function answerQuiz({ question_id, option_id, user_id }) {
   const option = await db('options').where('option_id', option_id).first()
   if (user_id) {
-    await db('answers').insert({user_id, question_id, correctly_answered: option.is_correct })
+    await db('answers').insert({ user_id, question_id, correctly_answered: option.is_correct })
   }
   return {
     remark: option.remark,

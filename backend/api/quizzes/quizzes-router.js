@@ -4,7 +4,8 @@ const Quiz = require('./quizzes-model')
 router.get('/next', async (req, res, next) => {
   try {
     const user_id = req?.token?.user_id
-    const nextQuiz = await Quiz.nextQuiz({ user_id })
+    const role_id = req?.token?.role_id
+    const nextQuiz = await Quiz.nextQuiz({ user_id, role_id })
     res.json(nextQuiz)
   } catch (err) {
     next(err)

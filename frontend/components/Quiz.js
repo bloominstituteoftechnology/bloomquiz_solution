@@ -9,6 +9,9 @@ export function Quiz(props) {
     nextQuiz,
     selectOption,
     answerQuiz,
+    questionFormSetExisting,
+    navigate,
+    auth,
   } = props
 
   useEffect(() => {
@@ -19,13 +22,26 @@ export function Quiz(props) {
     answerQuiz({ question_id: question.question_id, option_id })
   }
 
+  const onEdit = question => () => {
+    if (auth.admin) {
+      questionFormSetExisting(question)
+      navigate(`/admin/edit/${question.question_id}`)
+    }
+  }
+
   return (
     <div>
       {
         question ? (
           <>
             <div id="quizAnswers">
-              <Md className="question text md">{question.question_text}</Md>
+              {
+                auth.admin &&
+                <button className="edit" onClick={onEdit(question)}>🔧</button>
+              }
+              <Md className="question text md">
+                {question.question_text}
+              </Md>
               {
                 question.options.map(opt => (
                   <div

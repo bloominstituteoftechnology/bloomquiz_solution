@@ -1,6 +1,12 @@
-const { nanoid } = require('nanoid')
+const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
-const getId = () => nanoid().slice(0, 5)
+const getId = () => {
+  let result = ''
+  for (let i = 0; i < 5; i++) {
+    result += chars[Math.floor(Math.random() * 36)]
+  }
+  return result
+}
 
 const initialQuestionForm = () => ({
   question_title: '', question_text: '',

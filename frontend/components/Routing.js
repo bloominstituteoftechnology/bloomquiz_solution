@@ -17,7 +17,7 @@ export function Routing(props) {
 
   useEffect(() => {
     props.getAuthStatus()
-  }, [location])
+  }, [location.pathname])
 
   const onLogout = () => {
     props.reset()

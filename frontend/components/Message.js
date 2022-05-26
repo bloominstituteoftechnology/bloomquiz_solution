@@ -27,7 +27,7 @@ export function Message({ infoMessage }) {
 
   return (
     <StyledMessage key={time} code={code} id="message">
-      <h1>BloomQuiz</h1> {main}{profile.username && `, ${profile.username}`}
+      <h1>BloomQuiz</h1> {main}{!!profile.username && `, ${profile.username}`}
     </StyledMessage>
   )
 }

@@ -11,7 +11,7 @@ router.post('/register', mid.uniqueUsername, async (req, res) => {
       password: bcrypt.hashSync(password, 8),
     })
     setTimeout(() => {
-      res.status(201).json({ message: `Welcome, ${username}!` })
+      res.status(201).json({ message: 'Welcome' })
     }, 500)
   } catch (error) {
     res.status(500).json({ message: error.message })
@@ -24,7 +24,7 @@ router.post('/login', mid.usernameExists, async (req, res) => {
     if (bcrypt.compareSync(password, user.password)) {
       setTimeout(() => {
         res.json({
-          message: `Welcome, ${user.username}`,
+          message: 'Welcome',
           token: mid.generateToken(user),
         })
       }, 500)

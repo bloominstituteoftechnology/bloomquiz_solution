@@ -2,13 +2,12 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
-const initialMessage = { main: 'Welcome to QuizMaster', code: 0, time: null }
-const emptyMessage = { main: '', code: 0, time: null }
-function infoMessage(state = initialMessage, action) {
+const initialAuth = { user: null, admin: null, username: null }
+function auth(state = initialAuth, action) {
   switch (action.type) {
     case types.RESET:
-      return emptyMessage
-    case types.SET_INFO_MESSAGE:
+      return initialAuth
+    case types.SET_AUTH_STATUS:
       return action.payload
     default:
       return state
@@ -25,6 +24,19 @@ function authForm(state = initialAuthForm, action) {
       return initialAuthForm
     case types.AUTH_FORM_INPUT_CHANGE:
       return { ...state, [action.payload.id]: action.payload.value }
+    default:
+      return state
+  }
+}
+
+const initialMessage = { main: 'Welcome to QuizMaster', code: 0, time: null }
+const emptyMessage = { main: '', code: 0, time: null }
+function infoMessage(state = initialMessage, action) {
+  switch (action.type) {
+    case types.RESET:
+      return emptyMessage
+    case types.SET_INFO_MESSAGE:
+      return action.payload
     default:
       return state
   }
@@ -79,18 +91,6 @@ function quizForm(state = initialQuestionForm(), action) {
   }
 }
 
-const initialAuth = { user: null, admin: null, username: null }
-function auth(state = initialAuth, action) {
-  switch (action.type) {
-    case types.RESET:
-      return initialAuth
-    case types.SET_AUTH_STATUS:
-      return action.payload
-    default:
-      return state
-  }
-}
-
 const initialQuiz = {}
 function quiz(state = initialQuiz, action) {
   switch (action.type) {
@@ -98,18 +98,6 @@ function quiz(state = initialQuiz, action) {
       return { option_id: null, question: action.payload }
     case types.QUIZ_SET_SELECTED_OPTION:
       return { ...state, option_id: action.payload }
-    default:
-      return state
-  }
-}
-
-const initialStats = {}
-function stats(state = initialStats, action) {
-  switch (action.type) {
-    case types.RESET:
-      return initialStats
-    case types.SET_GENERAL_STATS:
-      return { ...state, general: action.payload }
     default:
       return state
   }
@@ -133,6 +121,18 @@ function spinnerOn(state = false, action) {
       return false
     case types.SPINNER_ON:
       return true
+    default:
+      return state
+  }
+}
+
+const initialStats = {}
+function stats(state = initialStats, action) {
+  switch (action.type) {
+    case types.RESET:
+      return initialStats
+    case types.SET_GENERAL_STATS:
+      return { ...state, general: action.payload }
     default:
       return state
   }

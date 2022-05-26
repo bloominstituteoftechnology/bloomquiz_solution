@@ -10,9 +10,10 @@ const opacity = keyframes`
 
 const getColor = code => {
   switch (code) {
-    case 0: return '#3a3a7b' // blue
-    case 1: return '#70b02f' // green
-    case 2: return '#dc004b' // red
+    case 'blue': return '#3a3a7b'
+    case 'green': return '#70b02f'
+    case 'red': return '#dc004b'
+    default: return '#3a3a7b' // blue
   }
 }
 

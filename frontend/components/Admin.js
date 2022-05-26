@@ -11,7 +11,7 @@ export function Admin(props) {
   useEffect(() => {
     if (auth.admin === false) {
       navigate('/auth')
-      setMessage({ code: 2, main: 'Not allowed there' })
+      setMessage({ main: 'Not allowed there', code: 'red' })
     }
   }, [auth])
 

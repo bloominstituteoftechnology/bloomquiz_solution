@@ -72,7 +72,7 @@ export function setMessage({ main, code }) {
 }
 function setError(err, dispatch) {
   const errToDisplay = err.response ? err.response.data.message : err.message
-  dispatch(setMessage({ main: errToDisplay, code: 2 }))
+  dispatch(setMessage({ main: errToDisplay, code: 'red' }))
 }
 export function register({ username, password }) {
   return function (dispatch) {
@@ -80,7 +80,7 @@ export function register({ username, password }) {
     axios.post('http://localhost:9000/api/auth/register', { username, password })
       .then(res => {
         dispatch(spinnerOff())
-        dispatch(setMessage({ main: res.data.message, code: 0 }))
+        dispatch(setMessage({ main: res.data.message }))
         dispatch(login({ username, password }))
       })
       .catch(err => {
@@ -96,7 +96,7 @@ export function login({ username, password }) {
       .then(res => {
         localStorage.setItem('token', res.data.token)
         dispatch(spinnerOff())
-        dispatch(setMessage({ main: res.data.message, code: 0 }))
+        dispatch(setMessage({ main: res.data.message }))
         dispatch(getAuthStatus())
       })
       .catch(err => {
@@ -130,7 +130,7 @@ export function answerQuiz({ question_id, option_id, user_id }) {
         dispatch(spinnerOff())
         dispatch(setMessage({
           main: `${res.data.verdict}`,
-          code: res.data.is_correct ? 1 : 2
+          code: res.data.is_correct ? 'green' : 'red',
         }))
         dispatch(nextQuiz())
       })
@@ -144,10 +144,7 @@ export function createQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().post('http://localhost:9000/api/questions', question)
       .then(res => {
-        dispatch(setMessage({
-          main: `${res.data.question_title} is a brilliant question`,
-          code: 0,
-        }))
+        dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question` }))
         dispatch(questionFormReset())
         dispatch(setQuiz(res.data))
         redirect()
@@ -161,7 +158,7 @@ export function editQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
       .then(res => {
-        dispatch(setMessage({ main: `Brilliant update`, code: 0 }))
+        dispatch(setMessage({ main: `Brilliant update` }))
         dispatch(questionFormReset())
         dispatch(setQuiz(res.data))
         redirect()

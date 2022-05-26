@@ -14,7 +14,7 @@ export function Stats(props) {
   useEffect(() => {
     if (auth.user === false) {
       navigate('/auth')
-      setMessage({ code: 2, main: 'Not allowed there' })
+      setMessage({ main: 'Not allowed there', code: 'red' })
     }
   }, [auth])
 

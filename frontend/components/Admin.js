@@ -15,7 +15,7 @@ export function Admin(props) {
 
   return (
     <Routes>
-      <Route path="edit/:id" element={<QuizForm navigate={navigate} />} />
+      <Route path="quiz/edit" element={<QuizForm navigate={navigate} />} />
       <Route path="/" element={<QuizList navigate={navigate} />} />
     </Routes>
   )

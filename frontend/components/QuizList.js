@@ -14,12 +14,12 @@ export function QuizList(props) {
 
   const onNew = () => {
     questionFormReset()
-    navigate('/admin/edit/new')
+    navigate('/admin/quiz/edit')
   }
 
   const onEdit = question_id => () => {
     questionFormSetExisting(quizList.find(q => q.question_id === question_id))
-    navigate('/admin/edit/' + question_id)
+    navigate('/admin/quiz/edit')
   }
 
   const onView = question_id => () => {

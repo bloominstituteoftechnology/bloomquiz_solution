@@ -25,7 +25,7 @@ export function Quiz(props) {
   const onEdit = question => () => {
     if (auth.admin) {
       questionFormSetExisting(question)
-      navigate(`/admin/edit/${question.question_id}`)
+      navigate('/admin/quiz/edit')
     }
   }
 

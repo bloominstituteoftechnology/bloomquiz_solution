@@ -224,8 +224,7 @@ footer {
 .question {
   width: 100%;
   max-width: 620px;
-  line-height: 1.5rem;
-  padding: 0.55rem;
+  padding: 0.5rem;
   background-color: $form-background-color;
   border: 1px solid $form-border-color;
   margin-bottom: 0.9rem;
@@ -233,6 +232,7 @@ footer {
   button {
     &.wide {
       min-width: 100px;
+      margin-left: 0.5rem;
     }
   }
 
@@ -244,6 +244,7 @@ footer {
   &.answer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &.selected {
       background-color: $app-background-color;

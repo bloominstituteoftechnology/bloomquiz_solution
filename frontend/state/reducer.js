@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
-const initialMessage = { main: 'Test your knowledge...', code: 0, time: null }
+const initialMessage = { main: 'Welcome to QuizMaster', code: 0, time: null }
 const emptyMessage = { main: '', code: 0, time: null }
 function infoMessage(state = initialMessage, action) {
   switch (action.type) {
@@ -30,7 +30,7 @@ function authForm(state = initialAuthForm, action) {
   }
 }
 
-function questionForm(state = initialQuestionForm(), action) {
+function quizForm(state = initialQuestionForm(), action) {
   switch (action.type) {
     case types.QUESTION_FORM_RESET:
       return action.payload
@@ -91,7 +91,7 @@ function auth(state = initialAuth, action) {
   }
 }
 
-const initialQuiz = { question: null, option_id: null }
+const initialQuiz = {}
 function quiz(state = initialQuiz, action) {
   switch (action.type) {
     case types.SET_QUIZ:
@@ -140,7 +140,7 @@ function spinnerOn(state = false, action) {
 
 export default combineReducers({
   authForm,
-  questionForm,
+  quizForm,
   quiz,
   infoMessage,
   auth,

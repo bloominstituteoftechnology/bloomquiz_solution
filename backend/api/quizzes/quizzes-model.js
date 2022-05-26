@@ -43,7 +43,7 @@ async function randomQuiz({ role_id }) {
       option_text: row.option_text,
     }
     if (role_id === 1) {
-      option.is_correct = row.is_correct
+      option.is_correct = !!row.is_correct
     }
     acc.options.push(option)
     return acc

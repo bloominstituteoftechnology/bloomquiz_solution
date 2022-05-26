@@ -28,7 +28,7 @@ export class QuizForm extends React.Component {
   constructor(props) {
     super(props)
     const optionBars = {}
-    const { options } = props.questionForm
+    const { options } = props.quizForm
     Object.keys(options).forEach(key => { optionBars[key] = false })
     this.state = { optionBars }
   }
@@ -67,43 +67,43 @@ export class QuizForm extends React.Component {
   }
   onSubmit = evt => {
     evt.preventDefault()
-    const { questionForm, editQuestion, createQuestion } = this.props
-    const payload = { ...questionForm, options: Object.values(questionForm.options) }
-    const callback = questionForm.question_id ? editQuestion : createQuestion
+    const { quizForm, editQuestion, createQuestion } = this.props
+    const payload = { ...quizForm, options: Object.values(quizForm.options) }
+    const callback = quizForm.question_id ? editQuestion : createQuestion
     callback(payload, this.onRedirect('/'))
   }
   render() {
-    const { questionForm } = this.props
+    const { quizForm } = this.props
     const plusButton = <>&#10060;</>
     const downArrow = <>&#9660;&nbsp;&nbsp;</>
     const rightArrow = <>&#9658;&nbsp;&nbsp;</>
 
     return (
       <form onSubmit={this.onSubmit}>
-        <h2>{questionForm.question_id ? "Edit" : "Create New"} Question</h2>
+        <h2>{quizForm.question_id ? "Edit" : "Create New"} Question</h2>
         <input
           type="text"
           maxLength={50}
           placeholder="Question title"
           name="question_title"
-          value={questionForm.question_title}
+          value={quizForm.question_title}
           onChange={this.onQuestionChange}
         />
         <textarea
           maxLength={400}
           placeholder="Question text"
           name="question_text"
-          value={questionForm.question_text}
+          value={quizForm.question_text}
           onChange={this.onQuestionChange}
         />
         <div className="options-heading">
           <h2>Options</h2><button className="option-operation" onClick={this.onAddOption}>➕</button>
         </div>
         {
-          Object.keys(questionForm.options).map((optionKey, idx) => {
+          Object.keys(quizForm.options).map((optionKey, idx) => {
             const optionHeading = <>Option {idx + 1} &nbsp;&nbsp;</>
-            const removeBtnDisabled = Object.keys(questionForm.options).length < 3
-            const option = questionForm.options[optionKey]
+            const removeBtnDisabled = Object.keys(quizForm.options).length < 3
+            const option = quizForm.options[optionKey]
 
             /* =============== 👉 9.1 STEP 3.1 =============== */
             const optionIsExpanded = this.state.optionBars[optionKey]
@@ -168,7 +168,7 @@ export class QuizForm extends React.Component {
 }
 
 export default connect(st => ({
-  questionForm: st.questionForm,
+  quizForm: st.quizForm,
 }), {
   addOption,
   removeOption,

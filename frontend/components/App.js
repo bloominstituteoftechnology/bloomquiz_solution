@@ -1,8 +1,8 @@
 import React from 'react'
-
+// router
 import { BrowserRouter } from 'react-router-dom'
 import Routing from './Routing'
-
+// redux
 import { Provider as StoreProvider } from 'react-redux'
 import { legacy_createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'

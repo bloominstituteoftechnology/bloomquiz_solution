@@ -21,4 +21,4 @@ export function Admin(props) {
   )
 }
 
-export default connect(st => st)(Admin)
+export default connect(st => ({ auth: st.auth }))(Admin)

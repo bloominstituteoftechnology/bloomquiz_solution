@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../state/action-creators'
+import { getGeneralStats, setMessage } from '../state/action-creators'
 
 export function Stats(props) {
-  const { stats, getGeneralStats, navigate, auth } = props
+  const {
+    auth,
+    stats,
+    getGeneralStats,
+    setMessage,
+    navigate,
+  } = props
 
   useEffect(() => {
-    if (auth.user === false) navigate('/auth')
+    if (auth.user === false) {
+      navigate('/auth')
+      setMessage({ code: 2, main: 'Not allowed there' })
+    }
   }, [auth])
 
   useEffect(() => {
@@ -23,4 +32,6 @@ export function Stats(props) {
   )
 }
 
-export default connect(st => st, actions)(Stats)
+export default connect(st => ({
+  stats: st.stats, auth: st.auth
+}), { getGeneralStats, setMessage })(Stats)

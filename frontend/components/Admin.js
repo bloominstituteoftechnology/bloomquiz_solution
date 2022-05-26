@@ -3,13 +3,15 @@ import { Routes, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import QuizForm from './QuizForm'
 import QuizList from './QuizList'
+import { setMessage } from '../state/action-creators'
 
 export function Admin(props) {
-  const { auth, navigate } = props
+  const { auth, navigate, setMessage } = props
 
   useEffect(() => {
     if (auth.admin === false) {
       navigate('/auth')
+      setMessage({ code: 2, main: 'Not allowed there' })
     }
   }, [auth])
 
@@ -21,4 +23,4 @@ export function Admin(props) {
   )
 }
 
-export default connect(st => ({ auth: st.auth }))(Admin)
+export default connect(st => ({ auth: st.auth }), { setMessage })(Admin)

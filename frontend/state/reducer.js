@@ -29,7 +29,7 @@ function authForm(state = initialAuthForm, action) {
   }
 }
 
-const initialMessage = { main: 'Welcome to BloomQuiz', code: 0, time: null }
+const initialMessage = { main: 'Welcome to BloomQuiz', code: 'blue', time: null }
 function infoMessage(state = initialMessage, action) {
   switch (action.type) {
     case types.RESET:

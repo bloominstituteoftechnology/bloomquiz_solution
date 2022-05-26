@@ -66,7 +66,7 @@ export function setMessage({ main, code }) {
   window.scrollTo(0, 0)
   return {
     type: types.SET_INFO_MESSAGE, payload: {
-      main, code, time: new Date().valueOf()
+      main, time: new Date().valueOf(), code
     }
   }
 }

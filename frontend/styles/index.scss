@@ -78,17 +78,6 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-button {
-  border: 1px solid $button-border-color;
-  border-radius: 0;
-  min-height: 2rem;
-  background-color: $button-color;
-}
-
-.button-group {
-  display: flex;
-}
-
 #message {
   display: flex;
   justify-content: center;
@@ -132,6 +121,13 @@ form {
       cursor: pointer;
     }
   }
+}
+
+button {
+  border: 1px solid $button-border-color;
+  border-radius: 0;
+  min-height: 2rem;
+  background-color: $button-color;
 }
 
 button:active {
@@ -235,8 +231,6 @@ footer {
   margin-bottom: 0.9rem;
 
   button {
-    // margin-left: 0.5rem;
-
     &.wide {
       min-width: 100px;
     }
@@ -263,7 +257,7 @@ footer {
   position: relative;
 
   button.edit {
-    opacity: 0.6;
+    opacity: 0.8;
     position: absolute;
     top: 0;
     right: 0;
@@ -321,7 +315,7 @@ button.jumbo-button {
 }
 
 .button-group {
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0 0.2rem;
   display: flex;
   width: 100%;
 
@@ -332,6 +326,12 @@ button.jumbo-button {
   button:nth-of-type(2) {
     flex: 1;
   }
+}
+
+.mini-group {
+  opacity: 0.8;
+  margin: 0 0 0 0.5rem;
+  display: flex;
 }
 
 code.language-js {

@@ -41,9 +41,9 @@ export function QuizList(props) {
           return (
             <div className="question answer" key={q.question_id}>
               {q.question_title}
-              <div>
-                <button onClick={onView(q.question_id)}>👁️</button>
+              <div className="mini-group">
                 <button onClick={onEdit(q.question_id)}>🔧</button>
+                <button onClick={onView(q.question_id)}>👁️</button>
               </div>
             </div>
           )

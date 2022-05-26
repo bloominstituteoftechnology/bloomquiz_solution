@@ -74,4 +74,11 @@ export function AuthForm(props) {
   )
 }
 
-export default connect(st => st, actions)(AuthForm)
+export default connect(st => ({
+  authForm: st.authForm,
+  auth: st.auth,
+}), {
+  login: actions.login,
+  register: actions.register,
+  authInputChange: actions.authInputChange,
+})(AuthForm)

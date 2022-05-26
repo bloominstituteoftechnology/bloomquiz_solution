@@ -52,10 +52,10 @@ export function questionFormReset() {
   }
 }
 export function questionFormSetExisting(question) {
-  const ids = question.options.map(() => getId())
+  const keys = question.options.map(getId)
   const options = {}
-  ids.forEach((id, idx) => {
-    options[id] = question.options[idx]
+  keys.forEach((key, idx) => {
+    options[key] = question.options[idx]
   })
   return {
     type: types.QUESTION_FORM_SET_EXISTING,

@@ -1,11 +1,19 @@
 const db = require('../../data/db-config')
 
 async function getAll() {
-  const questions = await db('questions').orderBy('updated_at', 'desc')
+  const questions = await db('questions')
+    .select('question_title', 'question_text', 'question_id', 'updated_at')
+    .orderBy('updated_at', 'desc')
   let options = await db('options')
-  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
+    .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
   questions.forEach(q => {
-    const q_options = options.filter(o => o.question_id == q.question_id)
+    let q_options = options.filter(o => o.question_id == q.question_id)
+    q_options = q_options.map(o => ({
+      option_id: o.option_id,
+      option_text: o.option_text,
+      is_correct: !!o.is_correct,
+      remark: o.remark,
+    }))
     q.options = q_options
   })
   return questions

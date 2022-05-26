@@ -69,4 +69,12 @@ export function Quiz(props) {
   )
 }
 
-export default connect(st => st, actions)(Quiz)
+export default connect(st => ({
+  quiz: st.quiz,
+  auth: st.auth,
+}), {
+  nextQuiz: actions.nextQuiz,
+  selectOption: actions.selectOption,
+  answerQuiz: actions.answerQuiz,
+  questionFormSetExisting: actions.questionFormSetExisting,
+})(Quiz)

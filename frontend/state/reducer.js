@@ -29,7 +29,7 @@ function authForm(state = initialAuthForm, action) {
   }
 }
 
-const initialMessage = { main: 'Welcome to QuizMaster', code: 0, time: null }
+const initialMessage = { main: 'Welcome to BloomQuiz', code: 0, time: null }
 const emptyMessage = { main: '', code: 0, time: null }
 function infoMessage(state = initialMessage, action) {
   switch (action.type) {

@@ -24,7 +24,7 @@ export function Message({ infoMessage }) {
   const { main, code, time } = infoMessage
   return (
     <StyledMessage key={time} code={code} id="message">
-      <h1>QuizMaster</h1> {main}
+      <h1>BloomQuiz</h1> {main}
     </StyledMessage>
   )
 }

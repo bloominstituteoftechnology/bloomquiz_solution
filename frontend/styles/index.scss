@@ -13,7 +13,7 @@
 $app-background-color: white;
 $dark-grey: #4848486b;
 $text-color: #666666;
-$highlight-color: #ff5959;
+$highlight-color: #dc004b;
 $button-color: rgb(239, 239, 239);
 $button-border-color: #DDDDDD;
 $button-active-color: white;
@@ -24,7 +24,6 @@ $form-border-color: rgb(238, 238, 238);
 html {
   min-height: 100vh;
   font-family: 'Titillium Web', sans-serif;
-
 }
 
 body {
@@ -236,7 +235,7 @@ footer {
   margin-bottom: 0.9rem;
 
   button {
-    margin-left: 0.5rem;
+    // margin-left: 0.5rem;
 
     &.wide {
       min-width: 100px;

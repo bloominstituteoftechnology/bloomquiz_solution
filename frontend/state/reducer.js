@@ -20,7 +20,6 @@ const initialAuthForm = {
 function authForm(state = initialAuthForm, action) {
   switch (action.type) {
     case types.RESET:
-    case types.AUTH_FORM_RESET:
       return initialAuthForm
     case types.AUTH_FORM_INPUT_CHANGE:
       return { ...state, [action.payload.id]: action.payload.value }

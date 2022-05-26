@@ -1,6 +1,5 @@
 export const RESET = 'RESET'
 // auth screen
-export const AUTH_FORM_RESET = 'AUTH_FORM_RESET'
 export const AUTH_FORM_INPUT_CHANGE = 'AUTH_FORM_INPUT_CHANGE'
 // auth status
 export const SET_AUTH_STATUS = 'SET_AUTH_STATUS'

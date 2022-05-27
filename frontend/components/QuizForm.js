@@ -101,8 +101,8 @@ export class QuizForm extends React.Component {
             const optionHeading = <>Option {idx + 1} &nbsp;&nbsp;</>
             const removeBtnDisabled = Object.keys(quizForm.options).length < 3
             const option = quizForm.options[optionKey]
-            // [codealong 9.1] - step 3.1
-            const optionIsExpanded = this.state.optionBars[optionKey]
+
+            const optionIsExpanded = this.state.optionBars[optionKey] // [codealong 9.1] - step 3.1
             const optionSlice = option.option_text.slice(0, 40)
 
             return (

@@ -1,5 +1,5 @@
 {
-  "name": "codealong-web-u3-u4",
+  "name": "bloomquiz",
   "version": "0.0.1",
   "scripts": {
     "prep": "npm i && npm run resetdb",
@@ -77,6 +77,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bloominstituteoftechnology/codealong-web-u3-u4.git"
+    "url": "git+https://github.com/bloominstituteoftechnology/bloomquiz.git"
   }
 }

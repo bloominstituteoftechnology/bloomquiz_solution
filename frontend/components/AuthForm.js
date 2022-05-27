@@ -7,8 +7,8 @@ export function AuthForm(props) {
   const {
     login,
     register,
+    authForm,
     authInputChange,
-    authForm: { username, password },
     navigate,
     auth,
   } = props
@@ -25,13 +25,16 @@ export function AuthForm(props) {
   const onSubmit = evt => {
     evt.preventDefault()
     const callback = isNewUser ? register : login
-    callback({ username, password })
+    callback({
+      username: authForm.usename,
+      password: authForm.password,
+    })
   }
 
   const isDisabled = () => {
     return (
-      username.trim().length < 3 ||
-      password.trim().length < 4
+      authForm.username.trim().length < 3 ||
+      authForm.password.trim().length < 4
     )
   }
 
@@ -45,7 +48,7 @@ export function AuthForm(props) {
       <input
         type="text"
         maxLength={200}
-        value={username}
+        value={authForm.username}
         onChange={onChange}
         placeholder="Enter username"
         id="username"
@@ -53,7 +56,7 @@ export function AuthForm(props) {
       <input
         type="password"
         maxLength={100}
-        value={password}
+        value={authForm.password}
         onChange={onChange}
         placeholder="Enter password"
         id="password"

@@ -14,13 +14,13 @@ import styled, { keyframes } from 'styled-components'
 
 const scale = keyframes`
   100% { transform: scaleY(1); }
-  `
+`
 
 const StyledInputGroup = styled.div`
   transform: scaleY(0);
   transform-origin: top center;
   animation: ${scale} 0.25s forwards;
-  `
+`
 
 export class QuizForm extends React.Component {
   constructor(props) {

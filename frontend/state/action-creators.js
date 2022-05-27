@@ -9,8 +9,8 @@ export function spinnerOn() {
 export function spinnerOff() {
   return { type: types.SPINNER_OFF }
 }
-export function authInputChange({ id, value }) {
-  return { type: types.AUTH_FORM_INPUT_CHANGE, payload: { id, value } }
+export function authInputChange({ name, value }) {
+  return { type: types.AUTH_FORM_INPUT_CHANGE, payload: { name, value } }
 }
 export function questionInputChange({ name, value }) {
   return { type: types.QUESTION_FORM_INPUT_CHANGE, payload: { name, value } }

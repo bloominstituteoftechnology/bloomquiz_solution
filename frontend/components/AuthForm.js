@@ -18,8 +18,8 @@ export function AuthForm(props) {
   }, [auth.user])
 
   const onChange = evt => {
-    const { id, value } = evt.target
-    authInputChange({ id, value })
+    const { name, value } = evt.target
+    authInputChange({ name, value })
   }
 
   const onSubmit = evt => {
@@ -51,7 +51,7 @@ export function AuthForm(props) {
         value={authForm.username}
         onChange={onChange}
         placeholder="Enter username"
-        id="username"
+        name="username"
       />
       <input
         type="password"
@@ -59,7 +59,7 @@ export function AuthForm(props) {
         value={authForm.password}
         onChange={onChange}
         placeholder="Enter password"
-        id="password"
+        name="password"
       />
       <div className="button-group">
         <button className="jumbo-button" disabled={isDisabled()} id="submitCredentials">

@@ -22,7 +22,7 @@ function authForm(state = initialAuthForm, action) {
     case types.RESET:
       return initialAuthForm
     case types.AUTH_FORM_INPUT_CHANGE:
-      return { ...state, [action.payload.id]: action.payload.value }
+      return { ...state, [action.payload.name]: action.payload.value }
     default:
       return state
   }

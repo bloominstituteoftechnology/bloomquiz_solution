@@ -26,7 +26,7 @@ export function AuthForm(props) {
     evt.preventDefault()
     const callback = isNewUser ? register : login
     callback({
-      username: authForm.usename,
+      username: authForm.username,
       password: authForm.password,
     })
   }

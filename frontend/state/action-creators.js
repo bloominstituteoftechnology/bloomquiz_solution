@@ -159,6 +159,7 @@ export function createQuestion(question, redirect) {
       .then(res => {
         dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question` }))
         dispatch(questionFormReset())
+        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {
@@ -172,6 +173,7 @@ export function editQuestion(question, redirect) {
       .then(res => { // eslint-disable-line
         dispatch(setMessage({ main: `Brilliant update` }))
         dispatch(questionFormReset())
+        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {

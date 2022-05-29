@@ -67,7 +67,7 @@ export class QuizForm extends React.Component {
     const { quizForm, editQuestion, createQuestion } = this.props
     const payload = { ...quizForm, options: Object.values(quizForm.options) }
     const callback = quizForm.question_id ? editQuestion : createQuestion
-    callback(payload, this.onRedirect('/'))
+    callback(payload, this.onRedirect('/admin'))
   }
   render() {
     const { quizForm } = this.props

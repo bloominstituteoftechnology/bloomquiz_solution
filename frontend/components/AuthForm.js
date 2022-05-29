@@ -14,7 +14,8 @@ export function AuthForm(props) {
   } = props
 
   useEffect(() => {
-    if (auth.is_user) navigate('/')
+    if (auth.is_admin) navigate('/admin')
+    else if (auth.is_user) navigate('/')
   }, [auth.is_user])
 
   const onChange = evt => {

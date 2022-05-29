@@ -159,7 +159,6 @@ export function createQuestion(question, redirect) {
       .then(res => {
         dispatch(setMessage({ main: `${res.data.question_title} is a brilliant question` }))
         dispatch(questionFormReset())
-        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {
@@ -170,10 +169,9 @@ export function createQuestion(question, redirect) {
 export function editQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
-      .then(res => {
+      .then(res => { // eslint-disable-line
         dispatch(setMessage({ main: `Brilliant update` }))
         dispatch(questionFormReset())
-        dispatch(setQuiz(res.data))
         redirect()
       })
       .catch(err => {

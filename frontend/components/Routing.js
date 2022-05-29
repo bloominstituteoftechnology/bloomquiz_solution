@@ -35,8 +35,8 @@ export function Routing(props) {
         <Message />
         {is_user && <button onClick={onLogout} id="logout">Logout</button>}
         <nav>
-          <NavLink to="/">Test yourself!</NavLink>
-          {is_user && <NavLink to="/stats">Stats</NavLink>}
+          <NavLink to="/">{is_admin ? "Preview Quiz" : "Test yourself!"}</NavLink>
+          {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
           {is_admin && <NavLink to="/admin">Admin</NavLink>}
           {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
         </nav>

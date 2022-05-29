@@ -18,7 +18,7 @@ export function Quiz(props) {
     if (!question) nextQuiz()
   }, [])
 
-  const onClick = () => {
+  const onAnswer = () => {
     const { question_id } = question
     const getNext = !auth.is_admin
     answerQuiz({ question_id, option_id, getNext })
@@ -60,7 +60,7 @@ export function Quiz(props) {
               }
             </div>
             <div className="button-group">
-              <button className="jumbo-button" onClick={onClick} disabled={!option_id}>
+              <button className="jumbo-button" onClick={onAnswer} disabled={!option_id}>
                 Submit answer
               </button>
             </div>

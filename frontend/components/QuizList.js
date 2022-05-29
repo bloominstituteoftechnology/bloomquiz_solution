@@ -5,7 +5,6 @@ import * as actions from '../state/action-creators'
 export function QuizList(props) {
   const {
     questionFormReset,
-    questionFormSetExisting,
     getQuizzes,
     quizList,
     navigate,
@@ -14,11 +13,6 @@ export function QuizList(props) {
 
   const onNew = () => {
     questionFormReset()
-    navigate('/admin/quiz/edit')
-  }
-
-  const onEdit = question_id => () => {
-    questionFormSetExisting(quizList.find(q => q.question_id === question_id))
     navigate('/admin/quiz/edit')
   }
 
@@ -42,7 +36,6 @@ export function QuizList(props) {
             <div className="question answer" key={q.question_id}>
               {q.question_title}
               <div className="mini-group">
-                <button onClick={onEdit(q.question_id)}>🔧</button>
                 <button onClick={onView(q.question_id)}>👁️</button>
               </div>
             </div>

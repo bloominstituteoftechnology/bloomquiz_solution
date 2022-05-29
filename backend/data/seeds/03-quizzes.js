@@ -56,12 +56,12 @@ exports.seed = async function (knex) {
       question_id: 2,
     },
     {
-      option_text: 'Function object plus bindings.',
+      option_text: 'A Function object plus bindings.',
       is_correct: true,
       question_id: 3,
     },
     {
-      option_text: 'Some kind of pink elephant.',
+      option_text: 'A function binding.',
       is_correct: false,
       question_id: 3,
     },

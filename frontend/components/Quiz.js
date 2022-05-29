@@ -19,7 +19,9 @@ export function Quiz(props) {
   }, [])
 
   const onClick = () => {
-    answerQuiz({ question_id: question.question_id, option_id })
+    const { question_id } = question
+    const getNext = !auth.is_admin
+    answerQuiz({ question_id, option_id, getNext })
   }
 
   const onEdit = question => () => {

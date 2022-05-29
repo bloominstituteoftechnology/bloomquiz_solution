@@ -22,5 +22,5 @@ export const SET_GENERAL_STATS = 'SET_GENERAL_STATS'
 // spinner
 export const SPINNER_ON = 'SPINNER_ON'
 export const SPINNER_OFF = 'SPINNER_OFF'
-// admin
+// quiz list
 export const SET_ALL_QUIZZES = 'SET_ALL_QUIZZES'

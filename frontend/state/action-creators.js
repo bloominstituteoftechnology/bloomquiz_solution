@@ -132,7 +132,7 @@ export function nextQuiz() {
       })
   }
 }
-export function answerQuiz({ question_id, option_id }) {
+export function answerQuiz({ question_id, option_id, getNext }) {
   return function (dispatch) {
     dispatch(spinnerOn())
     axiosWithAuth().post(
@@ -145,7 +145,7 @@ export function answerQuiz({ question_id, option_id }) {
           main: `${res.data.verdict}`,
           code: res.data.is_correct ? 'green' : 'red',
         }))
-        dispatch(nextQuiz())
+        getNext && dispatch(nextQuiz())
       })
       .catch(err => {
         dispatch(spinnerOff())

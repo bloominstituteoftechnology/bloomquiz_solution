@@ -27,7 +27,7 @@ export function Routing(props) {
   }
 
   const { is_user, is_admin } = props.auth
-
+  const renderNav = !is_admin || location.pathname !== '/admin/quiz/edit'
   return (
     <>
       <Spinner />
@@ -35,10 +35,15 @@ export function Routing(props) {
         <Message />
         {is_user && <button onClick={onLogout} id="logout">Logout</button>}
         <nav>
-          <NavLink to="/">{is_admin ? "Preview Quiz" : "Test yourself!"}</NavLink>
-          {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
-          {is_admin && <NavLink to="/admin">Admin</NavLink>}
-          {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to save your progress</NavLink>}
+          {
+            renderNav &&
+            <>
+              <NavLink to="/">{is_admin ? "Preview Quiz" : "Test yourself!"}</NavLink>
+              {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
+              {is_admin && <NavLink to="/admin">Quizzes</NavLink>}
+              {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to save your progress</NavLink>}
+            </>
+          }
         </nav>
         <Routes>
           <Route path="/" element={<Quiz navigate={navigate} />} />

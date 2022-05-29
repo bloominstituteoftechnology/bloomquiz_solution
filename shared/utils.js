@@ -1,9 +1,9 @@
-const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+const chars = 'abcdefghijklmnopqrstuvwxyz'
 
 const getId = () => {
   let result = ''
   for (let i = 0; i < 5; i++) {
-    result += chars[Math.floor(Math.random() * 36)]
+    result += chars[Math.floor(Math.random() * 26)]
   }
   return result
 }

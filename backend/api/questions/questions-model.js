@@ -30,9 +30,28 @@ async function getById(question_id) {
   return question
 }
 
+async function getByIds(question_ids) {
+  const questions = await db('questions')
+    .select('question_title', 'question_text', 'question_id', 'updated_at')
+    .whereIn('question_id', question_ids)
+  let options = await db('options').whereIn('question_id', question_ids)
+    .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
+  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
+  questions.forEach(q => {
+    q.options = []
+    options.forEach(o => {
+      if (o.question_id === q.question_id) {
+        q.options.push(o)
+      }
+    })
+  })
+  return questions
+}
+
 async function create(question) {
   let { options, ...rest } = question
-  const [question_id] = await db('questions').insert([rest], ['question_id'])
+  const [question_id] = await db('questions').insert(rest, ['question_id'])
+  await db('question_search').insert({ question_id, ...rest })
   options = options.map(o => ({ ...o, question_id }))
   await db('options').insert(options)
   const newQuestion = await getById(question_id)
@@ -51,8 +70,20 @@ async function editById(question_id, { options, ...rest }) {
   })
   await Promise.all(promises)
   const { question_title, question_text } = rest
-  await db('questions').where('question_id', question_id).update({ question_title, question_text })
+  await db('questions').where('question_id', question_id)
+    .update({ question_title, question_text })
+  await db('question_search')
+    .where('question_id', Number(question_id))
+    .update({ question_title, question_text })
   return await getById(question_id)
+}
+
+async function getByText({ text }) {
+  const questions = await db.raw(`
+    SELECT question_id FROM question_search WHERE question_search MATCH ?;
+  `, [text])
+  const result = await getByIds(questions.map(q => q.question_id))
+  return result
 }
 
 module.exports = {
@@ -60,4 +91,6 @@ module.exports = {
   create,
   getById,
   editById,
+  getByText,
+  getByIds,
 }

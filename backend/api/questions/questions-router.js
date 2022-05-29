@@ -216,4 +216,14 @@ router.put('/:question_id', async (req, res, next) => {
   }
 })
 
+router.get('/text', async (req, res, next) => {
+  try {
+    const { text } = req.query
+    const quizzes = await Question.getByText({ text })
+    res.json(quizzes)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

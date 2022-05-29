@@ -70,7 +70,7 @@ exports.up = async function (knex) {
 
   await knex.raw(`
     CREATE VIRTUAL TABLE question_search
-    USING FTS4(question_title, question_text);
+    USING FTS4(question_id, question_title, question_text);
   `)
 }
 

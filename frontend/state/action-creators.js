@@ -218,6 +218,21 @@ export function getQuizzes() {
       })
   }
 }
+export function getQuestionBy({ text }) {
+  return function (dispatch) {
+    dispatch(spinnerOn())
+    axiosWithAuth().get(`http://localhost:9000/api/questions/text?text=${text}`)
+      .then(res => {
+        dispatch(setAllQuestions(res.data))
+      })
+      .catch(() => {
+        dispatch(reset())
+      })
+      .finally(() => {
+        dispatch(spinnerOff())
+      })
+  }
+}
 function setError(err, dispatch) {
   const errToDisplay = err.response ? err.response.data.message : err.message
   dispatch(setMessage({ main: errToDisplay, code: 'red' }))

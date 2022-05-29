@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function QuizList(props) {
   const {
     questionFormReset,
+    getQuestionBy,
     getQuizzes,
     quizList,
     navigate,
     setQuiz,
     quiz,
   } = props
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   const onNew = () => {
     questionFormReset()
@@ -31,6 +34,9 @@ export function QuizList(props) {
       <div className="button-group">
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
+      <input onChange={evt => setSearchTerm(evt.target.value)}></input>
+      <button onClick={() => getQuestionBy({ text: searchTerm })}>search</button>
+      <button onClick={() => getQuizzes()}>clear</button>
       {
         quizList.map(q => {
           const quizIsLoaded = quiz.question && q.question_id === quiz.question.question_id

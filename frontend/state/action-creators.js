@@ -170,7 +170,7 @@ export function createQuestion(question, redirect) {
 export function editQuestion(question, redirect) {
   return function (dispatch) {
     axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
-      .then(res => { // eslint-disable-line
+      .then(res => {
         dispatch(setMessage({ main: `Brilliant update` }))
         dispatch(questionFormReset())
         dispatch(setQuiz(res.data))

@@ -59,11 +59,11 @@ function only(role_id) {
 
 function isRegisteredUser(req, res) {
   if (req.token && req.token.role_id === 1)
-    res.json({ user: true, admin: true })
+    res.json({ is_user: true, is_admin: true })
   else if (req.token)
-    res.json({ user: true, admin: false })
+    res.json({ is_user: true, is_admin: false })
   else
-    res.json({ user: false, admin: false })
+    res.json({ is_user: false, is_admin: false })
 }
 
 module.exports = {

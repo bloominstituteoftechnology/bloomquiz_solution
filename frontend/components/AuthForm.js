@@ -14,8 +14,8 @@ export function AuthForm(props) {
   } = props
 
   useEffect(() => {
-    if (auth.user) navigate('/')
-  }, [auth.user])
+    if (auth.is_user) navigate('/')
+  }, [auth.is_user])
 
   const onChange = evt => {
     const { name, value } = evt.target

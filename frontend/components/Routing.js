@@ -26,19 +26,19 @@ export function Routing(props) {
     navigate('/auth', { replace: true })
   }
 
-  const { user, admin } = props.auth
+  const { is_user, is_admin } = props.auth
 
   return (
     <>
       <Spinner />
       <Opacity>
         <Message />
-        {user && <button onClick={onLogout} id="logout">Logout</button>}
+        {is_user && <button onClick={onLogout} id="logout">Logout</button>}
         <nav>
           <NavLink to="/">Test yourself!</NavLink>
-          {user && <NavLink to="/stats">Stats</NavLink>}
-          {admin && <NavLink to="/admin">Admin</NavLink>}
-          {!user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
+          {is_user && <NavLink to="/stats">Stats</NavLink>}
+          {is_admin && <NavLink to="/admin">Admin</NavLink>}
+          {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
         </nav>
         <Routes>
           <Route path="/" element={<Quiz navigate={navigate} />} />

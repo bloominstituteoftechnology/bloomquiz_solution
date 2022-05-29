@@ -23,7 +23,7 @@ export function Quiz(props) {
   }
 
   const onEdit = question => () => {
-    if (auth.admin) {
+    if (auth.is_admin) {
       questionFormSetExisting(question)
       navigate('/admin/quiz/edit')
     }
@@ -36,7 +36,7 @@ export function Quiz(props) {
           <>
             <div id="quizAnswers">
               {
-                auth.admin &&
+                auth.is_admin &&
                 <button className="edit" onClick={onEdit(question)}>🔧</button>
               }
               <Md className="question text md">

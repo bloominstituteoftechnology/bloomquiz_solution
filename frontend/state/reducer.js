@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
-const initialAuth = { user: null, admin: null }
+const initialAuth = { is_user: null, is_admin: null }
 function auth(state = initialAuth, action) {
   switch (action.type) {
     case types.RESET:

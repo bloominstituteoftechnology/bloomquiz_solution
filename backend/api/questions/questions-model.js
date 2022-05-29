@@ -20,8 +20,11 @@ async function getAll() {
 }
 
 async function getById(question_id) {
-  const question = await db('questions').where('question_id', question_id).first()
+  const question = await db('questions')
+    .select('question_title', 'question_text', 'question_id', 'updated_at')
+    .where('question_id', question_id).first()
   let options = await db('options').where('question_id', question_id)
+    .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
   options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
   question.options = options
   return question

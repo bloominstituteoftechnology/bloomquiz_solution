@@ -67,10 +67,16 @@ exports.up = async function (knex) {
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
     }).then(() => knex.raw(onUpdateTrigger('answers')))
+
+  await knex.raw(`
+    CREATE VIRTUAL TABLE question_search
+    USING FTS4(question_title, question_text);
+  `)
 }
 
 exports.down = async function (knex) {
   await knex.schema
+    .dropTableIfExists('question_search')
     .dropTableIfExists('answers')
     .dropTableIfExists('options')
     .dropTableIfExists('questions')

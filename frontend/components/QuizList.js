@@ -8,7 +8,8 @@ export function QuizList(props) {
     getQuizzes,
     quizList,
     navigate,
-    setQuiz
+    setQuiz,
+    quiz,
   } = props
 
   const onNew = () => {
@@ -32,11 +33,12 @@ export function QuizList(props) {
       </div><br />
       {
         quizList.map(q => {
+          const quizIsLoaded = quiz.question && q.question_id === quiz.question.question_id
           return (
-            <div className="question answer" key={q.question_id}>
+            <div className={`question answer${quizIsLoaded ? ' selected' : ''}`} key={q.question_id}>
               {q.question_title}
               <div className="mini-group">
-                <button onClick={onView(q.question_id)}>👁️</button>
+                <button onClick={onView(q.question_id)}>👓</button>
               </div>
             </div>
           )

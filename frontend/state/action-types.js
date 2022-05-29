@@ -1,13 +1,14 @@
 export const RESET = 'RESET'
 // auth screen
 export const AUTH_FORM_INPUT_CHANGE = 'AUTH_FORM_INPUT_CHANGE'
+export const AUTH_FORM_RESET = 'AUTH_FORM_RESET'
 // auth status
 export const SET_AUTH_STATUS = 'SET_AUTH_STATUS'
 // quiz screen
 export const SET_INFO_MESSAGE = 'SET_INFO_MESSAGE'
 export const QUIZ_SET_SELECTED_OPTION = 'QUIZ_SET_SELECTED_OPTION'
 export const SET_QUIZ = 'SET_QUIZ'
-// add/edit quiz screen
+// add/edit question screen
 export const QUESTION_FORM_RESET = 'QUESTION_FORM_RESET'
 export const QUESTION_FORM_INPUT_CHANGE = 'QUESTION_FORM_INPUT_CHANGE'
 export const QUESTION_FORM_OPTION_INPUT_CHANGE = 'QUESTION_FORM_OPTION_INPUT_CHANGE'

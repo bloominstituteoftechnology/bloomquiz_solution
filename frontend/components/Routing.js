@@ -38,7 +38,7 @@ export function Routing(props) {
           <NavLink to="/">{is_admin ? "Preview Quiz" : "Test yourself!"}</NavLink>
           {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
           {is_admin && <NavLink to="/admin">Admin</NavLink>}
-          {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to see your stats</NavLink>}
+          {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to save your progress</NavLink>}
         </nav>
         <Routes>
           <Route path="/" element={<Quiz navigate={navigate} />} />

@@ -30,13 +30,15 @@ export function QuizList(props) {
   }, [])
 
   return (
-    <div>
+    <div id="quizList">
       <div className="button-group">
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
-      <input onChange={evt => setSearchTerm(evt.target.value)}></input>
-      <button onClick={() => getQuestionBy({ text: searchTerm })}>search</button>
-      <button onClick={() => getQuizzes()}>clear</button>
+      <div className="search-bar">
+        <input onChange={evt => setSearchTerm(evt.target.value)}></input>
+        <button onClick={() => getQuestionBy({ text: searchTerm })}>search</button>
+        <button onClick={() => getQuizzes()}>clear</button>
+      </div>
       {
         quizList.map(q => {
           const quizIsLoaded = quiz.question && q.question_id === quiz.question.question_id

@@ -11,11 +11,9 @@ export function QuizList(props) {
     navigate,
     setQuiz,
     quiz,
-    quizSearchForm,
+    searchText,
     inputChange,
   } = props
-
-  const { searchText } = quizSearchForm
 
   const onNew = () => {
     questionFormReset()
@@ -81,8 +79,8 @@ export function QuizList(props) {
 export default connect(st => ({
   quizList: st.quizList,
   setQuiz: st.setQuiz,
-  quizSearchForm: st.quizSearchForm,
   quiz: st.quiz,
+  searchText: st.quizSearchForm.searchText,
 }), {
   questionFormReset: actions.questionFormReset,
   getQuestionBy: actions.getQuestionBy,

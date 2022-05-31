@@ -72,6 +72,26 @@ exports.up = async function (knex) {
     CREATE VIRTUAL TABLE question_search
     USING FTS4(question_id, question_title, question_text);
   `)
+
+  await knex.raw(`
+    CREATE TRIGGER questions_after_insert AFTER INSERT ON questions
+    BEGIN
+        INSERT INTO question_search (question_id, question_title, question_text)
+        VALUES (new.question_id, new.question_title, new.question_text);
+    END;
+  `)
+
+  await knex.raw(`
+    CREATE TRIGGER questions_after_update AFTER UPDATE ON questions
+    BEGIN
+        UPDATE question_search
+        SET
+          question_title = new.question_title,
+          question_text = new.question_text
+        WHERE
+          question_id = new.question_id;
+    END;
+  `)
 }
 
 exports.down = async function (knex) {

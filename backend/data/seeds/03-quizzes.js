@@ -106,8 +106,4 @@ exports.seed = async function (knex) {
       question_id: 6,
     },
   ])
-
-  await knex.raw(`
-    INSERT INTO question_search
-      SELECT question_id, question_title, question_text FROM questions;`)
 }

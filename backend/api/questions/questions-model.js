@@ -51,7 +51,6 @@ async function getByIds(question_ids) {
 async function create(question) {
   let { options, ...rest } = question
   const [question_id] = await db('questions').insert(rest, ['question_id'])
-  await db('question_search').insert({ question_id, ...rest })
   options = options.map(o => ({ ...o, question_id }))
   await db('options').insert(options)
   const newQuestion = await getById(question_id)
@@ -71,9 +70,6 @@ async function editById(question_id, { options, ...rest }) {
   await Promise.all(promises)
   const { question_title, question_text } = rest
   await db('questions').where('question_id', question_id)
-    .update({ question_title, question_text })
-  await db('question_search')
-    .where('question_id', Number(question_id))
     .update({ question_title, question_text })
   return await getById(question_id)
 }

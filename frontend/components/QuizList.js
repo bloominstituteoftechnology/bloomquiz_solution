@@ -14,7 +14,7 @@ export function QuizList(props) {
     searchText, // =============== 👉 [Code-Along 10.1] - step 2.2
     inputChange,
   } = props
-// =============== 👉 [Code-Along 10.1] - step 3.2
+  // =============== 👉 [Code-Along 10.1] - step 3.2
   const onNew = () => {
     questionFormReset()
     navigate('/admin/quiz/edit')

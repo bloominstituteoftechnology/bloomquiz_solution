@@ -29,13 +29,13 @@ export function QuizList(props) {
     getQuestionBy({ searchText })
   }
 
+  const isSearchDisabled = () => {
+    return !searchText.trim().length
+  }
+
   const onSearchTextChange = evt => {
     const { name, value } = evt.target
     inputChange({ name, value })
-  }
-
-  const isSearchDisabled = () => {
-    return !searchText.trim().length
   }
 
   const onSearchClear = () => {

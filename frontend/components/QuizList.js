@@ -11,7 +11,7 @@ export function QuizList(props) {
     navigate,
     setQuiz,
     quiz,
-    searchText,
+    searchText, // =============== 👉 [Code-Along 10.1] - step 2.2
     inputChange,
   } = props
 
@@ -80,7 +80,7 @@ export default connect(st => ({
   quizList: st.quizList,
   setQuiz: st.setQuiz,
   quiz: st.quiz,
-  searchText: st.quizSearchForm.searchText,
+  searchText: st.quizSearchForm.searchText, // =============== 👉 [Code-Along 10.1] - step 2.1
 }), {
   questionFormReset: actions.questionFormReset,
   getQuestionBy: actions.getQuestionBy,

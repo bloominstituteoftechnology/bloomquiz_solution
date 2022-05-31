@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
-const initialSearch = { searchText: '' }
+const initialSearch = { searchText: '' } // =============== 👉 [Code-Along 10.1] - step 1.1
 function quizSearchForm(state = initialSearch, action) {
   switch (action.type) {
     case types.RESET:
@@ -179,5 +179,5 @@ export default combineReducers({
   stats,
   quizList,
   spinnerOn,
-  quizSearchForm,
+  quizSearchForm, // =============== 👉 [Code-Along 10.1] - step 1.2
 })

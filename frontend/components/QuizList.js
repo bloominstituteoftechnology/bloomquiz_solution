@@ -35,6 +35,11 @@ export function QuizList(props) {
     inputChange({ name, value })
   }
 
+  const onSearchClear = () => {
+    inputChange({ name: 'searchText', value: '' })
+    getQuizzes()
+  }
+
   const isSearchDisabled = () => {
     const { searchText } = quizSearch
     return !searchText.trim().length
@@ -55,7 +60,7 @@ export function QuizList(props) {
       <div className="search-bar">
         <input name="searchText" onChange={onSearchTextChange} value={quizSearch.searchText} />
         <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
-        <button onClick={getQuizzes}>clear</button>
+        <button onClick={onSearchClear}>clear</button>
       </div>
       {
         quizList.map(q => {
@@ -77,13 +82,12 @@ export function QuizList(props) {
 export default connect(st => ({
   quizList: st.quizList,
   setQuiz: st.setQuiz,
+  quizSearch: st.quizSearch,
   quiz: st.quiz,
 }), {
   questionFormReset: actions.questionFormReset,
   getQuestionBy: actions.getQuestionBy,
   getQuizzes: actions.getQuizzes,
-  quizList: actions.quizList,
   setQuiz: actions.setQuiz,
-  quizSearch: actions.quizSearch,
   inputChange: actions.inputChange,
 })(QuizList)

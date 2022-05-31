@@ -42,11 +42,9 @@ export function QuizList(props) {
 
   useEffect(() => {
     const { searchText } = quizSearch
-    if (searchText.trim().length) {
-      getQuestionBy({ searchText })
-    } else {
-      getQuizzes()
-    }
+    searchText.trim().length
+      ? getQuestionBy({ searchText })
+      : getQuizzes()
   }, [])
 
   return (
@@ -55,7 +53,7 @@ export function QuizList(props) {
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
       <div className="search-bar">
-        <input name="searchText" onChange={onSearchTextChange} value={quizSearch.searchText}></input>
+        <input name="searchText" onChange={onSearchTextChange} value={quizSearch.searchText} />
         <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
         <button onClick={getQuizzes}>clear</button>
       </div>
@@ -76,4 +74,16 @@ export function QuizList(props) {
   )
 }
 
-export default connect(st => st, actions)(QuizList)
+export default connect(st => ({
+  quizList: st.quizList,
+  setQuiz: st.setQuiz,
+  quiz: st.quiz,
+}), {
+  questionFormReset: actions.questionFormReset,
+  getQuestionBy: actions.getQuestionBy,
+  getQuizzes: actions.getQuizzes,
+  quizList: actions.quizList,
+  setQuiz: actions.setQuiz,
+  quizSearch: actions.quizSearch,
+  inputChange: actions.inputChange,
+})(QuizList)

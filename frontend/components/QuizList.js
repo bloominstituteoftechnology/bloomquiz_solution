@@ -15,6 +15,8 @@ export function QuizList(props) {
     inputChange,
   } = props
 
+  const { searchText } = quizSearchForm
+
   const onNew = () => {
     questionFormReset()
     navigate('/admin/quiz/edit')
@@ -26,7 +28,6 @@ export function QuizList(props) {
   }
 
   const onSearch = () => {
-    const { searchText } = quizSearchForm
     getQuestionBy({ searchText })
   }
 
@@ -36,7 +37,6 @@ export function QuizList(props) {
   }
 
   const isSearchDisabled = () => {
-    const { searchText } = quizSearchForm
     return !searchText.trim().length
   }
 
@@ -46,7 +46,6 @@ export function QuizList(props) {
   }
 
   useEffect(() => {
-    const { searchText } = quizSearchForm
     searchText.trim().length
       ? getQuestionBy({ searchText })
       : getQuizzes()
@@ -58,7 +57,7 @@ export function QuizList(props) {
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
       <div className="search-bar">
-        <input name="searchText" onChange={onSearchTextChange} value={quizSearchForm.searchText} />
+        <input name="searchText" onChange={onSearchTextChange} value={searchText} />
         <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
         <button disabled={isSearchDisabled()} onClick={onSearchClear}>clear</button>
       </div>

@@ -3,7 +3,7 @@ import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
 const initialSearch = { searchText: '' }
-function quizSearch(state = initialSearch, action) {
+function quizSearchForm(state = initialSearch, action) {
   switch (action.type) {
     case types.RESET:
       return initialSearch
@@ -179,5 +179,5 @@ export default combineReducers({
   stats,
   quizList,
   spinnerOn,
-  quizSearch,
+  quizSearchForm,
 })

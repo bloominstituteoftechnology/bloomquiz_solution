@@ -2,23 +2,6 @@ import { combineReducers } from 'redux'
 import * as types from './action-types'
 import { initialQuestionForm } from '../../shared/utils'
 
-const initialSearch = { searchText: '' }
-function quizSearchForm(state = initialSearch, action) {
-  switch (action.type) {
-    case types.RESET:
-      return initialSearch
-    case types.INPUT_CHANGE: {
-      const { name, value } = action.payload
-      if (Object.keys(state).includes(name)) {
-        return { ...state, [name]: value }
-      }
-      return state
-    }
-    default:
-      return state
-  }
-}
-
 const initialAuth = { is_user: null, is_admin: null }
 function auth(state = initialAuth, action) {
   switch (action.type) {
@@ -179,5 +162,4 @@ export default combineReducers({
   stats,
   quizList,
   spinnerOn,
-  quizSearchForm,
 })

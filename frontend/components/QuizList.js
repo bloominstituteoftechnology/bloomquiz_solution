@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
@@ -11,9 +11,9 @@ export function QuizList(props) {
     navigate,
     setQuiz,
     quiz,
-    searchText,
-    inputChange,
   } = props
+
+  const [searchText, setSearchText] = useState('')
 
   const onNew = () => {
     questionFormReset()
@@ -30,8 +30,8 @@ export function QuizList(props) {
   }
 
   const onSearchTextChange = evt => {
-    const { name, value } = evt.target
-    inputChange({ name, value })
+    const { value } = evt.target
+    setSearchText(value)
   }
 
   const isSearchDisabled = () => {
@@ -39,14 +39,12 @@ export function QuizList(props) {
   }
 
   const onSearchClear = () => {
-    inputChange({ name: 'searchText', value: '' })
+    setSearchText('')
     getQuizzes()
   }
 
   useEffect(() => {
-    searchText.trim().length
-      ? getQuestionBy({ searchText })
-      : getQuizzes()
+    getQuizzes()
   }, [])
 
   return (
@@ -80,11 +78,9 @@ export default connect(st => ({
   quizList: st.quizList,
   setQuiz: st.setQuiz,
   quiz: st.quiz,
-  searchText: st.quizSearchForm.searchText,
 }), {
   questionFormReset: actions.questionFormReset,
   getQuestionBy: actions.getQuestionBy,
   getQuizzes: actions.getQuizzes,
   setQuiz: actions.setQuiz,
-  inputChange: actions.inputChange,
 })(QuizList)

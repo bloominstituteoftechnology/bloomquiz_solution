@@ -36,6 +36,7 @@ export function Quiz(props) {
       {
         question ? (
           <>
+            {auth.is_admin && <h2>{question.question_title}</h2>}
             <div id="quizAnswers">
               {
                 auth.is_admin &&

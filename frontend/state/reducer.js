@@ -6,7 +6,7 @@ const initialSearch = { searchText: '' }
 function quizSearch(state = initialSearch, action) {
   switch (action.type) {
     case types.RESET:
-      return initialAuth
+      return initialSearch
     case types.INPUT_CHANGE: {
       const { name, value } = action.payload
       if (Object.keys(state).includes(name)) {

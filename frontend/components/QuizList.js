@@ -35,14 +35,14 @@ export function QuizList(props) {
     inputChange({ name, value })
   }
 
-  const onSearchClear = () => {
-    inputChange({ name: 'searchText', value: '' })
-    getQuizzes()
-  }
-
   const isSearchDisabled = () => {
     const { searchText } = quizSearch
     return !searchText.trim().length
+  }
+
+  const onSearchClear = () => {
+    inputChange({ name: 'searchText', value: '' })
+    getQuizzes()
   }
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function QuizList(props) {
       <div className="search-bar">
         <input name="searchText" onChange={onSearchTextChange} value={quizSearch.searchText} />
         <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
-        <button onClick={onSearchClear}>clear</button>
+        <button disabled={isSearchDisabled()} onClick={onSearchClear}>clear</button>
       </div>
       {
         quizList.map(q => {

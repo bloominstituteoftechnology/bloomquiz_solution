@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react' // =============== 👉 [Code-Along 10.1] - step 3.1
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
@@ -14,7 +14,7 @@ export function QuizList(props) {
     searchText, // =============== 👉 [Code-Along 10.1] - step 2.2
     inputChange,
   } = props
-
+// =============== 👉 [Code-Along 10.1] - step 3.2
   const onNew = () => {
     questionFormReset()
     navigate('/admin/quiz/edit')
@@ -33,7 +33,7 @@ export function QuizList(props) {
     return !searchText.trim().length
   }
 
-  const onSearchTextChange = evt => {
+  const onSearchTextChange = evt => { // =============== 👉 [Code-Along 10.1] - step 4
     const { name, value } = evt.target
     inputChange({ name, value })
   }
@@ -43,7 +43,7 @@ export function QuizList(props) {
     getQuizzes()
   }
 
-  useEffect(() => {
+  useEffect(() => { // =============== 👉 [Code-Along 10.1] - step 5
     searchText.trim().length
       ? getQuestionBy({ searchText })
       : getQuizzes()

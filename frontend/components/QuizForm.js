@@ -9,36 +9,7 @@ import {
   editQuestion,
 } from '../state/action-creators'
 
-import styled, { keyframes } from 'styled-components' // =============== 👉 [Code-Along 9.1] - step 5.1
-
-const scale = keyframes`
-  100% { transform: scaleY(1); }
-`
-
-const StyledInputGroup = styled.div`
-  transform: scaleY(0);
-  transform-origin: top center;
-  animation: ${scale} 0.25s forwards;
-`
-
 export class QuizForm extends React.Component {
-  constructor(props) { // =============== 👉 [Code-Along 9.1] - step 1
-    super(props)
-    const optionBars = {}
-    const { options } = props.quizForm
-    Object.keys(options).forEach(key => { optionBars[key] = false })
-    this.state = { optionBars }
-  }
-  toggleBar = optionKey => () => { // =============== 👉 [Code-Along 9.1] step 2.1
-    const { optionBars } = this.state
-    this.setState({
-      ...this.state,
-      optionBars: {
-        ...optionBars,
-        [optionKey]: !optionBars[optionKey],
-      },
-    })
-  }
   onRedirect = path => evt => {
     if (evt) evt.preventDefault()
     this.props.navigate(path)
@@ -97,50 +68,43 @@ export class QuizForm extends React.Component {
             const removeBtnDisabled = Object.keys(quizForm.options).length < 3
             const option = quizForm.options[optionKey]
 
-            const optionIsExpanded = this.state.optionBars[optionKey] // =============== 👉 [Code-Along 9.1] - step 3.1
-            const optionSlice = option.option_text.slice(0, 40)
-
             return (
               <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
-                <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}> {/* =============== 👉 [Code-Along 9.1] step 2.2 */}
-                  <span> {/* =============== 👉 [Code-Along 9.1] - step 3.2 */}
-                    {optionIsExpanded ? downArrow : rightArrow}
+                <div className="option-bar" tabIndex="0">
+                  <span>
+                    {downArrow}
                     {optionHeading}
-                    {!optionIsExpanded && optionSlice}
                   </span>
                   <button
                     className="option-operation"
                     disabled={removeBtnDisabled}
                     onClick={this.onRemoveOption(optionKey)}>{plusButton}</button>
                 </div>
-                {
-                  optionIsExpanded && // =============== 👉 [Code-Along 9.1] - step 4
-                  <StyledInputGroup className="option-inputs"> {/* =============== 👉 [Code-Along 9.1] - step 5.2 */}
-                    <textarea
-                      maxLength={400}
-                      placeholder="Option text"
-                      name={`option_text-${optionKey}`}
-                      value={option.option_text}
-                      onChange={this.onTextChange}
-                    />
-                    <textarea
-                      type="text"
-                      maxLength={400}
-                      placeholder="Option remark"
-                      name={`remark-${optionKey}`}
-                      value={option.remark ?? ''}
-                      onChange={this.onTextChange}
-                    />
-                    <label>
-                      <input
-                        type="radio"
-                        name="is_correct"
-                        checked={option.is_correct}
-                        onChange={this.onQuestionSetCorrect(optionKey)}
-                      />&nbsp;&nbsp;correct option
-                    </label>
-                  </StyledInputGroup>
-                }
+                <div className="option-inputs">
+                  <textarea
+                    maxLength={400}
+                    placeholder="Option text"
+                    name={`option_text-${optionKey}`}
+                    value={option.option_text}
+                    onChange={this.onTextChange}
+                  />
+                  <textarea
+                    type="text"
+                    maxLength={400}
+                    placeholder="Option remark"
+                    name={`remark-${optionKey}`}
+                    value={option.remark ?? ''}
+                    onChange={this.onTextChange}
+                  />
+                  <label>
+                    <input
+                      type="radio"
+                      name="is_correct"
+                      checked={option.is_correct}
+                      onChange={this.onQuestionSetCorrect(optionKey)}
+                    />&nbsp;&nbsp;correct option
+                  </label>
+                </div>
               </div>
             )
           })

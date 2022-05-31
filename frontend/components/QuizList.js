@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
@@ -11,9 +11,9 @@ export function QuizList(props) {
     navigate,
     setQuiz,
     quiz,
+    quizSearch,
+    inputChange,
   } = props
-
-  const [searchTerm, setSearchTerm] = useState('')
 
   const onNew = () => {
     questionFormReset()
@@ -25,8 +25,28 @@ export function QuizList(props) {
     navigate('/')
   }
 
+  const onSearch = () => {
+    const { searchText } = quizSearch
+    getQuestionBy({ searchText })
+  }
+
+  const onSearchTextChange = evt => {
+    const { name, value } = evt.target
+    inputChange({ name, value })
+  }
+
+  const isSearchDisabled = () => {
+    const { searchText } = quizSearch
+    return !searchText.trim().length
+  }
+
   useEffect(() => {
-    getQuizzes()
+    const { searchText } = quizSearch
+    if (searchText.trim().length) {
+      getQuestionBy({ searchText })
+    } else {
+      getQuizzes()
+    }
   }, [])
 
   return (
@@ -35,9 +55,9 @@ export function QuizList(props) {
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
       <div className="search-bar">
-        <input onChange={evt => setSearchTerm(evt.target.value)}></input>
-        <button onClick={() => getQuestionBy({ text: searchTerm })}>search</button>
-        <button onClick={() => getQuizzes()}>clear</button>
+        <input name="searchText" onChange={onSearchTextChange} value={quizSearch.searchText}></input>
+        <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
+        <button onClick={getQuizzes}>clear</button>
       </div>
       {
         quizList.map(q => {

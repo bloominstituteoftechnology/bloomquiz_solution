@@ -8,7 +8,7 @@ export function AuthForm(props) {
     login,
     register,
     authForm,
-    authInputChange,
+    inputChange,
     navigate,
     auth,
   } = props
@@ -20,7 +20,7 @@ export function AuthForm(props) {
 
   const onChange = evt => {
     const { name, value } = evt.target
-    authInputChange({ name, value })
+    inputChange({ name, value })
   }
 
   const onSubmit = evt => {
@@ -84,5 +84,5 @@ export default connect(st => ({
 }), {
   login: actions.login,
   register: actions.register,
-  authInputChange: actions.authInputChange,
+  inputChange: actions.inputChange,
 })(AuthForm)

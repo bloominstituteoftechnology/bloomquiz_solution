@@ -10,11 +10,12 @@ export function spinnerOn() {
 export function spinnerOff() {
   return { type: types.SPINNER_OFF }
 }
-// AUTH FORM
-export function authInputChange({ name, value }) {
+// INPUTS AND TEXTAREAS
+export function inputChange({ name, value }) {
   const payload = { name, value }
-  return { type: types.AUTH_FORM_INPUT_CHANGE, payload }
+  return { type: types.INPUT_CHANGE, payload }
 }
+// AUTH FORM
 export function authFormReset() {
   return { type: types.AUTH_FORM_RESET }
 }
@@ -22,14 +23,6 @@ export function authFormReset() {
 export function questionFormReset() {
   const payload = initialQuestionForm()
   return { type: types.QUESTION_FORM_RESET, payload }
-}
-export function questionInputChange({ name, value }) {
-  const payload = { name, value }
-  return { type: types.QUESTION_FORM_INPUT_CHANGE, payload }
-}
-export function questionOptionInputChange({ optionKey, name, value }) {
-  const payload = { optionKey, name, value }
-  return { type: types.QUESTION_FORM_OPTION_INPUT_CHANGE, payload }
 }
 export function questionOptionSetCorrect(optionKey) {
   const payload = optionKey
@@ -218,10 +211,10 @@ export function getQuizzes() {
       })
   }
 }
-export function getQuestionBy({ text }) {
+export function getQuestionBy({ searchText }) {
   return function (dispatch) {
     dispatch(spinnerOn())
-    axiosWithAuth().get(`http://localhost:9000/api/questions/text?text=${text}`)
+    axiosWithAuth().get(`http://localhost:9000/api/questions/text?text=${searchText}`)
       .then(res => {
         dispatch(setAllQuestions(res.data))
       })

@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import {
   addOption,
   removeOption,
-  questionInputChange,
-  questionOptionInputChange,
+  inputChange,
   questionOptionSetCorrect,
   createQuestion,
   editQuestion,
@@ -52,12 +51,8 @@ export class QuizForm extends React.Component {
     evt.preventDefault()
     this.props.removeOption(optionKey)
   }
-  onQuestionChange = ({ target: { name, value } }) => {
-    this.props.questionInputChange({ name, value })
-  }
-  onQuestionOptionChange = optionKey => ({ target }) => {
-    const { name, value } = target
-    this.props.questionOptionInputChange({ optionKey, name, value })
+  onTextChange = ({ target: { name, value } }) => {
+    this.props.inputChange({ name, value })
   }
   onQuestionSetCorrect = optionKey => () => {
     this.props.questionOptionSetCorrect(optionKey)
@@ -84,14 +79,14 @@ export class QuizForm extends React.Component {
           placeholder="Question title"
           name="question_title"
           value={quizForm.question_title}
-          onChange={this.onQuestionChange}
+          onChange={this.onTextChange}
         />
         <textarea
           maxLength={400}
           placeholder="Question text"
           name="question_text"
           value={quizForm.question_text}
-          onChange={this.onQuestionChange}
+          onChange={this.onTextChange}
         />
         <div className="options-heading">
           <h2>Options</h2><button className="option-operation" onClick={this.onAddOption}>➕</button>
@@ -124,17 +119,17 @@ export class QuizForm extends React.Component {
                     <textarea
                       maxLength={400}
                       placeholder="Option text"
-                      name="option_text"
+                      name={`option_text-${optionKey}`}
                       value={option.option_text}
-                      onChange={this.onQuestionOptionChange(optionKey)}
+                      onChange={this.onTextChange}
                     />
                     <textarea
                       type="text"
                       maxLength={400}
                       placeholder="Option remark"
-                      name="remark"
+                      name={`remark-${optionKey}`}
                       value={option.remark ?? ''}
-                      onChange={this.onQuestionOptionChange(optionKey)}
+                      onChange={this.onTextChange}
                     />
                     <label>
                       <input
@@ -164,8 +159,7 @@ export default connect(st => ({
 }), {
   addOption,
   removeOption,
-  questionInputChange,
-  questionOptionInputChange,
+  inputChange,
   questionOptionSetCorrect,
   createQuestion,
   editQuestion,

@@ -3,6 +3,8 @@ import axiosWithAuth from '../axios'
 import { getId, initialQuestionForm } from '../../shared/utils'
 import axios from 'axios'
 
+// ======= SYNCHRONOUS ACTION CREATORS =======
+
 // SPINNER
 export function spinnerOn() {
   return { type: types.SPINNER_ON }
@@ -59,11 +61,7 @@ export function setAuthStatus({ is_user, is_admin }) {
   const payload = { is_user, is_admin }
   return { type: types.SET_AUTH_STATUS, payload }
 }
-// STATS
-export function setGeneralStats({ corrects, incorrects }) {
-  const payload = { corrects, incorrects }
-  return { type: types.SET_GENERAL_STATS, payload }
-}
+// QUIZ LIST
 export function setAllQuestions(questions) {
   const payload = questions
   return { type: types.SET_ALL_QUIZZES, payload }
@@ -78,7 +76,29 @@ export function setMessage({ main, code }) {
   const payload = { main, time: new Date().valueOf(), code }
   return { type: types.SET_INFO_MESSAGE, payload }
 }
-// ASYNC FLOW
+// STATS
+export function setGeneralStats(stats) {
+  const payload = stats
+  return { type: types.SET_GENERAL_STATS, payload }
+}
+
+// ======= ASYNCHRONOUS ACTION CREATORS =======
+
+export function getGeneralStats() {
+  return function (dispatch) {
+    dispatch(spinnerOn())
+    axiosWithAuth().get('http://localhost:9000/api/stats/general')
+      .then(res => {
+        dispatch(setGeneralStats(res.data))
+      })
+      .catch(() => {
+        dispatch(reset())
+      })
+      .finally(() => {
+        dispatch(spinnerOff())
+      })
+  }
+}
 export function register({ username, password }) {
   return function (dispatch) {
     dispatch(spinnerOn())
@@ -182,21 +202,6 @@ export function getAuthStatus() {
       })
       .catch(() => {
         dispatch(reset())
-      })
-  }
-}
-export function getGeneralStats() {
-  return function (dispatch) {
-    dispatch(spinnerOn())
-    axiosWithAuth().get('http://localhost:9000/api/stats/general')
-      .then(res => {
-        dispatch(setGeneralStats(res.data))
-      })
-      .catch(() => {
-        dispatch(reset())
-      })
-      .finally(() => {
-        dispatch(spinnerOff())
       })
   }
 }

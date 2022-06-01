@@ -7,7 +7,7 @@ router.get('/general', restrict, async (req, res, next) => {
     const stats = await Stats.generalStats(req.token.user_id)
     setTimeout(() => {
       res.json(stats)
-    }, 500)
+    }, 1000)
   } catch (err) {
     next(err)
   }

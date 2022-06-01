@@ -158,13 +158,13 @@ function spinnerOn(state = false, action) {
   }
 }
 
-const initialStats = {}
+const initialStats = null
 function stats(state = initialStats, action) {
   switch (action.type) {
     case types.RESET:
       return initialStats
     case types.SET_GENERAL_STATS:
-      return { ...state, general: action.payload }
+      return action.payload
     default:
       return state
   }
@@ -176,8 +176,8 @@ export default combineReducers({
   quiz,
   infoMessage,
   auth,
-  stats,
   quizList,
   spinnerOn,
+  stats,
   quizSearchForm, // =============== 👉 [Code-Along 10.1] - step 1.2
 })

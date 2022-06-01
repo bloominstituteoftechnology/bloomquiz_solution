@@ -5,10 +5,10 @@ import { getGeneralStats, setMessage } from '../state/action-creators'
 export function Stats(props) {
   const {
     auth,
-    stats,
-    getGeneralStats,
     setMessage,
     navigate,
+    stats,
+    getGeneralStats,
   } = props
 
   useEffect(() => {
@@ -22,16 +22,22 @@ export function Stats(props) {
     getGeneralStats()
   }, [])
 
-  if (!stats.general) return null
+  if (!stats) return null
 
   return (
     <>
-      <h1>{stats.general.corrects}</h1>correct answers
-      <h1>{stats.general.incorrects}</h1>incorrect answers
+      <h1>{stats.corrects}</h1>correct answers
+      <h1>{stats.incorrects}</h1>incorrect answers
     </>
   )
 }
 
 export default connect(st => ({
-  stats: st.stats, auth: st.auth
-}), { getGeneralStats, setMessage })(Stats)
+  // mapping state to props
+  stats: st.stats,
+  auth: st.auth
+}), {
+  // action creators
+  getGeneralStats,
+  setMessage,
+})(Stats)

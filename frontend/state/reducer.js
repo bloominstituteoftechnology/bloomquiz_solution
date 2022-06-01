@@ -158,7 +158,7 @@ function spinnerOn(state = false, action) {
   }
 }
 
-const initialStats = null
+const initialStats = null // =============== 👉 [Code-Along 10.2] - step 1.1
 function stats(state = initialStats, action) {
   switch (action.type) {
     case types.RESET:
@@ -178,6 +178,6 @@ export default combineReducers({
   auth,
   quizList,
   spinnerOn,
-  stats,
+  stats, // =============== 👉 [Code-Along 10.2] - step 1.2
   quizSearchForm, // =============== 👉 [Code-Along 10.1] - step 1.2
 })

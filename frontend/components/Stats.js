@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react' // =============== 👉 [Code-Along 10.2] - step 4.1
 import { connect } from 'react-redux'
 import { getGeneralStats, setMessage } from '../state/action-creators'
 
@@ -7,9 +7,11 @@ export function Stats(props) {
     auth,
     setMessage,
     navigate,
-    stats,
+    stats, // =============== 👉 [Code-Along 10.2] - step 5.1
     getGeneralStats,
   } = props
+
+  // =============== 👉 [Code-Along 10.2] - step 5.2
 
   useEffect(() => {
     if (auth.user === false) {
@@ -19,6 +21,7 @@ export function Stats(props) {
   }, [auth])
 
   useEffect(() => {
+    // =============== 👉 [Code-Along 10.2] - step 5.3
     getGeneralStats()
   }, [])
 
@@ -34,7 +37,7 @@ export function Stats(props) {
 
 export default connect(st => ({
   // mapping state to props
-  stats: st.stats,
+  stats: st.stats, // =============== 👉 [Code-Along 10.2] - step 4.2
   auth: st.auth
 }), {
   // action creators

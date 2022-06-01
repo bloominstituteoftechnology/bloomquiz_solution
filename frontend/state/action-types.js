@@ -23,4 +23,4 @@ export const SPINNER_OFF = 'SPINNER_OFF'
 // quiz list
 export const SET_ALL_QUIZZES = 'SET_ALL_QUIZZES'
 // stats
-export const SET_GENERAL_STATS = 'SET_GENERAL_STATS'
+export const SET_GENERAL_STATS = 'SET_GENERAL_STATS' // =============== 👉 [Code-Along 10.2] - step 2

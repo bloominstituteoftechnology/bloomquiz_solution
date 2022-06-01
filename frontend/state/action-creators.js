@@ -77,14 +77,14 @@ export function setMessage({ main, code }) {
   return { type: types.SET_INFO_MESSAGE, payload }
 }
 // STATS
-export function setGeneralStats(stats) {
+export function setGeneralStats(stats) { // =============== 👉 [Code-Along 10.2] - step 3.1
   const payload = stats
   return { type: types.SET_GENERAL_STATS, payload }
 }
 
 // ======= ASYNCHRONOUS ACTION CREATORS =======
 
-export function getGeneralStats() {
+export function getGeneralStats() { // =============== 👉 [Code-Along 10.2] - step 3.2
   return function (dispatch) {
     dispatch(spinnerOn())
     axiosWithAuth().get('http://localhost:9000/api/stats/general')

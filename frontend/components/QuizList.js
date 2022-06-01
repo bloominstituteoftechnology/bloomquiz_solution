@@ -55,7 +55,7 @@ export function QuizList(props) {
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
       <div className="search-bar">
-        <input name="searchText" onChange={onSearchTextChange} value={searchText} />
+        <input placeholder="type keywords" name="searchText" onChange={onSearchTextChange} value={searchText} />
         <button disabled={isSearchDisabled()} onClick={onSearch}>search</button>
         <button disabled={isSearchDisabled()} onClick={onSearchClear}>clear</button>
       </div>

@@ -5,7 +5,9 @@ const { restrict } = require('../auth/auth-middleware')
 router.get('/general', restrict, async (req, res, next) => {
   try {
     const stats = await Stats.generalStats(req.token.user_id)
-    res.json(stats)
+    setTimeout(() => {
+      res.json(stats)
+    }, 500)
   } catch (err) {
     next(err)
   }

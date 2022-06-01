@@ -187,12 +187,16 @@ export function getAuthStatus() {
 }
 export function getGeneralStats() {
   return function (dispatch) {
+    dispatch(spinnerOn())
     axiosWithAuth().get('http://localhost:9000/api/stats/general')
       .then(res => {
         dispatch(setGeneralStats(res.data))
       })
       .catch(() => {
         dispatch(reset())
+      })
+      .finally(() => {
+        dispatch(spinnerOff())
       })
   }
 }

@@ -67,7 +67,7 @@ export function QuizList(props) {
           <button disabled={isSearchDisabled()}>Search</button>
           <button onClick={onSearchClear}>Clear</button>
         </form>
-      </div>
+      </div><br />
       {
         quizList.map(q => {
           const quizIsLoaded = quiz.question && q.question_id === quiz.question.question_id

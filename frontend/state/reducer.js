@@ -75,15 +75,14 @@ function quizForm(state = initialQuestionForm(), action) {
         return { ...state, [name]: value }
       }
       const [optionName, optionKey] = name.split('-')
-      if (optionKey && Object.keys(state.options).includes(optionKey)) {
+      const options = state.options
+      if (optionKey && Object.keys(options).includes(optionKey)) {
+        const option = state.options[optionKey]
         return {
           ...state,
           options: {
-            ...state.options,
-            [optionKey]: {
-              ...state.options[optionKey],
-              [optionName]: value,
-            },
+            ...options,
+            [optionKey]: { ...option, [optionName]: value },
           }
         }
       }

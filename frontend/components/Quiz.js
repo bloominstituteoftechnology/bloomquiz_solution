@@ -70,7 +70,7 @@ export function Quiz(props) {
               <button className="jumbo-button" onClick={onAnswer} disabled={!option_id}>
                 Submit answer
               </button>
-              {auth.is_admin && <button onClick={onCancel}>Back to List</button>}
+              {auth.is_admin && <button onClick={onCancel}>Back to list</button>}
             </div>
           </>
         ) : 'Loading next quiz...'

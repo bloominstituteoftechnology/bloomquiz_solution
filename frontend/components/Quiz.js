@@ -45,7 +45,6 @@ export function Quiz(props) {
               {
                 auth.is_admin &&
                 <div className="edit">
-                  <button onClick={onCancel}>✖️</button>
                   <button onClick={onEdit(question)}>🔧</button>
                 </div>
               }
@@ -71,6 +70,7 @@ export function Quiz(props) {
               <button className="jumbo-button" onClick={onAnswer} disabled={!option_id}>
                 Submit answer
               </button>
+              {auth.is_admin && <button onClick={onCancel}>Cancel</button>}
             </div>
           </>
         ) : 'Loading next quiz...'

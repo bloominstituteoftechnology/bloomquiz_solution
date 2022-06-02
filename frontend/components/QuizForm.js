@@ -18,7 +18,7 @@ const scale = keyframes`
 const StyledInputGroup = styled.div`
   transform: scaleY(0);
   transform-origin: top center;
-  animation: ${scale} 0.25s forwards;
+  animation: ${scale} 0.15s forwards;
 `
 
 export class QuizForm extends React.Component {

@@ -4,6 +4,7 @@ import * as actions from '../state/action-creators'
 
 export function QuizList(props) {
   const {
+    questionFormSetExisting,
     questionFormReset,
     getQuestionBy,
     getQuizzes,
@@ -22,6 +23,11 @@ export function QuizList(props) {
   const onView = question_id => () => {
     setQuiz(quizList.find(q => q.question_id === question_id))
     navigate('/')
+  }
+  const onEdit = question => () => {
+    setQuiz(question)
+    questionFormSetExisting(question)
+    navigate('/admin/quiz/edit')
   }
   const onSearchTextChange = evt => { // =============== 👉 [Code-Along 10.1] - step 4
     const { name, value } = evt.target
@@ -69,6 +75,7 @@ export function QuizList(props) {
             <div className={`question answer${quizIsLoaded ? ' selected' : ''}`} key={q.question_id}>
               {q.question_title}
               <div className="mini-group">
+                <button onClick={onEdit(q)}>🔧</button>
                 <button onClick={onView(q.question_id)}>👓</button>
               </div>
             </div>
@@ -85,6 +92,7 @@ export default connect(st => ({
   quiz: st.quiz,
   searchText: st.quizSearchForm.searchText, // =============== 👉 [Code-Along 10.1] - step 2.1
 }), {
+  questionFormSetExisting: actions.questionFormSetExisting,
   questionFormReset: actions.questionFormReset,
   getQuestionBy: actions.getQuestionBy,
   getQuizzes: actions.getQuizzes,

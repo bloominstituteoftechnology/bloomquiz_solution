@@ -19,32 +19,26 @@ export function QuizList(props) {
     questionFormReset()
     navigate('/admin/quiz/edit')
   }
-
   const onView = question_id => () => {
     setQuiz(quizList.find(q => q.question_id === question_id))
     navigate('/')
   }
-
   const onSearchTextChange = evt => { // =============== 👉 [Code-Along 10.1] - step 4
     const { name, value } = evt.target
     inputChange({ name, value })
   }
-
   const onSearchClear = evt => {
     evt.preventDefault()
     inputChange({ name: 'searchText', value: '' })
     getQuizzes()
   }
-  
   const onSearch = evt => {
     evt.preventDefault()
     getQuestionBy({ searchText })
   }
-
   const isSearchDisabled = () => {
     return !searchText.trim().length
   }
-
   useEffect(() => { // =============== 👉 [Code-Along 10.1] - step 5
     searchText.trim().length
       ? getQuestionBy({ searchText })

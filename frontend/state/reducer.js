@@ -125,6 +125,8 @@ function quizForm(state = initialQuestionForm(), action) {
 const initialQuiz = {}
 function quiz(state = initialQuiz, action) {
   switch (action.type) {
+    case types.RESET:
+      return initialQuiz
     case types.SET_QUIZ:
       return { option_id: null, question: action.payload }
     case types.QUIZ_SET_SELECTED_OPTION:

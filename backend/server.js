@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+const helmet = require('helmet')
 
 const questionsRouter = require('./api/questions/questions-router')
 const authRouter = require('./api/auth/auth-router')
@@ -13,6 +14,7 @@ const server = express()
 server.use(express.json())
 server.use(express.static(path.join(__dirname, '../dist')))
 server.use(cors())
+server.use(helmet())
 
 server.use(processToken)
 server.use('/api/questions', only(1), questionsRouter)

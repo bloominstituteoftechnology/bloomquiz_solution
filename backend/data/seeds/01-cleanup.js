@@ -1,8 +1,8 @@
-const { clean } = require('knex-cleaner')
-
 exports.seed = async function (knex) {
-  await clean(knex, {
-    mode: 'truncate',
-    ignoreTables: ['knex_migrations', 'knex_migrations_lock'],
-  })
+  await knex('question_search').truncate()
+  await knex('answers').truncate()
+  await knex('options').truncate()
+  await knex('questions').truncate()
+  await knex('users').truncate()
+  await knex('roles').truncate()
 }

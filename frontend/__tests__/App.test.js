@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 import App from '../components/App'
@@ -20,5 +20,9 @@ beforeEach(() => {
 })
 
 it('renders without errors', () => {
-  screen.debug()
+  screen.getByText('Loading next quiz', queryOptions)
+})
+it('loads the first quiz with submit button disabled', async () => {
+  expect(await screen.findByText('Submit answer', queryOptions, waitForOptions))
+    .toBeDisabled()
 })

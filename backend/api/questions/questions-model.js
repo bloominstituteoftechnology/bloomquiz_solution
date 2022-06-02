@@ -25,12 +25,16 @@ async function getByIds(question_ids) {
     .whereIn('question_id', question_ids)
   let options = await db('options').whereIn('question_id', question_ids)
     .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
-  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
   questions.forEach(q => {
     q.options = []
     options.forEach(o => {
       if (o.question_id === q.question_id) {
-        q.options.push(o)
+        q.options.push({
+          option_id: o.option_id,
+          option_text: o.option_text,
+          is_correct: !!o.is_correct,
+          remark: o.remark,
+        })
       }
     })
   })

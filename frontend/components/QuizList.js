@@ -59,7 +59,7 @@ export function QuizList(props) {
             value={searchText}
           />
           <button disabled={isSearchDisabled()}>Search</button>
-          <button disabled={isSearchDisabled()} onClick={onSearchClear}>Clear</button>
+          <button onClick={onSearchClear}>Clear</button>
         </form>
       </div>
       {

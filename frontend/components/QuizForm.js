@@ -71,7 +71,7 @@ export class QuizForm extends React.Component {
     const rightArrow = <>&#9658;&nbsp;&nbsp;</>
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form id="quizForm" onSubmit={this.onSubmit}>
         <h2>{quizForm.question_id ? "Edit" : "Create New"} Question</h2>
         <input
           type="text"
@@ -137,7 +137,7 @@ export class QuizForm extends React.Component {
                         name="is_correct"
                         checked={option.is_correct}
                         onChange={this.onQuestionSetCorrect(optionKey)}
-                      />&nbsp;&nbsp;correct option
+                      />&nbsp;&nbsp;Correct option
                     </label>
                   </StyledInputGroup>
                 }

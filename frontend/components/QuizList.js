@@ -25,22 +25,24 @@ export function QuizList(props) {
     navigate('/')
   }
 
-  const onSearch = () => {
-    getQuestionBy({ searchText })
-  }
-
-  const isSearchDisabled = () => {
-    return !searchText.trim().length
-  }
-
   const onSearchTextChange = evt => { // =============== 👉 [Code-Along 10.1] - step 4
     const { name, value } = evt.target
     inputChange({ name, value })
   }
 
-  const onSearchClear = () => {
+  const onSearchClear = evt => {
+    evt.preventDefault()
     inputChange({ name: 'searchText', value: '' })
     getQuizzes()
+  }
+  
+  const onSearch = evt => {
+    evt.preventDefault()
+    getQuestionBy({ searchText })
+  }
+
+  const isSearchDisabled = () => {
+    return !searchText.trim().length
   }
 
   useEffect(() => { // =============== 👉 [Code-Along 10.1] - step 5
@@ -55,9 +57,16 @@ export function QuizList(props) {
         <button className="jumbo-button" onClick={onNew}>New Quiz</button>
       </div><br />
       <div className="search-bar">
-        <input placeholder="Type keywords" name="searchText" onChange={onSearchTextChange} value={searchText} />
-        <button disabled={isSearchDisabled()} onClick={onSearch}>Search</button>
-        <button disabled={isSearchDisabled()} onClick={onSearchClear}>Clear</button>
+        <form id="searchForm" onSubmit={onSearch}>
+          <input
+            placeholder="Type keywords"
+            name="searchText"
+            onChange={onSearchTextChange}
+            value={searchText}
+          />
+          <button disabled={isSearchDisabled()}>Search</button>
+          <button disabled={isSearchDisabled()} onClick={onSearchClear}>Clear</button>
+        </form>
       </div>
       {
         quizList.map(q => {

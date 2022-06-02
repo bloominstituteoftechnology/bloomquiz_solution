@@ -93,7 +93,8 @@ h2 {
   }
 }
 
-form {
+form#authForm,
+form#quizForm {
   min-width: 450px;
   padding: 0.55rem;
   background-color: $form-background-color;
@@ -102,10 +103,6 @@ form {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  button {
-    width: 100%
-  }
 
   a {
     margin-top: 1.5rem;
@@ -116,6 +113,12 @@ form {
       cursor: pointer;
     }
   }
+}
+
+form#searchForm {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 button {
@@ -342,6 +345,7 @@ code.language-js {
   min-width: 450px;
   max-width: 620px;
 }
+
 .search-bar {
   display: flex;
   height: 2.4rem;

@@ -2,7 +2,7 @@ const db = require('../../data/db-config')
 
 async function getAll() {
   const questions = await db('questions')
-    .select('question_title', 'question_text', 'question_id', 'updated_at')
+    .select('question_title', 'question_text', 'question_id')
     .orderBy('updated_at', 'desc')
   let options = await db('options')
     .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
@@ -19,20 +19,9 @@ async function getAll() {
   return questions
 }
 
-async function getById(question_id) {
-  const question = await db('questions')
-    .select('question_title', 'question_text', 'question_id', 'updated_at')
-    .where('question_id', question_id).first()
-  let options = await db('options').where('question_id', question_id)
-    .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
-  options = options.map(o => ({ ...o, is_correct: !!o.is_correct }))
-  question.options = options
-  return question
-}
-
 async function getByIds(question_ids) {
   const questions = await db('questions')
-    .select('question_title', 'question_text', 'question_id', 'updated_at')
+    .select('question_title', 'question_text', 'question_id')
     .whereIn('question_id', question_ids)
   let options = await db('options').whereIn('question_id', question_ids)
     .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
@@ -53,7 +42,7 @@ async function create(question) {
   const [question_id] = await db('questions').insert(rest, ['question_id'])
   options = options.map(o => ({ ...o, question_id }))
   await db('options').insert(options)
-  const newQuestion = await getById(question_id)
+  const [newQuestion] = await getByIds([question_id])
   return newQuestion
 }
 
@@ -71,7 +60,8 @@ async function editById(question_id, { options, ...rest }) {
   const { question_title, question_text } = rest
   await db('questions').where('question_id', question_id)
     .update({ question_title, question_text })
-  return await getById(question_id)
+  const [editedQuestion] = await getByIds([question_id])
+  return editedQuestion
 }
 
 async function getByText({ text }) {
@@ -85,7 +75,6 @@ async function getByText({ text }) {
 module.exports = {
   getAll,
   create,
-  getById,
   editById,
   getByText,
   getByIds,

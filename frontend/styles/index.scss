@@ -1,8 +1,13 @@
 @use 'reset.scss';
 
 @font-face {
-  font-family: 'Titillium Web';
+  font-family: 'Titillium';
   src: url('../fonts/TitilliumWeb-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumBold';
+  src: url('../fonts/TitilliumWeb-Bold.ttf');
 }
 
 $app-background-color: white;
@@ -18,7 +23,11 @@ $form-border-color: rgb(238, 238, 238);
 
 html {
   min-height: 100vh;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium', sans-serif;
+
+  strong {
+    font-family: 'TitilliumBold', sans-serif;
+  }
 }
 
 body {

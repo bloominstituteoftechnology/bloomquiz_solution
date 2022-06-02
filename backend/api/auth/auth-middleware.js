@@ -51,7 +51,7 @@ function processToken(req, res, next) {
 function only(role_id) {
   return function (req, res, next) {
     if (req?.token?.role_id !== role_id) {
-      return next({ status: 403, message: 'incorrect' })
+      return next({ status: 403, message: 'You lack privileges' })
     }
     next()
   }

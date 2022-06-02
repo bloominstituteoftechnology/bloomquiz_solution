@@ -145,7 +145,7 @@ export class QuizForm extends React.Component {
             )
           })
         }
-        <div className="button-group">
+        <br /><div className="button-group">
           <button className="jumbo-button">Submit</button>
           <button onClick={this.onRedirect('/admin')}>Cancel</button>
         </div>

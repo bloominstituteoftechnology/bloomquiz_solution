@@ -292,8 +292,10 @@ footer {
   min-width: 450px;
   position: relative;
 
-  button.edit {
-    opacity: 0.8;
+  div.edit {
+    display: flex;
+    flex-direction: column;
+    opacity: 0.7;
     position: absolute;
     top: 0;
     right: 0;

@@ -31,6 +31,10 @@ export function Quiz(props) {
     }
   }
 
+  const onCancel = () => {
+    navigate('/admin')
+  }
+
   return (
     <div>
       {
@@ -40,7 +44,10 @@ export function Quiz(props) {
             <div id="quizAnswers">
               {
                 auth.is_admin &&
-                <button className="edit" onClick={onEdit(question)}>🔧</button>
+                <div className="edit">
+                  <button onClick={onCancel}>✖️</button>
+                  <button onClick={onEdit(question)}>🔧</button>
+                </div>
               }
               <Md className="question text md">
                 {question.question_text}

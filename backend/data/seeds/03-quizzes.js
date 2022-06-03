@@ -18,7 +18,7 @@ exports.seed = async function (knex) {
     },
     {
       question_title: 'Median of A Sorted, Even-Length Array of Numbers',
-      question_text: 'The **median** of a sorted, even-length array of numbers is the ___ of the two middle elements.',
+      question_text: 'The **median** of a sorted, even-length array of numbers is the ＿ of the two middle elements.',
     },
     {
       question_title: 'Models in Machine Learning',

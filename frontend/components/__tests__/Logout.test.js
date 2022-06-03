@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App, { resetStore } from '../App'
 import db from '../../../backend/data/db-config'
@@ -31,5 +31,21 @@ beforeEach(() => {
 
 it('renders without errors', async () => {
   await screen.findAllByText('Select', queryOptions, waitForOptions)
-  screen.debug()
+})
+describe('logout', () => {
+  beforeEach(() => {
+    fireEvent.click(screen.getByText('Sign in to save your progress'))
+    fireEvent.change(screen.getByPlaceholderText('Enter username'), { target: { value: 'foo' } })
+    fireEvent.change(screen.getByPlaceholderText('Enter password'), { target: { value: '1234' } })
+    fireEvent.click(screen.getByText('Login'))
+  })
+  it('log in redirects to quizzes screen', async () => {
+    await screen.findAllByText('Select', queryOptions, waitForOptions)
+    expect(screen.queryByText('Sign in to save your progress')).not.toBeInTheDocument()
+  })
+  it('log out redirects back to login screen', async () => {
+    await screen.findAllByText('Select', queryOptions, waitForOptions)
+    fireEvent.click(screen.getByText('Logout'))
+    screen.getByText('Login')
+  })
 })

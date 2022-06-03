@@ -3,6 +3,8 @@ const router = require('express').Router()
 const User = require('../user/user-model')
 const mid = require('./auth-middleware')
 
+const delay = process.env.NODE_ENV === 'testing' ? 0 : 500
+
 router.post('/register', mid.uniqueUsername, async (req, res) => {
   try {
     const { username, password } = req.body
@@ -12,7 +14,7 @@ router.post('/register', mid.uniqueUsername, async (req, res) => {
     })
     setTimeout(() => {
       res.status(201).json({ message: 'Welcome' })
-    }, 500)
+    }, delay)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -27,7 +29,7 @@ router.post('/login', mid.usernameExists, async (req, res) => {
           message: 'Welcome',
           token: mid.generateToken(user),
         })
-      }, 500)
+      }, delay)
     } else {
       res.status(401).json({ message: 'invalid credentials' })
     }

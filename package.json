@@ -9,7 +9,7 @@
     "frontend": "webpack serve --open",
     "backend": "nodemon index.js",
     "backend:test": "cross-env NODE_ENV=testing nodemon index.js",
-    "jest:test": "cross-env NODE_ENV=testing jest",
+    "jest:test": "cross-env NODE_ENV=testing jest --runInBand",
     "test": "fkill :9000 -s && concurrently --handle-input -n api,test --kill-others \"npm:backend:test\" \"npm:jest:test\"",
     "start": "node index.js",
     "migrate": "knex migrate:latest",

@@ -33,18 +33,18 @@ it('renders without errors', async () => {
   await screen.findAllByText('Select', queryOptions, waitForOptions)
 })
 describe('logout', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     fireEvent.click(screen.getByText('Sign in to save your progress'))
     fireEvent.change(screen.getByPlaceholderText('Enter username'), { target: { value: 'foo' } })
     fireEvent.change(screen.getByPlaceholderText('Enter password'), { target: { value: '1234' } })
     fireEvent.click(screen.getByText('Login'))
+    await screen.findAllByText('Select', queryOptions, waitForOptions)
   })
   it('log in redirects to quizzes screen', async () => {
-    await screen.findAllByText('Select', queryOptions, waitForOptions)
     expect(screen.queryByText('Sign in to save your progress')).not.toBeInTheDocument()
   })
   it('log out redirects back to login screen', async () => {
-    await screen.findAllByText('Select', queryOptions, waitForOptions)
+    expect(screen.queryByText('Login')).not.toBeInTheDocument()
     fireEvent.click(screen.getByText('Logout'))
     screen.getByText('Login')
   })

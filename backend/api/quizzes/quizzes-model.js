@@ -82,7 +82,7 @@ async function nextQuiz({ user_id, role_id }) {
 
 async function answerQuiz({ question_id, option_id, user_id }) {
   const option = await db('options').where('option_id', option_id).first()
-  if (user_id) {
+  if (user_id && user_id != 1) {
     await db('answers').insert({ user_id, question_id, correctly_answered: option.is_correct })
   }
   return {

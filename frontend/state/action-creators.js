@@ -91,8 +91,9 @@ export function getGeneralStats() { // =============== 👉 [Code-Along 10.2] - 
       .then(res => {
         dispatch(setGeneralStats(res.data))
       })
-      .catch(() => {
+      .catch((err) => {
         dispatch(reset())
+        setError(err, dispatch)
       })
       .finally(() => {
         dispatch(spinnerOff())
@@ -212,8 +213,9 @@ export function getQuizzes() {
       .then(res => {
         dispatch(setAllQuestions(res.data))
       })
-      .catch(() => {
+      .catch(err => {
         dispatch(reset())
+        setError(err, dispatch)
       })
       .finally(() => {
         dispatch(spinnerOff())
@@ -227,8 +229,9 @@ export function getQuestionBy({ searchText }) {
       .then(res => {
         dispatch(setAllQuestions(res.data))
       })
-      .catch(() => {
+      .catch(err => {
         dispatch(reset())
+        setError(err, dispatch)
       })
       .finally(() => {
         dispatch(spinnerOff())

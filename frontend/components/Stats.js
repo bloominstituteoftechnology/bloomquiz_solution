@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react' // =============== 👉 [Code-Along 10.2] - step 4.1
 import { connect } from 'react-redux'
-import { getGeneralStats, setMessage } from '../state/action-creators'
+import * as actions from '../state/action-creators'
 
 export function Stats(props) {
   const {
@@ -41,6 +41,6 @@ export default connect(st => ({
   auth: st.auth
 }), {
   // action creators
-  getGeneralStats,
-  setMessage,
+  getGeneralStats: actions.getGeneralStats,
+  setMessage: actions.setMessage,
 })(Stats)

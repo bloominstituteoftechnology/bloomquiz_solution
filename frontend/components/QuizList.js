@@ -20,14 +20,14 @@ export function QuizList(props) {
     questionFormReset()
     navigate('/admin/quiz/edit')
   }
-  const onView = question_id => () => {
-    setQuiz(quizList.find(q => q.question_id === question_id))
-    navigate('/')
-  }
-  const onEdit = question => () => {
+  const onAct = question => evt => {
     setQuiz(question)
-    questionFormSetExisting(question)
-    navigate('/admin/quiz/edit')
+    if (evt.target.classList.contains('edit')) {
+      questionFormSetExisting(question)
+      navigate('/admin/quiz/edit')
+    } else {
+      navigate('/')
+    }
   }
   const onSearchTextChange = evt => { // =============== 👉 [Code-Along 10.1] - step 4
     const { name, value } = evt.target
@@ -72,11 +72,14 @@ export function QuizList(props) {
         quizList.map(q => {
           const quizIsLoaded = quiz.question && q.question_id === quiz.question.question_id
           return (
-            <div className={`question answer${quizIsLoaded ? ' selected' : ''}`} key={q.question_id}>
+            <div
+              onClick={onAct(q)}
+              key={q.question_id}
+              className={`question answer${quizIsLoaded ? ' selected' : ''}`}
+            >
               {q.question_title}
               <div className="mini-group">
-                <button onClick={onEdit(q)}>🔧</button>
-                <button onClick={onView(q.question_id)}>👓</button>
+                <button className="edit">🔧</button>
               </div>
             </div>
           )

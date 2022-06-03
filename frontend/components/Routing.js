@@ -38,7 +38,7 @@ export function Routing(props) {
           {
             renderNav &&
             <>
-              <NavLink to="/">{is_admin ? "Preview Quiz" : "Test yourself!"}</NavLink>
+              <NavLink to="/">{is_admin ? "Selected Quiz" : "Test yourself!"}</NavLink>
               {is_admin && <NavLink to="/admin">Quizzes</NavLink>}
               {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
               {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to save your progress</NavLink>}

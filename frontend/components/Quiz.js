@@ -36,12 +36,12 @@ export function Quiz(props) {
   }
 
   return (
-    <div>
+    <div id="quizContainer">
       {
         question ? (
           <>
             {auth.is_admin && <h2>{question.question_title}</h2>}
-            <div id="quizAnswers">
+            <div className="quiz">
               {
                 auth.is_admin &&
                 <div className="edit">

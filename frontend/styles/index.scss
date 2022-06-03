@@ -175,6 +175,7 @@ button.jumbo-button {
 
   button:nth-of-type(1) {
     flex: 3;
+    margin-right: -1px;
   }
 
   button:nth-of-type(2) {
@@ -186,6 +187,24 @@ button.jumbo-button {
   opacity: 0.8;
   margin: 0 0 0 0.5rem;
   display: flex;
+
+  button:nth-of-type(1) {
+    margin-right: -1px;
+  }
+}
+
+.search-bar {
+  display: flex;
+  height: 2.4rem;
+
+  input {
+    border-radius: 0;
+  }
+
+  button:nth-of-type(1) {
+    margin-right: -1px;
+    margin-left: -1px;
+  }
 }
 
 input,
@@ -300,17 +319,25 @@ footer {
   }
 }
 
-#quizAnswers {
-  min-width: 450px;
-  position: relative;
+#quizContainer {
+  padding: 0 0.5rem 0 0.5rem;
 
-  div.edit {
-    display: flex;
-    flex-direction: column;
-    opacity: 0.7;
-    position: absolute;
-    top: 0;
-    right: 0;
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  .quiz {
+    min-width: 450px;
+    position: relative;
+
+    div.edit {
+      display: flex;
+      flex-direction: column;
+      opacity: 0.7;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 }
 
@@ -323,6 +350,7 @@ footer {
 
 .option {
   border: 1px solid $input-border-color;
+  transition: all 0.15s ease-in-out;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   width: 100%;
@@ -354,13 +382,4 @@ code.language-js {
 #quizList {
   min-width: 450px;
   max-width: 620px;
-}
-
-.search-bar {
-  display: flex;
-  height: 2.4rem;
-
-  input {
-    border-radius: 0;
-  }
 }

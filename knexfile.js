@@ -16,6 +16,15 @@ const production = {
   useNullAsDefault: true,
 }
 
+const testing = {
+  client: 'sqlite3',
+  connection: { filename: './backend/data/test.db3' },
+  migrations: { directory: './backend/data/migrations' },
+  seeds: { directory: './backend/data/seeds' },
+  pool: { afterCreate: (conn, done) => conn.run('PRAGMA foreign_keys = ON', done) },
+  useNullAsDefault: true,
+}
+
 const onUpdateTrigger = table => `
   CREATE TRIGGER ${table}_updated_at
   BEFORE UPDATE ON ${table}
@@ -29,5 +38,6 @@ const onUpdateTrigger = table => `
 module.exports = {
   development,
   production,
+  testing,
   onUpdateTrigger,
 }

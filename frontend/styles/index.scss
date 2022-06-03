@@ -294,6 +294,7 @@ footer {
   background-color: $form-background-color;
   border: 1px solid $form-border-color;
   margin-bottom: 0.9rem;
+  transition: all 0.1s ease-in-out;
 
   button {
     &.wide {

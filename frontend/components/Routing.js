@@ -22,7 +22,7 @@ export function Routing(props) {
   const onLogout = () => {
     props.reset()
     props.setMessage({ main: 'Bye' })
-    window.localStorage.removeItem('token')
+    window.localStorage.removeItem('tk_bloomqz')
     navigate('/auth', { replace: true })
   }
 

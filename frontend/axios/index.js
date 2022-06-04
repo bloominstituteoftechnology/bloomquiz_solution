@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 export default function axiosWithAuth() {
-  const token = localStorage.getItem('token')
+  const tk_bloomqz = localStorage.getItem('tk_bloomqz')
 
   return axios.create({
     headers: {
-      Authorization: token,
+      Authorization: tk_bloomqz,
     },
   })
 }

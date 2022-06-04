@@ -120,7 +120,7 @@ export function login({ username, password }) {
     dispatch(spinnerOn())
     axios.post('http://localhost:9000/api/auth/login', { username, password })
       .then(res => {
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('tk_bloomqz', res.data.tk_bloomqz)
         dispatch(spinnerOff())
         dispatch(authFormReset())
         dispatch(setMessage({ main: res.data.message }))

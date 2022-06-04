@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
-import useProfile from '../hooks/profile'
 
 const opacity = keyframes`
   0% { opacity: 0; }
@@ -24,11 +23,10 @@ const StyledMessage = styled.div`
 
 export function Message({ infoMessage }) {
   const { main, code, time } = infoMessage
-  const profile = useProfile()
 
   return (
     <StyledMessage key={time} code={code} id="message">
-      <h1>BloomQuiz</h1> {main}{!!profile.username && `, ${profile.username}`}
+      <h1>BloomQuiz</h1> {main}
     </StyledMessage>
   )
 }

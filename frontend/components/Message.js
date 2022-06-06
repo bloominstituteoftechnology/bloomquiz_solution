@@ -42,9 +42,9 @@ function useHeading(headingStr) {
 
 export function Message({ infoMessage }) {
   const { main, code, time } = infoMessage
-  const [heading, onClick] = useHeading('bloomquiz')
+  const [heading, clickHandler] = useHeading('bloomquiz')
   return (
-    <StyledMessage key={time} code={code} id="message" onClick={onClick}>
+    <StyledMessage key={time} code={code} id="message" onClick={clickHandler}>
       <h1>
         {
           heading.map((char, idx) => {

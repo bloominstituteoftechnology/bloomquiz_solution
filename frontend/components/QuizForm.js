@@ -57,7 +57,7 @@ export class QuizForm extends React.Component {
   onQuestionSetCorrect = optionKey => () => {
     this.props.questionOptionSetCorrect(optionKey)
   }
-  onSubmit = evt => {
+  onSubmit = evt => {// =============== 👉 [Code-Along 11.2] - step 1
     evt.preventDefault()
     const { quizForm, editQuestion, createQuestion } = this.props
     const payload = { ...quizForm, options: Object.values(quizForm.options) }

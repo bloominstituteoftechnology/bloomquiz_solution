@@ -28,7 +28,7 @@ function useHeading(headingStr) {
 
   const [index, setIndex] = useState(-1)
 
-  const moveIndex = () => {
+  const changeHeadingArr = () => {
     const nextIndex = index === maxIndex ? 0 : index + 1
     setIndex(nextIndex)
   }
@@ -37,7 +37,7 @@ function useHeading(headingStr) {
     return index === idx ? upperCase[idx] : lowCase[idx]
   })
 
-  return [headingArr, moveIndex]
+  return [headingArr, changeHeadingArr]
 }
 
 export function Message({ infoMessage }) {

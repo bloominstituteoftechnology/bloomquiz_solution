@@ -167,8 +167,8 @@ export function answerQuiz({ question_id, option_id, getNext }) {
       })
   }
 }
-export function createQuestion(question, redirect) {
-  return function (dispatch) { // =============== 👉 [Code-Along 11.2] - step 2
+export function createQuestion(question, redirect) { // =============== 👉 [Code-Along 11.2] - step 2
+  return function (dispatch) {
     dispatch(spinnerOn())
     axiosWithAuth().post('http://localhost:9000/api/questions', question)
       .then(res => {
@@ -184,8 +184,8 @@ export function createQuestion(question, redirect) {
       })
   }
 }
-export function editQuestion(question, redirect) {
-  return function (dispatch) { // =============== 👉 [Code-Along 11.2] - step 3
+export function editQuestion(question, redirect) { // =============== 👉 [Code-Along 11.2] - step 3
+  return function (dispatch) {
     dispatch(spinnerOn())
     axiosWithAuth().put('http://localhost:9000/api/questions/' + question.question_id, question)
       .then(res => {

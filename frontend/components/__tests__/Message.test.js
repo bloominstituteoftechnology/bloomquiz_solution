@@ -1,6 +1,8 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+
+// see how we are importing the non-connected (to Redux) version of the component
 import { Message } from '../Message'
 
 // to test this component in isolation, without an API, run

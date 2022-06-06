@@ -3,11 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "prep": "npm i && npm run resetdb",
-    "dev": "fkill :9000 :3000 -s && concurrently --handle-input \"npm:backend\" \"npm:frontend\"",
-    "webpack": "cross-env NODE_ENV=production webpack",
-    "heroku-postbuild": "npm run webpack",
     "frontend": "webpack serve --open",
     "backend": "nodemon index.js",
+    "dev": "fkill :9000 :3000 -s && concurrently --handle-input \"npm:backend\" \"npm:frontend\"",
     "backend:test": "cross-env NODE_ENV=testing nodemon index.js",
     "jest:test": "cross-env NODE_ENV=testing jest --runInBand",
     "test": "fkill :9000 -s && concurrently --handle-input -n api,test --kill-others \"npm:backend:test\" \"npm:jest:test\"",
@@ -16,10 +14,6 @@
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "resetdb": "npm run rollback && npm run migrate && npm run seed",
-    "migrate:prod": "heroku run knex migrate:latest -a codealong-web",
-    "rollback:prod": "heroku run knex migrate:rollback -a codealong-web",
-    "seed:prod": "heroku run knex seed:run -a codealong-web",
-    "resetdb:prod": "npm run rollback:prod && npm run migrate:prod && npm run seed:prod",
     "ketchup": "git fetch && git reset --hard origin/lecture && npm run prep"
   },
   "devDependencies": {
@@ -49,7 +43,7 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.1"
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "axios": "^0.27.2",

@@ -48,7 +48,7 @@ export function Message({ infoMessage }) {
       <h1>
         {
           heading.map((char, idx) => {
-            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.5
+            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.4
             return <span style={{ opacity }} key={idx}>{char}</span>
           })
         }

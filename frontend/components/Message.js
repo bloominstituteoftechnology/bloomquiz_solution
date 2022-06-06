@@ -26,10 +26,8 @@ const lowCase = 'bloomquiz'
 const upperCase = 'BLOOMQUIZ'
 const maxIndex = lowCase.length - 1
 
-export function Message({ infoMessage }) {
-  const { main, code, time } = infoMessage
+function useHeading() {
   const [state, setState] = useState(lowCase.split(''))
-
   const onClick = () => {
     // first click
     if (state.join('') === lowCase) {
@@ -48,12 +46,17 @@ export function Message({ infoMessage }) {
     // set the new state
     setState(nextState)
   }
+  return [state, onClick]
+}
 
+export function Message({ infoMessage }) {
+  const { main, code, time } = infoMessage
+  const [heading, onClick] = useHeading()
   return (
     <StyledMessage key={time} code={code} id="message" onClick={onClick}>
       <h1>
         {
-          state.map((char, idx) => {
+          heading.map((char, idx) => {
             const opacity = char === upperCase[idx] ? 1 : 0.5
             return <span style={{ opacity }} key={idx}>{char}</span>
           })

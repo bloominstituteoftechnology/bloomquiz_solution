@@ -11,7 +11,7 @@ const renderApp = ui => {
   window.history.pushState({}, 'Test page', '/')
   return render(ui)
 }
-beforeEach(() => {
+beforeEach(() => { // =============== 👉 [Code-Along 9.2] - step 5
   const infoMessage = { main: 'Welcome', time: new Date().valueOf() }
   renderApp(<Message infoMessage={infoMessage} />)
 })

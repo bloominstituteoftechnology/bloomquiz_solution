@@ -21,14 +21,14 @@ const StyledMessage = styled.div`
   animation: ${opacity} 1s forwards;
 `
 
-function useHeading(headingStr) {
+function useHeading(headingStr) { // =============== 👉 [Code-Along 9.2] - step 1
   const lowCase = headingStr
   const upperCase = headingStr.toUpperCase()
-  const maxIndex = headingStr.length - 1
 
+  const maxIndex = headingStr.length - 1 // =============== 👉 [Code-Along 9.2] - step 2
   const [index, setIndex] = useState(-1)
 
-  const changeHeadingArr = () => {
+  const changeHeadingArr = () => { // =============== 👉 [Code-Along 9.2] - step 3
     const nextIndex = index === maxIndex ? 0 : index + 1
     setIndex(nextIndex)
   }
@@ -48,7 +48,7 @@ export function Message({ infoMessage }) {
       <h1>
         {
           heading.map((char, idx) => {
-            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.4
+            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.4 // =============== 👉 [Code-Along 9.2] - step 4
             return <span style={{ opacity }} key={idx}>{char}</span>
           })
         }

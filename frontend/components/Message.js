@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 
@@ -21,12 +21,45 @@ const StyledMessage = styled.div`
   animation: ${opacity} 1s forwards;
 `
 
+// helpful variables
+const lowCase = 'bloomquiz'
+const upperCase = 'BLOOMQUIZ'
+const maxIndex = lowCase.length - 1
+
 export function Message({ infoMessage }) {
   const { main, code, time } = infoMessage
+  const [state, setState] = useState(lowCase.split(''))
+
+  const onClick = () => {
+    // first click
+    if (state.join('') === lowCase) {
+      return setState('Bloomquiz'.split(''))
+    }
+    // what is the index of the current uppercase letter
+    let index
+    state.forEach((char, idx) => {
+      if (char === upperCase[idx]) index = idx
+    })
+    // avoid mutating the state object
+    let nextState = [...state] // copy of current state
+    nextState[index] = lowCase[index] // current uppercase needs to go back to lowercase
+    const nextIndex = index === maxIndex ? 0 : index + 1 // depends on whether we're at the end
+    nextState[nextIndex] = upperCase[nextIndex] // set the next uppercase letter
+    // set the new state
+    setState(nextState)
+  }
 
   return (
-    <StyledMessage key={time} code={code} id="message">
-      <h1>BloomQuiz</h1> {main}
+    <StyledMessage key={time} code={code} id="message" onClick={onClick}>
+      <h1>
+        {
+          state.map((char, idx) => {
+            const opacity = char === upperCase[idx] ? 1 : 0.5
+            return <span style={{ opacity }} key={idx}>{char}</span>
+          })
+        }
+      </h1>
+      <span>{main}</span>
     </StyledMessage>
   )
 }

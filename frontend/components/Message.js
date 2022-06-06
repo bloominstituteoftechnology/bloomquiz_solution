@@ -22,22 +22,8 @@ const StyledMessage = styled.div`
 `
 
 function useHeading(headingStr) {
-  const lowCase = headingStr
-  const upperCase = headingStr.toUpperCase()
-  const maxIndex = headingStr.length - 1
-
-  const [index, setIndex] = useState(-1)
-
-  const changeHeadingArr = () => {
-    const nextIndex = index === maxIndex ? 0 : index + 1
-    setIndex(nextIndex)
-  }
-
-  const headingArr = lowCase.split('').map((char, idx) => {
-    return index === idx ? upperCase[idx] : lowCase[idx]
-  })
-
-  return [headingArr, changeHeadingArr]
+  console.log(headingStr.split(''))
+  return [headingStr.split(''), Function.prototype]
 }
 
 export function Message({ infoMessage }) {
@@ -48,8 +34,7 @@ export function Message({ infoMessage }) {
       <h1>
         {
           heading.map((char, idx) => {
-            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.5
-            return <span style={{ opacity }} key={idx}>{char}</span>
+            return <span style={{ opacity: 0.4 }} key={idx}>{char}</span>
           })
         }
       </h1>

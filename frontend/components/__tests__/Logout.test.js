@@ -32,7 +32,7 @@ beforeEach(() => {
 it('renders without errors', async () => {
   await screen.findAllByText('Select', queryOptions, waitForOptions)
 })
-describe('logout', () => {
+describe('logout', () => { // =============== 👉 [Code-Along 11.1] - step 5
   beforeEach(async () => {
     fireEvent.click(screen.getByText('Sign in to save your progress'))
     fireEvent.change(screen.getByPlaceholderText('Enter username'), { target: { value: 'foo' } })

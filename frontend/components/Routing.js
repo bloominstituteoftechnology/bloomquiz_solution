@@ -19,7 +19,7 @@ export function Routing(props) {
     props.getAuthStatus()
   }, [location.pathname])
 
-  const onLogout = () => {
+  const onLogout = () => { // =============== 👉 [Code-Along 11.1] - step 1
     props.reset()
     props.setMessage({ main: 'Bye' })
     window.localStorage.removeItem('tk_bloomqz')
@@ -40,7 +40,7 @@ export function Routing(props) {
             <>
               <NavLink to="/">{is_admin ? "Selected Quiz" : "Test yourself!"}</NavLink>
               {is_admin && <NavLink to="/admin">Quizzes</NavLink>}
-              {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>}
+              {is_user && !is_admin && <NavLink to="/stats">Stats</NavLink>} {/* =============== 👉 [Code-Along 11.1] - step 2 */}
               {!is_user && location.pathname !== '/auth' && <NavLink to="/auth">Sign in to save your progress</NavLink>}
             </>
           }
@@ -49,7 +49,7 @@ export function Routing(props) {
           <Route path="/" element={<Quiz navigate={navigate} />} />
           <Route path="auth" element={<AuthForm navigate={navigate} />} />
           <Route path="admin/*" element={<Admin navigate={navigate} />} />
-          <Route path="stats" element={<Stats navigate={navigate} />} />
+          <Route path="stats" element={<Stats navigate={navigate} />} /> {/* =============== 👉 [Code-Along 11.1] - step 3.1 */}
         </Routes>
         <footer>Bloom Institute of Technology {new Date().getFullYear()}</footer>
       </Opacity>

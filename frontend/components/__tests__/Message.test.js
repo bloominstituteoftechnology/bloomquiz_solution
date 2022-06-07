@@ -18,17 +18,17 @@ beforeEach(() => { // =============== 👉 [Code-Along 9.2] - step 5
   renderApp(<Message infoMessage={infoMessage} />)
 })
 
-it('renders the main message', async () => {
+it('renders the main message', () => {
   screen.getByText('Welcome')
 })
-it('renders `bloomquiz` after mounting', async () => {
+it('renders `bloomquiz` after mounting', () => {
   const spans = document.querySelectorAll('h1 span')
   const stateInitial = 'bloomquiz'
   spans.forEach((span, idx) => {
     expect(span.textContent).toBe(stateInitial[idx])
   })
 })
-it('renders `Bloomquiz` after first click', async () => {
+it('renders `Bloomquiz` after first click', () => {
   fireEvent.click(screen.getByText('Welcome'))
   const spans = document.querySelectorAll('h1 span')
   const stateFirstClick = 'Bloomquiz'
@@ -36,7 +36,7 @@ it('renders `Bloomquiz` after first click', async () => {
     expect(span.textContent).toBe(stateFirstClick[idx])
   })
 })
-it('renders `bLoomquiz` after second click', async () => {
+it('renders `bLoomquiz` after second click', () => {
   fireEvent.click(screen.getByText('Welcome'))
   fireEvent.click(screen.getByText('Welcome'))
   const spans = document.querySelectorAll('h1 span')

@@ -9,7 +9,7 @@ import {
   editQuestion,
 } from '../state/action-creators'
 
-import styled, { keyframes } from 'styled-components' // =============== 👉 [Code-Along 9.1] - step 5.1
+import styled, { keyframes } from 'styled-components'
 
 const scale = keyframes`
   100% { transform: scaleY(1); }
@@ -22,14 +22,14 @@ const StyledInputGroup = styled.div`
 `
 
 export class QuizForm extends React.Component {
-  constructor(props) { // =============== 👉 [Code-Along 9.1] - step 1
+  constructor(props) {
     super(props)
     const optionBars = {}
     const { options } = props.quizForm
     Object.keys(options).forEach(key => { optionBars[key] = false })
     this.state = { optionBars }
   }
-  toggleBar = optionKey => () => { // =============== 👉 [Code-Along 9.1] step 2.1
+  toggleBar = optionKey => () => {
     const { optionBars } = this.state
     this.setState({
       ...this.state,
@@ -57,7 +57,7 @@ export class QuizForm extends React.Component {
   onQuestionSetCorrect = optionKey => () => {
     this.props.questionOptionSetCorrect(optionKey)
   }
-  onSubmit = evt => { // =============== 👉 [Code-Along 11.2] - step 1
+  onSubmit = evt => {
     evt.preventDefault()
     const { quizForm, editQuestion, createQuestion } = this.props
     const payload = { ...quizForm, options: Object.values(quizForm.options) }
@@ -97,13 +97,13 @@ export class QuizForm extends React.Component {
             const removeBtnDisabled = Object.keys(quizForm.options).length < 3
             const option = quizForm.options[optionKey]
 
-            const optionIsExpanded = this.state.optionBars[optionKey] // =============== 👉 [Code-Along 9.1] - step 3.1
+            const optionIsExpanded = this.state.optionBars[optionKey]
             const optionSlice = option.option_text.slice(0, 40)
 
             return (
               <div className={`option${option.is_correct ? " truthy" : ""}`} key={optionKey}>
-                <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}> {/* =============== 👉 [Code-Along 9.1] step 2.2 */}
-                  <span> {/* =============== 👉 [Code-Along 9.1] - step 3.2 */}
+                <div className="option-bar" tabIndex="0" onClick={this.toggleBar(optionKey)}>
+                  <span>
                     {optionIsExpanded ? downArrow : rightArrow}
                     {optionHeading}
                     {!optionIsExpanded && optionSlice}
@@ -114,8 +114,8 @@ export class QuizForm extends React.Component {
                     onClick={this.onRemoveOption(optionKey)}>{plusButton}</button>
                 </div>
                 {
-                  optionIsExpanded && // =============== 👉 [Code-Along 9.1] - step 4
-                  <StyledInputGroup className="option-inputs"> {/* =============== 👉 [Code-Along 9.1] - step 5.2 */}
+                  optionIsExpanded &&
+                  <StyledInputGroup className="option-inputs">
                     <textarea
                       maxLength={400}
                       placeholder="Option text"

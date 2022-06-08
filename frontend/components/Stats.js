@@ -14,7 +14,7 @@ export function Stats(props) {
   // =============== 👉 [Code-Along 10.2] - step 5.2
 
   useEffect(() => { // =============== 👉 [Code-Along 11.1] - step 4
-    if (auth.user === false) {
+    if (auth.is_user === false) {
       navigate('/auth')
       setMessage({ main: 'Not allowed there', code: 'red' })
     }

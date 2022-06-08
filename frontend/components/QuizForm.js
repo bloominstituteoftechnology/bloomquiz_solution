@@ -57,13 +57,7 @@ export class QuizForm extends React.Component {
   onQuestionSetCorrect = optionKey => () => {
     this.props.questionOptionSetCorrect(optionKey)
   }
-  onSubmit = evt => {
-    evt.preventDefault()
-    const { quizForm, editQuestion, createQuestion } = this.props
-    const payload = { ...quizForm, options: Object.values(quizForm.options) }
-    const callback = quizForm.question_id ? editQuestion : createQuestion
-    callback(payload, this.onRedirect('/'))
-  }
+  onSubmit = evt => { }
   render() {
     const { quizForm } = this.props
     const plusButton = <>&#10060;</>

@@ -1,27 +1,14 @@
-import React, { useEffect } from 'react' // =============== 👉 [Code-Along 10.2] - step 4.1
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../state/action-creators'
 
 export function Stats(props) {
   const {
-    auth, // =============== 👉 [Code-Along 11.1] - step 3.3
-    setMessage,
-    navigate,
-    stats, // =============== 👉 [Code-Along 10.2] - step 5.1
+    stats,
     getGeneralStats,
   } = props
 
-  // =============== 👉 [Code-Along 10.2] - step 5.2
-
-  useEffect(() => { // =============== 👉 [Code-Along 11.1] - step 4
-    if (auth.user === false) {
-      navigate('/auth')
-      setMessage({ main: 'Not allowed there', code: 'red' })
-    }
-  }, [auth])
-
   useEffect(() => {
-    // =============== 👉 [Code-Along 10.2] - step 5.3
     getGeneralStats()
   }, [])
 
@@ -37,10 +24,8 @@ export function Stats(props) {
 
 export default connect(st => ({
   // mapping state to props
-  stats: st.stats, // =============== 👉 [Code-Along 10.2] - step 4.2
-  auth: st.auth, // =============== 👉 [Code-Along 11.1] - step 3.2
+  stats: st.stats,
 }), {
   // action creators
   getGeneralStats: actions.getGeneralStats,
-  setMessage: actions.setMessage,
 })(Stats)

@@ -57,7 +57,9 @@ export class QuizForm extends React.Component {
   onQuestionSetCorrect = optionKey => () => {
     this.props.questionOptionSetCorrect(optionKey)
   }
-  onSubmit = evt => { }
+  onSubmit = evt => {
+    evt.preventDefault()
+  }
   render() {
     const { quizForm } = this.props
     const plusButton = <>&#10060;</>

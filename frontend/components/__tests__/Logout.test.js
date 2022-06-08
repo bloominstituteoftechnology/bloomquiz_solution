@@ -4,6 +4,10 @@ import '@testing-library/jest-dom/extend-expect'
 import App, { resetStore } from '../App'
 import db from '../../../backend/data/db-config'
 
+// To test the whole app, API included, execute `npm run test`
+// This will crash the `dev` script, which can be easily restarted by typing `rs`
+// or by making any change in the code
+
 jest.setTimeout(750)
 const waitForOptions = { timeout: 150 }
 const queryOptions = { exact: false }

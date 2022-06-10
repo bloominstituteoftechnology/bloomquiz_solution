@@ -16,7 +16,23 @@ const initialQuestionForm = () => ({
   }
 })
 
+const randomizeArray = arr => {
+  const result = [...arr]
+  // In production we should use a fair PRNG, or a CSPRNG
+  for (let idx in result) {
+    const randomIdx = Math.floor(Math.random() * arr.length)
+    // Items that will swap positions
+    const item1 = result[idx]
+    const item2 = result[randomIdx]
+    // Perform the swap
+    result[idx] = item2
+    result[randomIdx] = item1
+  }
+  return result
+}
+
 module.exports = {
   getId,
   initialQuestionForm,
+  randomizeArray,
 }

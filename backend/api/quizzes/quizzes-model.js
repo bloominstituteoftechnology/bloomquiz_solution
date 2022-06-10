@@ -1,19 +1,5 @@
 const db = require('../../data/db-config')
-
-function randomizeArray(arr) {
-  const result = [...arr]
-  // In production we should use a fair PRNG, or a CSPRNG
-  for (let idx in result) {
-    const randomIdx = Math.floor(Math.random() * arr.length)
-    // Items that will swap positions
-    const item1 = result[idx]
-    const item2 = result[randomIdx]
-    // Perform the swap
-    result[idx] = item2
-    result[randomIdx] = item1
-  }
-  return result
-}
+const { randomizeArray } = require('../../../shared/utils')
 
 async function randomQuiz({ role_id }) {
   const [{ question_id }] = await db.raw(`
@@ -34,7 +20,7 @@ async function randomQuiz({ role_id }) {
       acc.question_id = row.question_id
       acc.question_text = row.question_text
 
-      if (role_id === 1) {
+      if (role_id === 1) { // admin user
         acc.question_title = row.question_title
       }
     }
@@ -42,7 +28,7 @@ async function randomQuiz({ role_id }) {
       option_id: row.option_id,
       option_text: row.option_text,
     }
-    if (role_id === 1) {
+    if (role_id === 1) { // admin user
       option.is_correct = !!row.is_correct
     }
     acc.options.push(option)
@@ -63,23 +49,33 @@ async function prevAnswers(user_id) {
   return answers
 }
 
+/**
+ * @param {{ user_id: Number, role_id: Number }} user
+ * @returns {Object}
+ */
 async function nextQuiz({ user_id, role_id }) {
   if (!user_id) {
+    // anon users get a random quiz
     const random = await randomQuiz({ role_id })
     return random
   }
 
   const answers = prevAnswers(user_id)
   if (!answers.length) {
+    // users with no history of answers should get random
     const random = await randomQuiz({ role_id })
     return random
   }
 
-  // TODO: build intelligent question choosing based on the history of answers
+  // TODO: build intelligent quiz choosing based on the history of answers
   const random = await randomQuiz({ role_id })
   return random
 }
 
+/**
+ * @param {{ question_id: number, option_id: number, user_id: number }} answer
+ * @returns {Object}
+ */
 async function answerQuiz({ question_id, option_id, user_id }) {
   const option = await db('options').where('option_id', option_id).first()
   if (user_id && user_id != 1) {
@@ -95,6 +91,4 @@ async function answerQuiz({ question_id, option_id, user_id }) {
 module.exports = {
   nextQuiz,
   answerQuiz,
-  prevAnswers,
-  randomQuiz,
 }

@@ -5,8 +5,8 @@ const helmet = require('helmet')
 
 const questionsRouter = require('./api/questions/questions-router')
 const authRouter = require('./api/auth/auth-router')
-const quizzesRouter = require('./api/quizzes/quizzes-router')
 const statsRouter = require('./api/stats/stats-router')
+const quizzesRouter = require('./api/quizzes/quizzes-router')
 
 const { processToken, only } = require('./api/auth/auth-middleware')
 

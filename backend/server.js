@@ -19,8 +19,8 @@ server.use(helmet())
 server.use(processToken)
 server.use('/api/questions', only(1), questionsRouter)
 server.use('/api/auth', authRouter)
-server.use('/api/quizzes', quizzesRouter)
 server.use('/api/stats', statsRouter)
+server.use('/api/quizzes', quizzesRouter)
 
 // SPA
 server.get('*', (req, res) => {

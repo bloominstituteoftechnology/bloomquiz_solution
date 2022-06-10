@@ -5,7 +5,6 @@ const helmet = require('helmet')
 
 const questionsRouter = require('./api/questions/questions-router')
 const authRouter = require('./api/auth/auth-router')
-const quizzesRouter = require('./api/quizzes/quizzes-router')
 const statsRouter = require('./api/stats/stats-router')
 
 const { processToken, only } = require('./api/auth/auth-middleware')
@@ -19,8 +18,26 @@ server.use(helmet())
 server.use(processToken)
 server.use('/api/questions', only(1), questionsRouter)
 server.use('/api/auth', authRouter)
-server.use('/api/quizzes', quizzesRouter)
 server.use('/api/stats', statsRouter)
+
+// QUIZZES
+server.get('/api/quizzes/next', async (req, res) => {
+  res.json({
+    question_id: 1,
+    question_title: 'The Meaning of Life',
+    question_text: 'What is the meaning of life?',
+    options: [
+      { option_id: 1, option_text: 'Family, Friends and Fun' },
+      { option_id: 2, option_text: 'Success at work' },
+    ]
+  })
+})
+server.post('/api/quizzes/answer', async (req, res) => {
+  res.json({
+    is_correct: true,
+    verdict: `You are CORRECT`,
+  })
+})
 
 // SPA
 server.get('*', (req, res) => {

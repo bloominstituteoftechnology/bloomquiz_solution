@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const questionsRouter = require('./api/questions/questions-router')
 const authRouter = require('./api/auth/auth-router')
 const statsRouter = require('./api/stats/stats-router')
-const quizzesRouter = require('./api/quizzes/quizzes-router')
+const quizzesRouter = require('./api/quizzes/quizzes-router') // =============== 👉 [Code-Along 13.1] - step 1.1
 
 const { processToken, only } = require('./api/auth/auth-middleware')
 
@@ -20,7 +20,9 @@ server.use(processToken)
 server.use('/api/questions', only(1), questionsRouter)
 server.use('/api/auth', authRouter)
 server.use('/api/stats', statsRouter)
-server.use('/api/quizzes', quizzesRouter)
+server.use('/api/quizzes', quizzesRouter) // =============== 👉 [Code-Along 13.1] - step 1.2
+
+// =============== 👉 [Code-Along 13.1] - step 1.3
 
 // SPA
 server.get('*', (req, res) => {

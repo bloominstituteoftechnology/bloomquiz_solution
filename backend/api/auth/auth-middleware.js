@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../user/user-model')
 const secret = process.env.SECRET || 'the secret'
-const yup = require('yup')
+const yup = require('yup') // =============== 👉 [Code-Along 13.2] - step 2
 
 const credentialsSchema = yup.object().shape({
   username: yup.string()
@@ -80,6 +80,8 @@ function isRegisteredUser(req, res) {
     res.json({ is_user: false, is_admin: false })
 }
 
+// =============== 👉 [Code-Along 13.2] - step 1.1
+// =============== 👉 [Code-Along 13.2] - step 3
 async function validateCredentials(req, res, next) {
   try {
     const cast = await credentialsSchema.validate(req.body, { stripUnknown: true })

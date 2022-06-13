@@ -7,9 +7,9 @@ let env = process.env.NODE_ENV || 'development' // remember environment variable
 const delay = env === 'development' ? 500 : 0
 
 router.post('/register',
-  mid.validateCredentials,
+  mid.validateCredentials, // =============== 👉 [Code-Along 13.2] - step 1.2
   mid.uniqueUsername,
-  async (req, res, next) => {
+  async (req, res, next) => { // =============== 👉 [Code-Along 13.2] - step 4
     try {
       const { username, password } = req.credentials
       await User.insert({
@@ -25,9 +25,9 @@ router.post('/register',
   })
 
 router.post('/login',
-  mid.validateCredentials,
+  mid.validateCredentials, // =============== 👉 [Code-Along 13.2] - step 1.2
   mid.usernameExists,
-  async (req, res, next) => {
+  async (req, res, next) => { // =============== 👉 [Code-Along 13.2] - step 5
     try {
       const { password } = req.credentials
       const { user } = req

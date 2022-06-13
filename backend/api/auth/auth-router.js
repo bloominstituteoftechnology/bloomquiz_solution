@@ -3,7 +3,7 @@ const router = require('express').Router()
 const User = require('../user/user-model')
 const mid = require('./auth-middleware')
 
-const delay = process.env.NODE_ENV === 'testing' ? 0 : 500
+const delay = process.env.NODE_ENV === 'development' ? 500 : 0
 
 router.post('/register',
   mid.uniqueUsername,

@@ -7,11 +7,10 @@ let env = process.env.NODE_ENV || 'development' // remember environment variable
 const delay = env === 'development' ? 500 : 0
 
 router.post('/register',
-  mid.validateCredentials,
   mid.uniqueUsername,
-  async (req, res, next) => {
+  async (req, res) => {
     try {
-      const { username, password } = req.credentials
+      const { username, password } = req.body
       await User.insert({
         username,
         password: bcrypt.hashSync(password, 8),
@@ -20,16 +19,15 @@ router.post('/register',
         res.status(201).json({ message: `Welcome, ${username}` })
       }, delay)
     } catch (error) {
-      next(error)
+      res.status(500).json({ message: error.message })
     }
   })
 
 router.post('/login',
-  mid.validateCredentials,
   mid.usernameExists,
-  async (req, res, next) => {
+  async (req, res) => {
     try {
-      const { password } = req.credentials
+      const { password } = req.body
       const { user } = req
       if (bcrypt.compareSync(password, user.password)) {
         setTimeout(() => {
@@ -39,10 +37,10 @@ router.post('/login',
           })
         }, delay)
       } else {
-        next({ status: 401, message: 'invalid credentials' })
+        res.status(401).json({ message: 'invalid credentials' })
       }
     } catch (error) {
-      next(error)
+      res.status(500).json({ message: error.message })
     }
   })
 

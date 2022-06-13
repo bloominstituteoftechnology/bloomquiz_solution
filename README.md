@@ -19,6 +19,11 @@
 2. Launch the project in a development server executing `npm run dev`.
 3. Visit your app by navigating to `http://localhost:3000` with Chrome.
 
+You can optionally run frontend and backend servers separately. __Instead__ of `npm run dev`:
+
+1. `npm run frontend`
+2. `npm run backend` (or spin up the backend using the VSCode's integrated Node debugger.)
+
 ## Accounts
 
 1. __Admin__, username: `admin` password: `admin`

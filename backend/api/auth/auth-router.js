@@ -4,7 +4,7 @@ const User = require('../user/user-model')
 const mid = require('./auth-middleware')
 
 let env = process.env.NODE_ENV || 'development'
-const delay = env !== 'development' ? 500 : 0
+const delay = env === 'development' ? 500 : 0
 
 router.post('/register',
   mid.validateCredentials,

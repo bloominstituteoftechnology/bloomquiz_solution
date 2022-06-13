@@ -34,7 +34,7 @@ router.post('/login',
       if (bcrypt.compareSync(password, user.password)) {
         setTimeout(() => {
           res.json({
-            message: 'Welcome',
+            message: `Welcome, ${user.username}`,
             token: mid.generateToken(user),
           })
         }, delay)

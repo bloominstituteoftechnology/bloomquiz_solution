@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../user/user-model')
 const secret = process.env.SECRET || 'the secret'
+const yup = require('yup')
 
 function generateToken(user) {
   const payload = {
@@ -66,6 +67,28 @@ function isRegisteredUser(req, res) {
     res.json({ is_user: false, is_admin: false })
 }
 
+async function validateCredentials(req, res, next) {
+  const schema = yup.object().shape({
+    username: yup.string()
+      .typeError('username must be a string').trim()
+      .required('username is mandatory')
+      .min(3, 'username must be at least 3 chars')
+      .max(100, 'username must be at most 100 chars'),
+    password: yup.string()
+      .typeError('password must be a string')
+      .required('password is mandatory')
+      .min(4, 'password must be at least 4 chars')
+      .max(100, 'password must be at most 100 chars'),
+  })
+  try {
+    const cast = await schema.validate(req.body, { stripUnknown: true })
+    req.credentials = cast
+    next()
+  } catch (err) {
+    next({ status: 422, message: err.message })
+  }
+}
+
 module.exports = {
   restrict,
   uniqueUsername,
@@ -74,4 +97,5 @@ module.exports = {
   processToken,
   isRegisteredUser,
   only,
+  validateCredentials,
 }

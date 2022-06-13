@@ -10,7 +10,7 @@ router.post('/register',
   mid.uniqueUsername,
   async (req, res, next) => {
     try {
-      const { username, password } = req.body
+      const { username, password } = req.credentials
       await User.insert({
         username,
         password: bcrypt.hashSync(password, 8),
@@ -28,7 +28,8 @@ router.post('/login',
   mid.usernameExists,
   async (req, res, next) => {
     try {
-      const { body: { password }, user } = req
+      const { password } = req.credentials
+      const { user } = req
       if (bcrypt.compareSync(password, user.password)) {
         setTimeout(() => {
           res.json({

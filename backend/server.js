@@ -37,11 +37,11 @@ server.use((req, res) => {
 // ERR
 server.use((err, req, res, next) => { // eslint-disable-line
   const { message, stack, status = 500 } = err
-  const response = { message, status }
+  const response = { message }
   if (process.env.NODE_ENV !== 'production' && stack) {
     response.stack = stack
   }
-  res.status(err.status).json(response)
+  res.status(status).json(response)
 })
 
 module.exports = server

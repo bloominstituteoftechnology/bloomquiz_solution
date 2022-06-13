@@ -17,7 +17,7 @@ router.post('/register',
         password: bcrypt.hashSync(password, 8),
       })
       setTimeout(() => {
-        res.status(201).json({ message: 'Welcome' })
+        res.status(201).json({ message: `Welcome, ${username}` })
       }, delay)
     } catch (error) {
       next(error)

@@ -3,7 +3,7 @@ const router = require('express').Router()
 const User = require('../user/user-model')
 const mid = require('./auth-middleware')
 
-let env = process.env.NODE_ENV || 'development'
+let env = process.env.NODE_ENV || 'development' // remember environment variables??
 const delay = env === 'development' ? 500 : 0
 
 router.post('/register',

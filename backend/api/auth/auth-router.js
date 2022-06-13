@@ -6,8 +6,9 @@ const mid = require('./auth-middleware')
 const delay = process.env.NODE_ENV === 'development' ? 500 : 0
 
 router.post('/register',
+  mid.validateCredentials,
   mid.uniqueUsername,
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const { username, password } = req.body
       await User.insert({
@@ -18,13 +19,14 @@ router.post('/register',
         res.status(201).json({ message: 'Welcome' })
       }, delay)
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      next(error)
     }
   })
 
 router.post('/login',
+  mid.validateCredentials,
   mid.usernameExists,
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const { body: { password }, user } = req
       if (bcrypt.compareSync(password, user.password)) {
@@ -35,10 +37,10 @@ router.post('/login',
           })
         }, delay)
       } else {
-        res.status(401).json({ message: 'invalid credentials' })
+        next({ status: 401, message: 'invalid credentials' })
       }
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      next(error)
     }
   })
 

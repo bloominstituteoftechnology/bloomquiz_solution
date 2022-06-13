@@ -3,6 +3,19 @@ const User = require('../user/user-model')
 const secret = process.env.SECRET || 'the secret'
 const yup = require('yup')
 
+const credentialsSchema = yup.object().shape({
+  username: yup.string()
+    .typeError('username must be a string').trim()
+    .required('username is mandatory')
+    .min(3, 'username must be at least 3 chars')
+    .max(100, 'username must be at most 100 chars'),
+  password: yup.string()
+    .typeError('password must be a string')
+    .required('password is mandatory')
+    .min(4, 'password must be at least 4 chars')
+    .max(100, 'password must be at most 100 chars'),
+})
+
 function generateToken(user) {
   const payload = {
     user_id: user.user_id,
@@ -68,20 +81,8 @@ function isRegisteredUser(req, res) {
 }
 
 async function validateCredentials(req, res, next) {
-  const schema = yup.object().shape({
-    username: yup.string()
-      .typeError('username must be a string').trim()
-      .required('username is mandatory')
-      .min(3, 'username must be at least 3 chars')
-      .max(100, 'username must be at most 100 chars'),
-    password: yup.string()
-      .typeError('password must be a string')
-      .required('password is mandatory')
-      .min(4, 'password must be at least 4 chars')
-      .max(100, 'password must be at most 100 chars'),
-  })
   try {
-    const cast = await schema.validate(req.body, { stripUnknown: true })
+    const cast = await credentialsSchema.validate(req.body, { stripUnknown: true })
     req.credentials = cast
     next()
   } catch (err) {

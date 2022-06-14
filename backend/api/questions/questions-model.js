@@ -26,8 +26,8 @@ async function getByIds(question_ids) {
 }
 
 async function getAll() {
-  const all = await getByIds([])
-  return all
+  const questions = await getByIds([])
+  return questions
 }
 
 async function create(question) {

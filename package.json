@@ -16,7 +16,7 @@
     "down": "knex migrate:down",
     "seed": "knex seed:run",
     "resetdb": "npm run rollback && npm run migrate && npm run seed",
-    "ketchup": "git fetch && git reset --hard origin/lecture && rm backend/data/dev.db3 && npm run prep"
+    "ketchup": "git fetch && git reset --hard origin/lecture && rm backend/data/*.db3 && npm run prep"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",

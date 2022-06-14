@@ -1,17 +1,13 @@
 const db = require('../../data/db-config')
 
 async function get(question_ids) {
-  const questionsQuery = db('questions')
+  const questions = await db('questions')
     .select('question_title', 'question_text', 'question_id')
     .orderBy('updated_at', 'desc')
-  const optionsQuery = db('options')
+    .whereIn('question_id', question_ids)
+  const options = await db('options')
     .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
-  if (question_ids) {
-    questionsQuery.whereIn('question_id', question_ids)
-    optionsQuery.whereIn('question_id', question_ids)
-  }
-  const questions = await questionsQuery
-  const options = await optionsQuery
+    .whereIn('question_id', question_ids)
   questions.forEach(q => {
     q.options = []
     options.forEach(o => {
@@ -26,21 +22,33 @@ async function get(question_ids) {
     })
   })
   return questions
-  // return [{
-  //   question_title: "Bilbo's Pocket",
-  //   question_text: "What's in Bilbo's pocket?",
-  //   question_id: 1,
-  //   options: [
-  //     { option_id: 1, option_text: "The One Ring.", is_correct: true, remark: null },
-  //     { option_id: 2, option_text: "Hand.", is_correct: false, remark: null },
-  //     { option_id: 3, option_text: "Nothing.", is_correct: false, remark: null },
-  //   ]
-  // }]
 }
 
 async function getAll() {
-  const questions = await get()
-  return questions
+  const rows = await db('questions as q')
+    .join('options as o', 'q.question_id', 'o.question_id')
+    .orderBy('q.updated_at', 'desc')
+    .select('q.question_id', 'question_title', 'question_text', 'option_id', 'option_text', 'remark', 'is_correct')
+  const reduced = rows.reduce((acc, row) => {
+    const question = {
+      question_title: row.question_title,
+      question_text: row.question_text,
+      question_id: row.question_id,
+    }
+    const option = {
+      option_id: row.option_id,
+      option_text: row.option_text,
+      is_correct: !!row.is_correct,
+      remark: row.remark,
+    }
+    if (!acc[row.question_id]) {
+      acc[row.question_id] = { ...question, options: [option] }
+    } else {
+      acc[row.question_id].options.push(option)
+    }
+    return acc
+  }, {})
+  return Object.values(reduced)
 }
 
 async function create(question) {

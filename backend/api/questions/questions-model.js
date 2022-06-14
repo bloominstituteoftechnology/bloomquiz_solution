@@ -30,25 +30,26 @@ async function getAll() {
     .orderBy('q.updated_at', 'desc')
     .select('q.question_id', 'question_title', 'question_text', 'option_id', 'option_text', 'remark', 'is_correct')
   const reduced = rows.reduce((acc, row) => {
-    const question = {
+    const q = {
       question_title: row.question_title,
       question_text: row.question_text,
       question_id: row.question_id,
     }
-    const option = {
+    const o = {
       option_id: row.option_id,
       option_text: row.option_text,
       is_correct: !!row.is_correct,
       remark: row.remark,
     }
-    if (!acc[row.question_id]) {
-      acc[row.question_id] = { ...question, options: [option] }
+    if (q.question_id !== acc.question_id) {
+      acc.questions.push({ ...q, options: [o] })
+      acc.question_id = q.question_id
     } else {
-      acc[row.question_id].options.push(option)
+      acc.questions[acc.questions.length - 1].options.push(o)
     }
     return acc
-  }, {})
-  return Object.values(reduced)
+  }, { question_id: null, questions: [] })
+  return reduced.questions
 }
 
 async function create(question) {

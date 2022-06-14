@@ -29,7 +29,6 @@ exports.up = async function (knex) {
       questions.timestamps(false, true)
       questions.string('question_title', 100).notNullable()
       questions.string('question_text', 500).notNullable()
-      questions.boolean('question_active').notNullable().defaultTo(true)
     }).then(() => knex.raw(onUpdateTrigger('questions')))
 
   await knex.schema

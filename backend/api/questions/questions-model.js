@@ -1,27 +1,16 @@
 const db = require('../../data/db-config')
 
 async function get(question_ids) {
-  const questions = await db('questions')
-    .select('question_title', 'question_text', 'question_id')
-    .orderBy('updated_at', 'desc')
-    .whereIn('question_id', question_ids)
-  const options = await db('options')
-    .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
-    .whereIn('question_id', question_ids)
-  questions.forEach(q => {
-    q.options = []
-    options.forEach(o => {
-      if (o.question_id === q.question_id) {
-        q.options.push({
-          option_id: o.option_id,
-          option_text: o.option_text,
-          is_correct: !!o.is_correct,
-          remark: o.remark,
-        })
-      }
-    })
-  })
-  return questions
+  return [{
+    question_title: "Bilbo's Pocket",
+    question_id: 1,
+    question_text: "What's in Bilbo's pocket?",
+    options: [
+      { option_id: 1, option_text: "The One Ring.", is_correct: true, remark: null },
+      { option_id: 2, option_text: "Hand.", is_correct: false, remark: null },
+      { option_id: 3, option_text: "Nothing.", is_correct: false, remark: null },
+    ]
+  }]
 }
 
 async function getAll() {

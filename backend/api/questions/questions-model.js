@@ -29,8 +29,8 @@ async function getAll() {
     .join('options as o', 'q.question_id', 'o.question_id')
     .orderBy('q.updated_at', 'desc')
     .select(
-      'q.question_id', 'question_title', 'question_text',
-      'option_id', 'option_text', 'remark', 'is_correct'
+      'q.question_id', 'q.question_title', 'q.question_text',
+      'o.option_id', 'o.option_text', 'o.remark', 'o.is_correct'
     )
   const reduced = rows.reduce((acc, row) => {
     const q = {

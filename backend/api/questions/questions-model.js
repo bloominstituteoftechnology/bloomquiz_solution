@@ -1,14 +1,14 @@
 const db = require('../../data/db-config')
 
 async function get(question_ids) {
-  const questions = await db('questions') // =============== 👉 [Code-Along 14.1] - step 2
+  const questions = await db('questions')
     .select('question_title', 'question_text', 'question_id')
     .orderBy('updated_at', 'desc')
     .whereIn('question_id', question_ids)
   const options = await db('options')
     .select('option_id', 'option_text', 'is_correct', 'remark', 'question_id')
     .whereIn('question_id', question_ids)
-  questions.forEach(q => { // =============== 👉 [Code-Along 14.1] - step 4
+  questions.forEach(q => {
     q.options = []
     options.forEach(o => {
       if (o.question_id === q.question_id) {

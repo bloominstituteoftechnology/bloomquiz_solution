@@ -28,7 +28,10 @@ async function getAll() {
   const rows = await db('questions as q')
     .join('options as o', 'q.question_id', 'o.question_id')
     .orderBy('q.updated_at', 'desc')
-    .select('q.question_id', 'question_title', 'question_text', 'option_id', 'option_text', 'remark', 'is_correct')
+    .select(
+      'q.question_id', 'question_title', 'question_text',
+      'option_id', 'option_text', 'remark', 'is_correct'
+    )
   const reduced = rows.reduce((acc, row) => {
     const q = {
       question_title: row.question_title,
@@ -41,15 +44,15 @@ async function getAll() {
       is_correct: !!row.is_correct,
       remark: row.remark,
     }
-    if (q.question_id !== acc.question_id) {
-      acc.questions.push({ ...q, options: [o] })
-      acc.question_id = q.question_id
+    if (acc.has(q.question_id)) {
+      const question = acc.get(q.question_id)
+      question.options.push(o)
     } else {
-      acc.questions[acc.questions.length - 1].options.push(o)
+      acc.set(q.question_id, { ...q, options: [o] })
     }
     return acc
-  }, { question_id: null, questions: [] })
-  return reduced.questions
+  }, new Map)
+  return Array.from(reduced.values())
 }
 
 async function create(question) {

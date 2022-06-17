@@ -25,14 +25,14 @@ async function get(question_ids) {
 }
 
 async function getAll() {
-  const rows = await db('questions as q')
+  const rows = await db('questions as q') // =============== 👉 [Code-Along 14.2] - step 2
     .join('options as o', 'q.question_id', 'o.question_id')
     .orderBy('q.updated_at', 'desc')
     .select(
       'q.question_id', 'q.question_title', 'q.question_text',
       'o.option_id', 'o.option_text', 'o.remark', 'o.is_correct'
     )
-  const reduced = rows.reduce((acc, row) => {
+  const reduced = rows.reduce((acc, row) => { // =============== 👉 [Code-Along 14.2] - step 4
     const q = {
       question_title: row.question_title,
       question_text: row.question_text,

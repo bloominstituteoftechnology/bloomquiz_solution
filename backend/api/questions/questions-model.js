@@ -25,34 +25,25 @@ async function get(question_ids) {
 }
 
 async function getAll() {
-  const rows = await db('questions as q')
-    .join('options as o', 'q.question_id', 'o.question_id')
-    .orderBy('q.updated_at', 'desc')
-    .select(
-      'q.question_id', 'q.question_title', 'q.question_text',
-      'o.option_id', 'o.option_text', 'o.remark', 'o.is_correct'
-    )
-  const reduced = rows.reduce((acc, row) => {
-    const q = {
-      question_title: row.question_title,
-      question_text: row.question_text,
-      question_id: row.question_id,
-    }
-    const o = {
-      option_id: row.option_id,
-      option_text: row.option_text,
-      is_correct: !!row.is_correct,
-      remark: row.remark,
-    }
-    if (acc.has(q.question_id)) {
-      const question = acc.get(q.question_id)
-      question.options.push(o)
-    } else {
-      acc.set(q.question_id, { ...q, options: [o] })
-    }
-    return acc
-  }, new Map)
-  return Array.from(reduced.values())
+  return [{
+    question_id: 1,
+    question_title: "Bilbo's Pocket",
+    question_text: "What's in Bilbo's pocket?",
+    options: [
+      { option_id: 1, option_text: "The One Ring.", is_correct: true, remark: null },
+      { option_id: 2, option_text: "Hand.", is_correct: false, remark: null },
+      { option_id: 3, option_text: "Nothing.", is_correct: false, remark: null },
+    ]
+  },
+  {
+    question_id: 2,
+    question_title: "Function Statements VS. Function Expressions",
+    question_text: "The following code is a function ＿.\n\n```js\nfunction foo() {\n  return \"bar\";\n}\n````",
+    options: [
+      { option_id: 4, option_text: "statement", is_correct: true, remark: null },
+      { option_id: 5, option_text: "expression", is_correct: false, remark: null },
+    ]
+  }]
 }
 
 async function create(question) {

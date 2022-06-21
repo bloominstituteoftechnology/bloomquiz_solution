@@ -28,6 +28,16 @@ function generateToken(user) {
   return jwt.sign(payload, secret, options)
 }
 
+function processToken(req, res, next) {
+  const token = req.headers.authorization
+  if (!token) return next() // anon user
+
+  jwt.verify(token, secret, (err, decoded) => {
+    if (!err) req.token = decoded
+    next()
+  })
+}
+
 function restrict(req, res, next) {
   const token = req.headers.authorization
   if (!token) return next({ status: 401, message: 'token required' })
@@ -46,16 +56,6 @@ function only(role_id) {
     }
     next()
   }
-}
-
-function processToken(req, res, next) {
-  const token = req.headers.authorization
-  if (!token) return next() // anon user
-
-  jwt.verify(token, secret, (err, decoded) => {
-    if (!err) req.token = decoded
-    next()
-  })
 }
 
 async function uniqueUsername(req, res, next) {

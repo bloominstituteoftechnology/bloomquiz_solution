@@ -1,10 +1,14 @@
 const db = require('../../data/db-config')
 const { randomizeArray } = require('../../../shared/utils')
 
-async function randomQuiz({ role_id }) {
+async function getRandomQuizId() {
   const [{ question_id }] = await db.raw(`
     SELECT question_id FROM questions ORDER BY RANDOM() LIMIT 1
   `)
+  return question_id
+}
+
+async function getQuiz({ question_id, role_id }) {
   const rows = await db.raw(`
     SELECT
       q.question_id, q.question_text, q.question_title,
@@ -39,14 +43,10 @@ async function randomQuiz({ role_id }) {
   return result
 }
 
-async function prevAnswers(user_id) {
-  const answers = await db('answers')
-    .where('user_id', user_id)
-    .groupBy('question_id')
-    .count('question_id')
-    .sum('correctly_answered')
-    .select('question_id')
-  return answers
+async function getRandomQuiz({ role_id }) {
+  const question_id = await getRandomQuizId()
+  const quiz = await getQuiz({ question_id, role_id })
+  return quiz
 }
 
 // =============== 👉 [Code-Along 13.1] - step 2
@@ -55,22 +55,11 @@ async function prevAnswers(user_id) {
  * @returns {Object}
  */
 async function nextQuiz({ user_id, role_id }) {
-  if (!user_id) {
-    // anon users get a random quiz
-    const random = await randomQuiz({ role_id })
-    return random
+  if (user_id) {
+    // TODO: build intelligent quiz choosing based on the history of answers of the user
   }
-
-  const answers = prevAnswers(user_id)
-  if (!answers.length) {
-    // users with no history of answers should get random
-    const random = await randomQuiz({ role_id })
-    return random
-  }
-
-  // TODO: build intelligent quiz choosing based on the history of answers
-  const random = await randomQuiz({ role_id })
-  return random
+  const randomQuiz = await getRandomQuiz({ role_id })
+  return randomQuiz
 }
 
 /**

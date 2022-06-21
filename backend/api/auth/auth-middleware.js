@@ -39,6 +39,15 @@ function restrict(req, res, next) {
   })
 }
 
+function only(role_id) {
+  return function (req, res, next) {
+    if (req?.token?.role_id !== role_id) {
+      return next({ status: 403, message: 'You lack privileges' })
+    }
+    next()
+  }
+}
+
 function processToken(req, res, next) {
   const token = req.headers.authorization
   if (!token) return next() // anon user
@@ -47,15 +56,6 @@ function processToken(req, res, next) {
     if (!err) req.token = decoded
     next()
   })
-}
-
-function only(role_id) {
-  return function (req, res, next) {
-    if (req?.token?.role_id !== role_id) {
-      return next({ status: 403, message: 'You lack privileges' })
-    }
-    next()
-  }
 }
 
 async function uniqueUsername(req, res, next) {

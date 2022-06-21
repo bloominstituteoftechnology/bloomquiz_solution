@@ -30,13 +30,13 @@ function generateToken(user) {
 
 async function uniqueUsername(req, res, next) {
   const user = await User.getByUsername(req.body.username)
-  if (user) return res.status(422).json({ message: 'username taken' })
+  if (user) return next({ status: 422, message: 'username taken' })
   next()
 }
 
 async function usernameExists(req, res, next) {
   const user = await User.getByUsername(req.body.username)
-  if (!user) return res.status(401).json({ message: 'invalid credentials' })
+  if (!user) return next({ status: 401, message: 'invalid credentials' })
   req.user = user
   next()
 }

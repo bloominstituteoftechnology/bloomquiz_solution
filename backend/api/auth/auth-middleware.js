@@ -28,19 +28,6 @@ function generateToken(user) {
   return jwt.sign(payload, secret, options)
 }
 
-async function uniqueUsername(req, res, next) {
-  const user = await User.getByUsername(req.body.username)
-  if (user) return next({ status: 422, message: 'username taken' })
-  next()
-}
-
-async function usernameExists(req, res, next) {
-  const user = await User.getByUsername(req.body.username)
-  if (!user) return next({ status: 401, message: 'invalid credentials' })
-  req.user = user
-  next()
-}
-
 function restrict(req, res, next) {
   const token = req.headers.authorization
   if (!token) return next({ status: 401, message: 'token required' })
@@ -69,6 +56,19 @@ function only(role_id) {
     }
     next()
   }
+}
+
+async function uniqueUsername(req, res, next) {
+  const user = await User.getByUsername(req.body.username)
+  if (user) return next({ status: 422, message: 'username taken' })
+  next()
+}
+
+async function usernameExists(req, res, next) {
+  const user = await User.getByUsername(req.body.username)
+  if (!user) return next({ status: 401, message: 'invalid credentials' })
+  req.user = user
+  next()
 }
 
 function isRegisteredUser(req, res) {

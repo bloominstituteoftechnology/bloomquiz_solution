@@ -18,7 +18,7 @@ const credentialsSchema = yup.object().shape({
 
 function generateToken(user) { // used in login endpoint
   const payload = {
-    user_id: user.user_id,
+    sub: user.user_id,
     username: user.username,
     role_id: user.role_id,
   }

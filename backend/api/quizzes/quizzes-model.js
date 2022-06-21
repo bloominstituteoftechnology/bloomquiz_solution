@@ -49,7 +49,7 @@ async function prevAnswers(user_id) {
   return answers
 }
 
-// =============== 👉 [Code-Along 13.1] - step 3
+// =============== 👉 [Code-Along 13.1] - step 2
 /**
  * @param {{ user_id: Number, role_id: Number }} user
  * @returns {Object}

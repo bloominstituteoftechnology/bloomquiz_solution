@@ -43,7 +43,7 @@ describe('getQuiz', () => {
       question_title: "Bilbo's Pocket",
       question_text: "What's in Bilbo's pocket?",
     }
-    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 })
+    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 1 })
     expect(question).toMatchObject(expectedQuestion)
     expect(options).toEqual(expect.arrayContaining(expectedOptions))
   })

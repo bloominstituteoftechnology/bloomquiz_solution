@@ -16,7 +16,7 @@ const credentialsSchema = yup.object().shape({
     .max(100, 'password must be at most 100 chars'),
 })
 
-function generateToken(user) {
+function generateToken(user) { // used in login endpoint
   const payload = {
     user_id: user.user_id,
     username: user.username,
@@ -28,7 +28,7 @@ function generateToken(user) {
   return jwt.sign(payload, secret, options)
 }
 
-function processToken(req, res, next) {
+function processToken(req, res, next) { // used before the routers, in server.js
   const token = req.headers.authorization
   if (!token) return next() // anon user
 
@@ -38,7 +38,7 @@ function processToken(req, res, next) {
   })
 }
 
-function restrict(req, res, next) {
+function restrict(req, res, next) { // used with the stats router, in server.js
   const token = req.headers.authorization
   if (!token) return next({ status: 401, message: 'token required' })
 
@@ -49,7 +49,7 @@ function restrict(req, res, next) {
   })
 }
 
-function only(role_id) {
+function only(role_id) { // used with the questions router, in server.js
   return function (req, res, next) {
     if (req?.token?.role_id !== role_id) {
       return next({ status: 403, message: 'You lack privileges' })

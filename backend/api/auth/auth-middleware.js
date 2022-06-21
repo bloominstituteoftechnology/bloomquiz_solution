@@ -54,7 +54,6 @@ function processToken(req, res, next) {
 
   jwt.verify(token, secret, (err, decoded) => {
     if (!err) req.token = decoded
-    else delete req.token
     next()
   })
 }

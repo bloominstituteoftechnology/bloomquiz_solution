@@ -15,8 +15,8 @@ const credentialsSchema = yup.object().shape({
     .min(4, 'password must be at least 4 chars')
     .max(100, 'password must be at most 100 chars'),
 })
-
-function generateToken(user) { // used in login endpoint
+// used in login endpoint
+function generateToken(user) { // =============== 👉 [Code-Along 15.1] - step 1
   const payload = {
     sub: user.user_id,
     username: user.username,
@@ -27,8 +27,8 @@ function generateToken(user) { // used in login endpoint
   }
   return jwt.sign(payload, secret, options)
 }
-
-function processToken(req, res, next) { // used before the routers, in server.js
+// used before the routers, in server.js
+function processToken(req, res, next) { // =============== 👉 [Code-Along 15.1] - steps 2 and 5
   const token = req.headers.authorization
   if (!token) return next() // anon user
 
@@ -37,8 +37,8 @@ function processToken(req, res, next) { // used before the routers, in server.js
     next()
   })
 }
-
-function restrict(req, res, next) { // used with the stats router, in server.js
+// used with the stats router, in server.js
+function restrict(req, res, next) { // =============== 👉 [Code-Along 15.1] - step 3
   const token = req.headers.authorization
   if (!token) return next({ status: 401, message: 'token required' })
 
@@ -48,8 +48,8 @@ function restrict(req, res, next) { // used with the stats router, in server.js
     next()
   })
 }
-
-function only(role_id) { // used with the questions router, in server.js
+// used with the questions router, in server.js
+function only(role_id) { // =============== 👉 [Code-Along 15.1] - step 4
   return function (req, res, next) {
     if (req?.token?.role_id !== role_id) {
       return next({ status: 403, message: 'You lack privileges' })

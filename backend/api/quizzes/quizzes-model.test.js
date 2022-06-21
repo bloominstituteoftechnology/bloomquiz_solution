@@ -1,4 +1,5 @@
 import db from '../../data/db-config'
+import { getQuiz } from './quizzes-model'
 
 jest.setTimeout(750)
 
@@ -13,8 +14,37 @@ beforeEach(async () => {
   await db.seed.run()
 })
 
-describe('thing', () => {
-  test('environmnet', () => {
-    expect(process.env.NODE_ENV).toBe('testing')
+test('environmnet', () => {
+  expect(process.env.NODE_ENV).toBe('testing')
+})
+describe('getQuiz', () => {
+  test('non-admin user', async () => {
+    const expectedOptions = [
+      { option_id: 1, option_text: 'The One Ring.' },
+      { option_id: 2, option_text: 'Hand.' },
+      { option_id: 3, option_text: 'Nothing.' },
+    ]
+    const expectedQuestion = {
+      question_id: 1,
+      question_text: "What's in Bilbo's pocket?",
+    }
+    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 })
+    expect(question).toMatchObject(expectedQuestion)
+    expect(options).toEqual(expect.arrayContaining(expectedOptions))
+  })
+  test('admin user', async () => {
+    const expectedOptions = [
+      { option_id: 1, option_text: 'The One Ring.', is_correct: true },
+      { option_id: 2, option_text: 'Hand.', is_correct: false },
+      { option_id: 3, option_text: 'Nothing.', is_correct: false },
+    ]
+    const expectedQuestion = {
+      question_id: 1,
+      question_title: "Bilbo's Pocket",
+      question_text: "What's in Bilbo's pocket?",
+    }
+    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 })
+    expect(question).toMatchObject(expectedQuestion)
+    expect(options).toEqual(expect.arrayContaining(expectedOptions))
   })
 })

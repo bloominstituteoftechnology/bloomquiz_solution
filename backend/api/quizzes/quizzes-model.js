@@ -19,13 +19,15 @@ async function getQuiz({ question_id, role_id }) {
     WHERE q.question_id = ?
   `, [question_id])
 
-  const result = rows.reduce((acc, row) => {
-    if (!acc.question_id) {
-      acc.question_id = row.question_id
-      acc.question_text = row.question_text
+  let result = { options: [] }
+
+  for (let row of rows) {
+    if (!result.question_id) {
+      result.question_id = row.question_id
+      result.question_text = row.question_text
 
       if (role_id === 1) { // admin user
-        acc.question_title = row.question_title
+        result.question_title = row.question_title
       }
     }
     const option = {
@@ -35,11 +37,10 @@ async function getQuiz({ question_id, role_id }) {
     if (role_id === 1) { // admin user
       option.is_correct = !!row.is_correct
     }
-    acc.options.push(option)
-    return acc
-  }, { options: [] })
-  const randomOptions = randomizeArray(result.options)
-  result.options = randomOptions
+    result.options.push(option)
+  }
+
+  result.options = randomizeArray(result.options)
   return result
 }
 

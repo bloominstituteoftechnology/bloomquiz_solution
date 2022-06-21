@@ -80,6 +80,9 @@ async function answerQuiz({ question_id, option_id, user_id }) {
 }
 
 module.exports = {
+  getRandomQuizId,
+  getQuiz,
+  getRandomQuiz,
   nextQuiz,
   answerQuiz,
 }

@@ -44,5 +44,5 @@ it('renders `bLoomquiz` after second click', () => {
   spans.forEach((span, idx) => {
     expect(span.textContent).toBe(stateSecondClick[idx])
   })
-  screen.debug()
+  // screen.debug() // to see the simulated DOM
 })

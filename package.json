@@ -6,7 +6,7 @@
     "frontend": "webpack serve --open",
     "backend": "nodemon index.js",
     "dev": "fkill :9000 :3000 -s && concurrently --handle-input \"npm:backend\" \"npm:frontend\"",
-    "backend:test": "cross-env NODE_ENV=testing nodemon index.js",
+    "backend:test": "cross-env NODE_ENV=testing node index.js",
     "jest:test": "cross-env NODE_ENV=testing jest --runInBand",
     "test": "fkill :9000 -s && concurrently --handle-input -n api,test --kill-others \"npm:backend:test\" \"npm:jest:test\"",
     "start": "node index.js",

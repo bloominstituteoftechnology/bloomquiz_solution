@@ -25,7 +25,7 @@ async function getRandomQuiz({ role_id }) {
  * @param {{ question_id: Number, role_id: Number }} user
  * @returns {Object}
  *
- * Example `getQuiz({ question_id: 1, role_id: 2 })`
+ * Example `getQuiz({ question_id: 1, role_id: 2 })` (non-admin role)
  *
  * {
  *    question_id: 1,
@@ -37,7 +37,7 @@ async function getRandomQuiz({ role_id }) {
  *    ]
  * }
  *
- * Example `getQuiz({ question_id: 1, role_id: 1 })`
+ * Example `getQuiz({ question_id: 1, role_id: 1 })` (admin role)
  *
  * {
  *    question_id: 1,
@@ -49,7 +49,6 @@ async function getRandomQuiz({ role_id }) {
  *      { option_id: 3, option_text: 'Nothing.', is_correct: false },
  *    ]
  * }
- *
  */
 async function getQuiz({ question_id, role_id }) {
   // const rows = await db.raw(`

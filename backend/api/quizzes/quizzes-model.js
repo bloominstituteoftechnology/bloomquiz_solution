@@ -51,27 +51,23 @@ async function getRandomQuiz({ role_id }) {
  * }
  */
 async function getQuiz({ question_id, role_id }) {
-  // const rows = await db.raw(`
-  //   SELECT
-  //     q.question_id, q.question_text, q.question_title,
-  //     o.option_id, o.option_text, o.is_correct
-  //   FROM questions q
-  //   JOIN options o
-  //     ON q.question_id = o.question_id
-  //   WHERE q.question_id = ?
-  // `, [question_id])
+  const rows = await db.raw(`
+    SELECT
+      q.question_id, q.question_text, q.question_title,
+      o.option_id, o.option_text, o.is_correct
+    FROM questions q
+    JOIN options o
+      ON q.question_id = o.question_id
+    WHERE q.question_id = ?
+  `, [question_id])
 
-  const rows = await db('questions as q')
-    .join('options as o', 'q.question_id', ' o.question_id')
-    .select(
-      'q.question_id',
-      'q.question_text',
-      'q.question_title',
-      'o.option_id',
-      'o.option_text',
-      'o.is_correct',
-    )
-    .where('q.question_id', question_id)
+  // const rows = await db('questions as q')
+  //   .join('options as o', 'q.question_id', ' o.question_id')
+  //   .select(
+  //     'q.question_id', 'q.question_text', 'q.question_title',
+  //     'o.option_id', 'o.option_text', 'o.is_correct',
+  //   )
+  //   .where('q.question_id', question_id)
 
   let result = { options: [] }
 

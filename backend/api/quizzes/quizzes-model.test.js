@@ -29,7 +29,8 @@ describe('getQuiz', () => {
       question_text: "What's in Bilbo's pocket?",
     }
     const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 })
-    expect(question).toMatchObject(expectedQuestion)
+    expect(question).toEqual(expectedQuestion)
+    expect(new Set(options)).toEqual(new Set(expectedOptions))
     expect(options).toEqual(expect.arrayContaining(expectedOptions))
   })
   test('admin user', async () => {
@@ -45,6 +46,7 @@ describe('getQuiz', () => {
     }
     const { options, ...question } = await getQuiz({ question_id: 1, role_id: 1 })
     expect(question).toMatchObject(expectedQuestion)
+    expect(new Set(options)).toEqual(new Set(expectedOptions))
     expect(options).toEqual(expect.arrayContaining(expectedOptions))
   })
 })

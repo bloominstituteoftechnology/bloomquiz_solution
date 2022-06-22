@@ -18,7 +18,7 @@ beforeEach(async () => {
 test('environmnet', () => {
   expect(process.env.NODE_ENV).toBe('testing')
 })
-describe('login', () => {
+describe('[POST] /api/auth/login', () => {
   test('responds with message and token on successful login', async () => {
     const res = await request(server).post('/api/auth/login')
       .send({ username: 'admin', password: 'admin' })

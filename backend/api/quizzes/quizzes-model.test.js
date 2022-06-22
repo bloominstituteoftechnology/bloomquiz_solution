@@ -18,7 +18,7 @@ test('environmnet', () => {
   expect(process.env.NODE_ENV).toBe('testing')
 })
 describe('getQuiz', () => {
-  test('non-admin user', async () => {
+  test('non-admin user get simplified structure', async () => {
     const expectedOptions = [
       { option_id: 1, option_text: 'The One Ring.' },
       { option_id: 2, option_text: 'Hand.' },
@@ -33,7 +33,7 @@ describe('getQuiz', () => {
     expect(new Set(options)).toEqual(new Set(expectedOptions))
     expect(options).toEqual(expect.arrayContaining(expectedOptions))
   })
-  test('admin user', async () => {
+  test('admin user gets all the fields', async () => {
     const expectedOptions = [
       { option_id: 1, option_text: 'The One Ring.', is_correct: true },
       { option_id: 2, option_text: 'Hand.', is_correct: false },

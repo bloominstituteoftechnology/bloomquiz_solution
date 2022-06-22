@@ -1,6 +1,9 @@
 const db = require('../../data/db-config')
 const { randomizeArray } = require('../../../shared/utils')
 
+/**
+ * @returns {String}
+ */
 async function getRandomQuizId() {
   const [{ question_id }] = await db.raw(`
     SELECT question_id FROM questions ORDER BY RANDOM() LIMIT 1
@@ -8,6 +11,46 @@ async function getRandomQuizId() {
   return question_id
 }
 
+/**
+ * @param {{ role_id: Number }} user
+ * @returns {Object}
+ */
+async function getRandomQuiz({ role_id }) {
+  const question_id = await getRandomQuizId()
+  const quiz = await getQuiz({ question_id, role_id })
+  return quiz
+}
+
+/**
+ * @param {{ question_id: Number, role_id: Number }} user
+ * @returns {Object}
+ *
+ * Example `getQuiz({ question_id: 1, role_id: 2 })`
+ *
+ * {
+ *    question_id: 1,
+ *    question_text: "What's in Bilbo's pocket?",
+ *    options: [
+ *      { option_id: 1, option_text: 'The One Ring.' },
+ *      { option_id: 2, option_text: 'Hand.' },
+ *      { option_id: 3, option_text: 'Nothing.' },
+ *    ]
+ * }
+ *
+ * Example `getQuiz({ question_id: 1, role_id: 1 })`
+ *
+ * {
+ *    question_id: 1,
+ *    question_title: "Bilbo's Ring"
+ *    question_text: "What's in Bilbo's pocket?",
+ *    options: [
+ *      { option_id: 1, option_text: 'The One Ring.', is_correct: true },
+ *      { option_id: 2, option_text: 'Hand.', is_correct: false },
+ *      { option_id: 3, option_text: 'Nothing.', is_correct: false },
+ *    ]
+ * }
+ *
+ */
 async function getQuiz({ question_id, role_id }) {
   // const rows = await db.raw(`
   //   SELECT
@@ -54,12 +97,6 @@ async function getQuiz({ question_id, role_id }) {
 
   result.options = randomizeArray(result.options)
   return result
-}
-
-async function getRandomQuiz({ role_id }) {
-  const question_id = await getRandomQuizId()
-  const quiz = await getQuiz({ question_id, role_id })
-  return quiz
 }
 
 // =============== 👉 [Code-Along 13.1] - step 2

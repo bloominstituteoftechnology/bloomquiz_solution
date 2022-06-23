@@ -29,13 +29,12 @@ You can _optionally_ run frontend and backend separately. __Instead__ of `npm ru
 1. __Admin__, username: `admin` password: `admin`
 2. __Non-admin__, username: `foo` password: `1234`
 
-Feel free to register additional accounts (will be non-admin).
-
-### Notes About The Accounts
+### Notes About Accounts
 
 - Anonymous users can answer multiple-choice questions, but stats aren't stored.
 - Registered users have access to their stats stored in the backend.
 - Admin users can create new and edit existing questions.
+- Feel free to register additional accounts (will be non-admin).
 
 ## Tests
 

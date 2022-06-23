@@ -10,11 +10,7 @@ const STYLE_LOADER = 'style-loader'
 const CSS_LOADER = 'css-loader'
 const SASS_LOADER = 'sass-loader'
 const BABEL_LOADER = 'babel-loader'
-const STRING_REPLACE_LOADER = 'string-replace-loader'
-
-const SERVER_URL = /http:\/\/localhost:9000/g
 const FRONTEND_PORT = 3000
-
 const INDEX_HTML_PATH = './frontend/index.html'
 const INDEX_JS_PATH = './frontend/index.js'
 const DIST_FOLDER = 'dist'
@@ -73,20 +69,6 @@ const config = {
       },
     ],
   },
-}
-
-if (!IS_DEV) {
-  config.module.rules.push({
-    test: /\.m?js$/,
-    exclude: /node_modules/,
-    use: {
-      loader: STRING_REPLACE_LOADER,
-      options: {
-        search: SERVER_URL,
-        replace: '',
-      },
-    },
-  })
 }
 
 module.exports = config

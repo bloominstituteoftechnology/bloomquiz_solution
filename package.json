@@ -1,5 +1,5 @@
 {
-  "name": "bloomquiz",
+  "name": "bloomquiz_solution",
   "version": "0.0.1",
   "scripts": {
     "prep": "npm i && npm run resetdb",
@@ -16,7 +16,7 @@
     "down": "knex migrate:down",
     "seed": "knex seed:run",
     "resetdb": "npm run rollback && npm run migrate && npm run seed",
-    "ketchup": "git fetch && git reset --hard origin/lecture",
+    "ketchup": "git fetch && git reset --hard origin/codealong",
     "ketchupfull": "npm run ketchup && rm -f backend/data/*.db3 && npm run prep"
   },
   "devDependencies": {

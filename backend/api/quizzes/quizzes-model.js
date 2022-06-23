@@ -20,7 +20,7 @@ async function getRandomQuiz({ role_id }) {
   const quiz = await getQuiz({ question_id, role_id })
   return quiz
 }
-
+// =============== 👉 [Code-Along 15.2] - step 1
 /**
  * @param {{ question_id: Number, role_id: Number }} user
  * @returns {Object}

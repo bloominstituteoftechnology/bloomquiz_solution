@@ -4,25 +4,25 @@
 
 - Node >= 16.x (prefer current LTS version)
 - NPM >= 8.x (upgrade executing `npm i -g npm`)
-- Chrome >= 100.x
+- Chrome >= 103.x
 
 ❗ Other browser/Node/NPM configurations might work but haven't been tested.
 
-### Nice To Haves
+### Nice to Haves
 
 - Postman HTTP client or similar.
 - React Devtools & Redux Devtools Chrome extensions.
 
 ## Set Up
 
-1. Clone repo and execute `npm run prep` to install deps and set up your database.
-2. Launch the project in a development server executing `npm run dev`.
-3. Visit your app by navigating to `http://localhost:3000` with Chrome.
+1. Clone repo and execute `npm run prep` to install deps and set up your dev database.
+2. Launch the project in a dev server executing `npm run dev`.
+3. Visit your app by navigating Chrome to `http://localhost:3000`.
 
 You can _optionally_ run frontend and backend separately. __Instead__ of `npm run dev`:
 
 1. `npm run frontend`
-2. `npm run backend` (or spin up the backend using the VSCode's integrated Node debugger.)
+2. `npm run backend` (or use the VSCode's integrated Node debugger to launch the backend.)
 
 ## Accounts
 
@@ -31,8 +31,25 @@ You can _optionally_ run frontend and backend separately. __Instead__ of `npm ru
 
 Feel free to register additional accounts (will be non-admin).
 
-## Notes
+### Notes About The Accounts
 
 - Anonymous users can answer multiple-choice questions, but stats aren't stored.
 - Registered users have access to their stats stored in the backend.
-- Admin users can create new multiple-choice questions.
+- Admin users can create new and edit existing questions.
+
+## Tests
+
+1. `npm run test` runs all tests.
+
+### Note About Running Tests
+
+The `test` script kills the development backend because tests need to spin up a testing db
+and free port 9000. To restart nodemon just type `rs` in the terminal of the `dev` script,
+or restart your debugger.
+
+## Catching Up with Your Instructor
+
+1. `npm run ketchup` resets your local files to the last push by your instructor to `origin/codealong`.
+2. `npm run ketchupfull` in addition to the above reinstalls dependencies and resets the database.
+
+Please remember to check the `package.json` file to see all available scripts.

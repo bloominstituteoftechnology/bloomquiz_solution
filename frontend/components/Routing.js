@@ -45,12 +45,14 @@ export function Routing(props) {
             </>
           }
         </nav>
-        <Routes>
-          <Route path="/" element={<Quiz navigate={navigate} />} />
-          <Route path="auth" element={<AuthForm navigate={navigate} />} />
-          <Route path="admin/*" element={<Admin navigate={navigate} />} />
-          <Route path="stats" element={<Stats navigate={navigate} />} /> {/* =============== 👉 [Code-Along 11.1] - step 3.1 */}
-        </Routes>
+        <div className="subcontainer">
+          <Routes>
+            <Route path="/" element={<Quiz navigate={navigate} />} />
+            <Route path="auth" element={<AuthForm navigate={navigate} />} />
+            <Route path="admin/*" element={<Admin navigate={navigate} />} />
+            <Route path="stats" element={<Stats navigate={navigate} />} /> {/* =============== 👉 [Code-Along 11.1] - step 3.1 */}
+          </Routes>
+        </div>
         <footer>Bloom Institute of Technology {new Date().getFullYear()}</footer>
       </Opacity>
     </>

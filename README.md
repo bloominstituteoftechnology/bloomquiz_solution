@@ -22,7 +22,7 @@
 You can _optionally_ run frontend and backend separately. __Instead__ of `npm run dev`:
 
 1. `npm run frontend`
-2. `npm run backend` (or use the VSCode's integrated Node debugger to launch the backend.)
+2. `npm run backend` (or use the VSCode's integrated Node debugger to launch the backend)
 
 ## Accounts
 
@@ -38,11 +38,11 @@ You can _optionally_ run frontend and backend separately. __Instead__ of `npm ru
 
 ## Tests
 
-1. `npm run test` runs all tests.
+1. `npm test` runs all tests.
 
 ### Note About Running Tests
 
-The `test` script kills the development backend because tests need to spin up a testing db
+The `test` script kills the development server because tests need to spin up a testing db
 and free port 9000. To restart nodemon just type `rs` in the terminal of the `dev` script,
 or restart your debugger.
 

@@ -28,7 +28,7 @@ describe('getQuiz', () => {
       question_id: 1,
       question_text: "What's in Bilbo's pocket?",
     }
-    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 })
+    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 2 }) // =============== 👉 [Code-Along 15.2] - step 2
     expect(question).toEqual(expectedQuestion)
     expect(new Set(options)).toEqual(new Set(expectedOptions))
     expect(options).toEqual(expect.arrayContaining(expectedOptions))
@@ -44,7 +44,7 @@ describe('getQuiz', () => {
       question_title: "Bilbo's Pocket",
       question_text: "What's in Bilbo's pocket?",
     }
-    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 1 })
+    const { options, ...question } = await getQuiz({ question_id: 1, role_id: 1 }) // =============== 👉 [Code-Along 15.2] - step 2
     expect(question).toEqual(expectedQuestion)
     expect(new Set(options)).toEqual(new Set(expectedOptions))
     expect(options).toEqual(expect.arrayContaining(expectedOptions))

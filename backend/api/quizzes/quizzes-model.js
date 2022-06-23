@@ -61,7 +61,7 @@ async function getQuiz({ question_id, role_id }) {
   //   WHERE q.question_id = ?
   // `, [question_id])
 
-  const rows = await db('questions as q')
+  const rows = await db('questions as q') // =============== 👉 [Code-Along 15.2] - step 3
     .join('options as o', 'q.question_id', ' o.question_id')
     .select(
       'q.question_id',

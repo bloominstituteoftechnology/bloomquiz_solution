@@ -77,5 +77,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bloominstituteoftechnology/bloomquiz_solution.git"
-  }
+  },
+  "license": "MIT"
 }

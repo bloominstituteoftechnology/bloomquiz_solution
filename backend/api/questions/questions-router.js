@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => { // todo: use Yup and middleware to validate!
   try {
     const { question_title, question_text } = req.body
     const validatedQuestion = { options: [] }
@@ -112,7 +112,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:question_id', async (req, res, next) => {
+router.put('/:question_id', async (req, res, next) => { // todo: use Yup and middleware to validate!
   try {
     const { question_title, question_text } = req.body
     const validatedQuestion = { options: [] }

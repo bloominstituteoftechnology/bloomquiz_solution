@@ -28,10 +28,10 @@ export function Stats(props) {
   if (!stats) return null
 
   return (
-    <>
+    <div id="stats">
       <h1>{stats.corrects}</h1>correct answers
       <h1>{stats.incorrects}</h1>incorrect answers
-    </>
+    </div>
   )
 }
 

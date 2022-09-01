@@ -15,7 +15,7 @@
 
 ## Set Up
 
-1. Clone repo and execute `npm run prep` to install deps and set up your dev database.
+1. Clone repo without forking and execute `npm run prep` to install deps and set up the database.
 2. Launch the project in a dev server executing `npm run dev`.
 3. Visit your app by navigating Chrome to `http://localhost:3000`.
 

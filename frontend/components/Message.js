@@ -34,7 +34,7 @@ function useHeading(headingStr) { // =============== 👉 [Code-Along 9.2] - ste
   }
 
   const headingArr = lowCase.split('').map((char, idx) => {
-    return index === idx ? upperCase[idx] : lowCase[idx]
+    return index === idx ? upperCase[idx] : char
   })
 
   return [headingArr, changeHeadingArr]

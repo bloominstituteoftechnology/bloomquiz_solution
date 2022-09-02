@@ -48,8 +48,8 @@ export function Message({ infoMessage }) {
       <h1>
         {
           heading.map((char, idx) => {
-            const opacity = char === 'BLOOMQUIZ'[idx] ? 1 : 0.4 // =============== 👉 [Code-Along 9.2] - step 4
-            return <span style={{ opacity }} key={idx}>{char}</span>
+            const isUpperCase = char.toUpperCase() === char // =============== 👉 [Code-Along 9.2] - step 4
+            return <span style={{ opacity: isUpperCase ? 1 : 0.4 }} key={idx}>{char}</span>
           })
         }
       </h1>

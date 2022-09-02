@@ -22,7 +22,7 @@ const StyledMessage = styled.div`
 `
 
 function useHeading(headingStr) { // =============== 👉 [Code-Along 9.2] - step 1
-  const lowCase = headingStr
+  const lowCase = headingStr.toLowerCase()
   const upperCase = headingStr.toUpperCase()
 
   const maxIndex = headingStr.length - 1 // =============== 👉 [Code-Along 9.2] - step 2

@@ -65,7 +65,7 @@ async function uniqueUsername(req, res, next) {
 }
 
 async function usernameExists(req, res, next) {
-  const user = await User.getByUsername(req.body.username)
+  const user = await User.getByUsername(req.credentials.username) // =============== 👉 [Code-Along 13.2] - step 6
   if (!user) return next({ status: 401, message: 'invalid credentials' })
   req.user = user
   next()
